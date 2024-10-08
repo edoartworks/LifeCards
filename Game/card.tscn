@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://chw4cxtoqcv3m"]
+
+[ext_resource type="Script" path="res://Game/card.gd" id="1_7t1bv"]
+[ext_resource type="Texture2D" uid="uid://dp8q50w5ajxco" path="res://Art/card_bg01.png" id="2_ypyjq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a2e7p"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oa1mv"]
+font_size = 114
+font_color = Color(0, 0, 0, 1)
+outline_size = 12
+outline_color = Color(0.7068, 0.93, 0.92256, 1)
+
+[node name="card" type="TextureRect"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -512.0
+offset_right = 512.0
+offset_bottom = 1504.0
+grow_horizontal = 2
+texture = ExtResource("2_ypyjq")
+stretch_mode = 5
+script = ExtResource("1_7t1bv")
+
+[node name="cont_text" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.096
+anchor_right = 0.5
+anchor_bottom = 0.904
+offset_left = -380.0
+offset_top = -0.384003
+offset_right = 404.0
+offset_bottom = 0.383911
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_a2e7p")
+
+[node name="lbl_card_text" type="Label" parent="cont_text"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_vertical = 1
+text = "# Don't make your question longer than this line, to prevent display issues ##########"
+label_settings = SubResource("LabelSettings_oa1mv")
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 1

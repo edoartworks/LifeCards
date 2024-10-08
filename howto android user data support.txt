@@ -1,0 +1,118 @@
+I am making a mobile app. How can I make it so that when the app is packaged and exported for android, the questions.txt file is included and can be modified by the users manually?
+
+To include the questions.txt file in your Android app and allow users to modify it manually, you'll need to follow these steps:
+
+	Move the questions.txt file to the user:// directory: In Godot, the user:// directory is a special directory that allows users to access and modify files. To move the questions.txt file to this directory, you can use the OS.get_user_data_dir() function to get the path to the user:// directory, and then use the FileAccess class to copy the file to that directory.
+
+Here's an example of how you can do this:
+
+gdscript
+
+func _ready():
+	var user_data_dir = OS.get_user_data_dir()
+	var file_access = FileAccess.open("res://questions.txt", FileAccess.READ)
+	if file_access != null:
+		var file_contents = file_access.get_buffer(file_access.get_length())
+		file_access = FileAccess.open(user_data_dir + "/questions.txt", FileAccess.WRITE)
+		if file_access != null:
+			file_access.store_buffer(file_contents)
+			file_access = null
+		else:
+			print("Failed to write to user data directory")
+	else:
+		print("Failed to read questions.txt")
+
+This code copies the questions.txt file from the res:// directory to the user:// directory when the app starts.
+
+	Use the user:// directory to read and write the questions.txt file: Once the questions.txt file is in the user:// directory, you can use the FileAccess class to read and write to it. You'll need to update your read_text_file function to use the user:// directory instead of the res:// directory.
+
+Here's an example of how you can do this:
+
+gdscript
+
+func read_text_file() -> Array[String]:
+	var user_data_dir = OS.get_user_data_dir()
+	var file_access = FileAccess.open(user_data_dir + "/questions.txt", FileAccess.READ)
+	if file_access != null:
+		var lines: Array[String] = []
+		while not file_access.eof_reached():
+			var line = file_access.get_line().strip_edges(true)
+			if not line.begins_with("#") and not line.is_empty():
+				lines.append(line)
+		file_access = null
+		return lines
+	else:
+		print("Failed to read questions.txt")
+		return []
+
+This code reads the questions.txt file from the user:// directory instead of the res:// directory.
+
+	Allow users to modify the questions.txt file manually: To allow users to modify the questions.txt file manually, you'll need to provide a way for them to access the file. One way to do this is to use an external file manager app to open the user:// directory and edit the questions.txt file.
+
+Alternatively, you can provide a built-in editor in your app that allows users to modify the questions.txt file. This would require implementing a text editor UI and logic in your app.
+
+By following these steps, you can include the questions.txt file in your Android app and allow users to modify it manually.
+
+add OS.request_permissions() to ask for file access
+
+To request file access permissions on Android, you can use the OS.request_permissions() function. Here's an example of how you can modify the previous code to request file access permissions:
+
+gdscript
+
+func _ready():
+	var user_data_dir = OS.get_user_data_dir()
+	if OS.has_touchscreen_ui_hint():
+		# Request file access permissions on Android
+		OS.request_permissions()
+	var file_access = FileAccess.open("res://questions.txt", FileAccess.READ)
+	if file_access != null:
+		var file_contents = file_access.get_buffer(file_access.get_length())
+		file_access = FileAccess.open(user_data_dir + "/questions.txt", FileAccess.WRITE)
+		if file_access != null:
+			file_access.store_buffer(file_contents)
+			file_access = null
+		else:
+			print("Failed to write to user data directory")
+	else:
+		print("Failed to read questions.txt")
+
+However, OS.request_permissions() is not a valid function in Godot. Instead, you need to use the Android module to request permissions.
+
+Here's an example of how you can request file access permissions on Android using the Android module:
+
+gdscript
+
+func _ready():
+	var user_data_dir = OS.get_user_data_dir()
+	if OS.has_touchscreen_ui_hint():
+		# Request file access permissions on Android
+		if Android.has_permission("android.permission.READ_EXTERNAL_STORAGE") and Android.has_permission("android.permission.WRITE_EXTERNAL_STORAGE"):
+			pass
+		else:
+			Android.request_permissions(["android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE"])
+	var file_access = FileAccess.open("res://questions.txt", FileAccess.READ)
+	if file_access != null:
+		var file_contents = file_access.get_buffer(file_access.get_length())
+		file_access = FileAccess.open(user_data_dir + "/questions.txt", FileAccess.WRITE)
+		if file_access != null:
+			file_access.store_buffer(file_contents)
+			file_access = null
+		else:
+			print("Failed to write to user data directory")
+	else:
+		print("Failed to read questions.txt")
+
+Note that you need to add the android.permission.READ_EXTERNAL_STORAGE and android.permission.WRITE_EXTERNAL_STORAGE permissions to your AndroidManifest.xml file for this to work.
+
+Also, you need to handle the permission request result in the _on_permission_result function:
+
+gdscript
+
+func _on_permission_result(permission, result):
+	if permission == "android.permission.READ_EXTERNAL_STORAGE" or permission == "android.permission.WRITE_EXTERNAL_STORAGE":
+		if result:
+			print("Permission granted")
+		else:
+			print("Permission denied")
+
+You can connect the _on_permission_result function to the permission_result signal of the Android module in the project settings.

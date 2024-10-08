@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=3 uid="uid://ktkatts3phbm"]
+
+[ext_resource type="Script" path="res://Game/mode_add_q.gd" id="1_tx0tm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e61of"]
+content_margin_left = 40.0
+content_margin_top = 40.0
+content_margin_right = 40.0
+content_margin_bottom = 40.0
+bg_color = Color(0.084, 0.1906, 0.24, 1)
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ibw7q"]
+bg_color = Color(0.2242, 0.330663, 0.38, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[node name="add_q_mode" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tx0tm")
+
+[node name="BG" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="cont_add_q" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -540.0
+offset_top = -1408.0
+offset_right = 540.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="txted_add_q" type="TextEdit" parent="cont_add_q"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/caret_color = Color(1, 1, 1, 1)
+theme_override_constants/caret_width = 8
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_e61of")
+placeholder_text = "type your question here"
+middle_mouse_paste_enabled = false
+wrap_mode = 1
+caret_blink = true
+caret_multiple = false
+
+[node name="btn_add_q" type="Button" parent="cont_add_q"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+theme_override_styles/normal = SubResource("StyleBoxFlat_ibw7q")
+text = "Add "
+
+[connection signal="pressed" from="cont_add_q/btn_add_q" to="." method="_on_btn_add_q_pressed"]
