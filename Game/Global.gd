@@ -1,7 +1,7 @@
 extends Node
 
-
-var QUESTIONS_FILE_PATH = "res://Data/questions.txt"
+var RESET_USER_QUESTIONS = true
+var QUESTIONS_FILE_PATH = "res://Data/DEBUG_questions.txt"
 var QUESTIONS_USER_FILE_PATH = "user://questions.txt"
 
 var QUESTIONS: Array[String] = []
@@ -41,10 +41,7 @@ func load_questions() -> void:
 
 
 func copy_questions_to_user_file() -> void:
-	if FileAccess.file_exists(QUESTIONS_USER_FILE_PATH):
-		debug("User questions found. Skip res file copy")
-		return
-	if not FileAccess.file_exists(QUESTIONS_USER_FILE_PATH):
+	if not FileAccess.file_exists(QUESTIONS_USER_FILE_PATH) or RESET_USER_QUESTIONS:
 		var file = FileAccess.open(QUESTIONS_FILE_PATH, FileAccess.READ)
 		if not file:
 			debug(str("Failed to open res file: ", QUESTIONS_FILE_PATH))
@@ -52,7 +49,6 @@ func copy_questions_to_user_file() -> void:
 		
 		var content = file.get_as_text()
 		file.close()
-		
 		file = FileAccess.open(QUESTIONS_USER_FILE_PATH, FileAccess.WRITE)
 		if not file:
 			debug(str("Failed to open user file: ", QUESTIONS_USER_FILE_PATH))
@@ -60,6 +56,9 @@ func copy_questions_to_user_file() -> void:
 		
 		file.store_string(content)
 		file.close()
+	else:
+		debug("User questions found. Skip res file copy")
+		return
 
 
 ### DEBUG

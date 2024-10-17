@@ -1,24 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://ktkatts3phbm"]
+[gd_scene load_steps=6 format=3 uid="uid://ktkatts3phbm"]
 
+[ext_resource type="Theme" uid="uid://fa3sqrgi1208" path="res://Art/th_custom01.theme" id="1_3pbqw"]
 [ext_resource type="Script" path="res://Game/mode_add_q.gd" id="1_tx0tm"]
+[ext_resource type="Texture2D" uid="uid://pm7346njvp7s" path="res://Art/icon_cancel.png" id="3_mnbnh"]
+[ext_resource type="Texture2D" uid="uid://cfveb17qyderm" path="res://Art/icon_confirm.png" id="4_upuil"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e61of"]
-content_margin_left = 40.0
-content_margin_top = 40.0
-content_margin_right = 40.0
-content_margin_bottom = 40.0
-bg_color = Color(0.084, 0.1906, 0.24, 1)
-corner_radius_top_left = 64
-corner_radius_top_right = 64
-corner_radius_bottom_right = 64
-corner_radius_bottom_left = 64
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ibw7q"]
-bg_color = Color(0.2242, 0.330663, 0.38, 1)
-corner_radius_top_left = 40
-corner_radius_top_right = 40
-corner_radius_bottom_right = 40
-corner_radius_bottom_left = 40
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5mgnx"]
+bg_color = Color(0.6497, 0.73, 0.727323, 0.941176)
 
 [node name="add_q_mode" type="Control"]
 layout_mode = 3
@@ -27,7 +15,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_3pbqw")
 script = ExtResource("1_tx0tm")
+txted_add_question_path = NodePath("MarginContainer/cont_add_q/txted_add_question")
 
 [node name="BG" type="Panel" parent="."]
 layout_mode = 1
@@ -36,8 +26,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5mgnx")
 
-[node name="cont_add_q" type="VBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -45,30 +36,82 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -540.0
-offset_top = -1408.0
+offset_top = -1664.0
 offset_right = 540.0
-offset_bottom = -720.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_bottom = -832.0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
 
-[node name="txted_add_q" type="TextEdit" parent="cont_add_q"]
+[node name="cont_add_q" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="txted_add_question" type="TextEdit" parent="MarginContainer/cont_add_q"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_colors/caret_color = Color(1, 1, 1, 1)
-theme_override_constants/caret_width = 8
-theme_override_font_sizes/font_size = 80
-theme_override_styles/normal = SubResource("StyleBoxFlat_e61of")
 placeholder_text = "type your question here"
 middle_mouse_paste_enabled = false
 wrap_mode = 1
 caret_blink = true
 caret_multiple = false
 
-[node name="btn_add_q" type="Button" parent="cont_add_q"]
+[node name="spacer3" type="Control" parent="MarginContainer/cont_add_q"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 128
-theme_override_styles/normal = SubResource("StyleBoxFlat_ibw7q")
-text = "Add "
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
 
-[connection signal="pressed" from="cont_add_q/btn_add_q" to="." method="_on_btn_add_q_pressed"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/cont_add_q"]
+layout_mode = 2
+
+[node name="spacer4" type="Control" parent="MarginContainer/cont_add_q/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="cont_btns_bg" type="PanelContainer" parent="MarginContainer/cont_add_q/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="cont_btns" type="HBoxContainer" parent="MarginContainer/cont_add_q/HBoxContainer/cont_btns_bg"]
+layout_mode = 2
+
+[node name="spacer4" type="Control" parent="MarginContainer/cont_add_q/HBoxContainer/cont_btns_bg/cont_btns"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="btn_cancel" type="Button" parent="MarginContainer/cont_add_q/HBoxContainer/cont_btns_bg/cont_btns"]
+layout_mode = 2
+theme = ExtResource("1_3pbqw")
+action_mode = 0
+icon = ExtResource("3_mnbnh")
+icon_alignment = 1
+
+[node name="spacer5" type="Control" parent="MarginContainer/cont_add_q/HBoxContainer/cont_btns_bg/cont_btns"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="btn_confirm" type="Button" parent="MarginContainer/cont_add_q/HBoxContainer/cont_btns_bg/cont_btns"]
+layout_mode = 2
+theme = ExtResource("1_3pbqw")
+action_mode = 0
+icon = ExtResource("4_upuil")
+icon_alignment = 1
+
+[node name="spacer6" type="Control" parent="MarginContainer/cont_add_q/HBoxContainer/cont_btns_bg/cont_btns"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="spacer5" type="Control" parent="MarginContainer/cont_add_q/HBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[connection signal="pressed" from="MarginContainer/cont_add_q/HBoxContainer/cont_btns_bg/cont_btns/btn_cancel" to="." method="_on_btn_cancel_pressed"]
+[connection signal="pressed" from="MarginContainer/cont_add_q/HBoxContainer/cont_btns_bg/cont_btns/btn_confirm" to="." method="_on_btn_confirm_pressed"]

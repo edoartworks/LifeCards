@@ -1,14 +1,19 @@
 extends Panel
 
 
-signal show_add_question
+signal show_menu
 
-@onready var CARD = $VBoxContainer/card
-@onready var DEBUG_LOG = $VBoxContainer/cont_debug_log/lbl_debug_log
-@onready var DEBUG_SCROLL = $VBoxContainer/cont_debug_log
+@export var card_path :NodePath
+@export var debug_log_path :NodePath
+var CARD :Node = null
+var DEBUG_LOG :Node = null
+var DEBUG_SCROLL :Node = null
 
 
 func _ready() -> void:
+	CARD = get_node(card_path)
+	DEBUG_LOG = get_node(debug_log_path)
+	DEBUG_SCROLL = DEBUG_LOG.get_parent()
 	draw_card()
 	# TODO: card should be empty first
 
@@ -28,13 +33,13 @@ func draw_card() -> void:
 		Global.debug("No more questions")
 
 
-func _on_btn_draw_pressed() -> void:
+func _on_btn_fwd_pressed() -> void:
 	draw_card()
-
-
-func _on_btn_add_q_pressed() -> void:
-	show_add_question.emit()
 
 
 func _scroll_to_bottom():
 	DEBUG_SCROLL.scroll_vertical = DEBUG_SCROLL.get_v_scroll_bar().max_value
+
+
+func _on_btn_menu_pressed() -> void:
+	show_menu.emit()
