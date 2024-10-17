@@ -27,14 +27,9 @@ debug_log_path = NodePath("cont_safe_area/VBoxContainer/cont_debug_log/lbl_debug
 
 [node name="cont_safe_area" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -540.0
-offset_top = -1920.0
-offset_right = 540.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 60
