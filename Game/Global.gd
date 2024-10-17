@@ -1,7 +1,7 @@
 extends Node
 
-var RESET_USER_QUESTIONS = true
-var QUESTIONS_FILE_PATH = "res://Data/DEBUG_questions.txt"
+var RESET_USER_QUESTIONS = false
+var QUESTIONS_FILE_PATH = "res://Data/questions.txt"
 var QUESTIONS_USER_FILE_PATH = "user://questions.txt"
 
 var QUESTIONS: Array[String] = []
