@@ -1,2 +1,3 @@
 # LifeCards
- a little mobile game
+ a little mobile game about asking meaningful questions
+ 
