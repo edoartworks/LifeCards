@@ -13,7 +13,7 @@ func _ready() -> void:
 	copy_questions_to_user_file()
 	load_questions()
 	# TODO: remove before shipping
-	set_half_resolution()
+	#set_half_resolution()
 
 
 func read_text_file(file_path) -> Array[String]:
@@ -73,5 +73,5 @@ func set_half_resolution() -> void:
 
 
 func debug(text):
-	DEBUG_LOG += text + "\n"
+	DEBUG_LOG += str(text) + "\n"
 	print(text)

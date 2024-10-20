@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cfveb17qyderm" path="res://Art/icon_confirm.png" id="4_upuil"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5mgnx"]
-bg_color = Color(0.6497, 0.73, 0.727323, 0.941176)
+bg_color = Color(0.647095, 0.726563, 0.723914, 1)
 
 [node name="add_q_mode" type="Control"]
 layout_mode = 3
@@ -17,7 +17,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_3pbqw")
 script = ExtResource("1_tx0tm")
-txted_add_question_path = NodePath("MarginContainer/cont_add_q/txted_add_question")
+txted_add_question_path = NodePath("cont_add_q/cont_v_main/txted_add_question")
+cont_add_q_path = NodePath("cont_add_q")
 
 [node name="BG" type="Panel" parent="."]
 layout_mode = 1
@@ -28,7 +29,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5mgnx")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="cont_add_q" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -38,14 +39,16 @@ anchor_bottom = 1.0
 offset_left = -540.0
 offset_top = -1664.0
 offset_right = 540.0
-offset_bottom = -832.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_right = 40
 
-[node name="cont_add_q" type="VBoxContainer" parent="MarginContainer"]
+[node name="cont_v_main" type="VBoxContainer" parent="cont_add_q"]
 layout_mode = 2
 
-[node name="txted_add_question" type="TextEdit" parent="MarginContainer/cont_add_q"]
+[node name="txted_add_question" type="TextEdit" parent="cont_add_q/cont_v_main"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -55,63 +58,65 @@ wrap_mode = 1
 caret_blink = true
 caret_multiple = false
 
-[node name="spacer3" type="Control" parent="MarginContainer/cont_add_q"]
+[node name="spacer3" type="Control" parent="cont_add_q/cont_v_main"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.1
+size_flags_vertical = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/cont_add_q"]
+[node name="HBoxContainer" type="HBoxContainer" parent="cont_add_q/cont_v_main"]
 layout_mode = 2
 
-[node name="spacer4" type="Control" parent="MarginContainer/cont_add_q/HBoxContainer"]
+[node name="spacer4" type="Control" parent="cont_add_q/cont_v_main/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="cont_btns_bg" type="PanelContainer" parent="MarginContainer/cont_add_q/HBoxContainer"]
+[node name="cont_btns_bg" type="PanelContainer" parent="cont_add_q/cont_v_main/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="cont_btns" type="HBoxContainer" parent="MarginContainer/cont_add_q/HBoxContainer/cont_btns_bg"]
+[node name="cont_btns" type="HBoxContainer" parent="cont_add_q/cont_v_main/HBoxContainer/cont_btns_bg"]
 layout_mode = 2
 
-[node name="spacer4" type="Control" parent="MarginContainer/cont_add_q/HBoxContainer/cont_btns_bg/cont_btns"]
+[node name="spacer4" type="Control" parent="cont_add_q/cont_v_main/HBoxContainer/cont_btns_bg/cont_btns"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="btn_cancel" type="Button" parent="MarginContainer/cont_add_q/HBoxContainer/cont_btns_bg/cont_btns"]
+[node name="btn_cancel" type="Button" parent="cont_add_q/cont_v_main/HBoxContainer/cont_btns_bg/cont_btns"]
 layout_mode = 2
 theme = ExtResource("1_3pbqw")
 action_mode = 0
 icon = ExtResource("3_mnbnh")
 icon_alignment = 1
 
-[node name="spacer5" type="Control" parent="MarginContainer/cont_add_q/HBoxContainer/cont_btns_bg/cont_btns"]
+[node name="spacer5" type="Control" parent="cont_add_q/cont_v_main/HBoxContainer/cont_btns_bg/cont_btns"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
 
-[node name="btn_confirm" type="Button" parent="MarginContainer/cont_add_q/HBoxContainer/cont_btns_bg/cont_btns"]
+[node name="btn_confirm" type="Button" parent="cont_add_q/cont_v_main/HBoxContainer/cont_btns_bg/cont_btns"]
 layout_mode = 2
 theme = ExtResource("1_3pbqw")
 action_mode = 0
 icon = ExtResource("4_upuil")
 icon_alignment = 1
 
-[node name="spacer6" type="Control" parent="MarginContainer/cont_add_q/HBoxContainer/cont_btns_bg/cont_btns"]
+[node name="spacer6" type="Control" parent="cont_add_q/cont_v_main/HBoxContainer/cont_btns_bg/cont_btns"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="spacer5" type="Control" parent="MarginContainer/cont_add_q/HBoxContainer"]
+[node name="spacer5" type="Control" parent="cont_add_q/cont_v_main/HBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 
-[connection signal="pressed" from="MarginContainer/cont_add_q/HBoxContainer/cont_btns_bg/cont_btns/btn_cancel" to="." method="_on_btn_cancel_pressed"]
-[connection signal="pressed" from="MarginContainer/cont_add_q/HBoxContainer/cont_btns_bg/cont_btns/btn_confirm" to="." method="_on_btn_confirm_pressed"]
+[connection signal="focus_entered" from="cont_add_q/cont_v_main/txted_add_question" to="." method="_on_txted_add_q_focus_entered"]
+[connection signal="focus_exited" from="cont_add_q/cont_v_main/txted_add_question" to="." method="_on_txted_add_q_focus_exited"]
+[connection signal="pressed" from="cont_add_q/cont_v_main/HBoxContainer/cont_btns_bg/cont_btns/btn_cancel" to="." method="_on_btn_cancel_pressed"]
+[connection signal="pressed" from="cont_add_q/cont_v_main/HBoxContainer/cont_btns_bg/cont_btns/btn_confirm" to="." method="_on_btn_confirm_pressed"]

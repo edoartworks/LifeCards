@@ -130,7 +130,6 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="cont_debug_log" type="ScrollContainer" parent="cont_safe_area/VBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 3
