@@ -1,0 +1,113 @@
+[gd_scene load_steps=6 format=3 uid="uid://ktkatts3phbm"]
+
+[ext_resource type="Theme" uid="uid://fa3sqrgi1208" path="res://Art/th_custom01.theme" id="1_3pbqw"]
+[ext_resource type="Script" path="res://Game/screen_add_question.gd" id="1_tx0tm"]
+[ext_resource type="Texture2D" uid="uid://pm7346njvp7s" path="res://Art/icon_cancel.png" id="3_mnbnh"]
+[ext_resource type="Texture2D" uid="uid://cfveb17qyderm" path="res://Art/icon_confirm.png" id="4_upuil"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5mgnx"]
+bg_color = Color(0.647095, 0.726563, 0.723914, 1)
+
+[node name="screen_add_question" type="CanvasLayer"]
+script = ExtResource("1_tx0tm")
+txted_add_question_path = NodePath("BG/cont_margin_main/cont_v_main/txted_add_question")
+cont_add_q_path = NodePath("BG/cont_margin_main")
+
+[node name="BG" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_3pbqw")
+theme_override_styles/panel = SubResource("StyleBoxFlat_5mgnx")
+
+[node name="cont_margin_main" type="MarginContainer" parent="BG"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -540.0
+offset_top = -1664.0
+offset_right = 540.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
+
+[node name="cont_v_main" type="VBoxContainer" parent="BG/cont_margin_main"]
+layout_mode = 2
+
+[node name="txted_add_question" type="TextEdit" parent="BG/cont_margin_main/cont_v_main"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+placeholder_text = "type your question here"
+middle_mouse_paste_enabled = false
+wrap_mode = 1
+caret_blink = true
+caret_multiple = false
+
+[node name="spacer3" type="Control" parent="BG/cont_margin_main/cont_v_main"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="cont_bottom" type="HBoxContainer" parent="BG/cont_margin_main/cont_v_main"]
+layout_mode = 2
+
+[node name="spacer4" type="Control" parent="BG/cont_margin_main/cont_v_main/cont_bottom"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="cont_btns_bg" type="PanelContainer" parent="BG/cont_margin_main/cont_v_main/cont_bottom"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="cont_btns" type="HBoxContainer" parent="BG/cont_margin_main/cont_v_main/cont_bottom/cont_btns_bg"]
+layout_mode = 2
+
+[node name="spacer4" type="Control" parent="BG/cont_margin_main/cont_v_main/cont_bottom/cont_btns_bg/cont_btns"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="btn_cancel" type="Button" parent="BG/cont_margin_main/cont_v_main/cont_bottom/cont_btns_bg/cont_btns"]
+layout_mode = 2
+theme = ExtResource("1_3pbqw")
+action_mode = 0
+icon = ExtResource("3_mnbnh")
+icon_alignment = 1
+
+[node name="spacer5" type="Control" parent="BG/cont_margin_main/cont_v_main/cont_bottom/cont_btns_bg/cont_btns"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="btn_confirm" type="Button" parent="BG/cont_margin_main/cont_v_main/cont_bottom/cont_btns_bg/cont_btns"]
+layout_mode = 2
+theme = ExtResource("1_3pbqw")
+action_mode = 0
+icon = ExtResource("4_upuil")
+icon_alignment = 1
+
+[node name="spacer6" type="Control" parent="BG/cont_margin_main/cont_v_main/cont_bottom/cont_btns_bg/cont_btns"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="spacer5" type="Control" parent="BG/cont_margin_main/cont_v_main/cont_bottom"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[connection signal="pressed" from="BG/cont_margin_main/cont_v_main/cont_bottom/cont_btns_bg/cont_btns/btn_cancel" to="." method="_on_btn_cancel_pressed"]
+[connection signal="pressed" from="BG/cont_margin_main/cont_v_main/cont_bottom/cont_btns_bg/cont_btns/btn_confirm" to="." method="_on_btn_confirm_pressed"]

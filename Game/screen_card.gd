@@ -1,18 +1,20 @@
-extends Panel
+extends CanvasLayer
 
-
-signal show_menu
 
 @export var card_path :NodePath
-@export var debug_log_path :NodePath
+@export var menu_path :NodePath
+@export var debug_log_lbl_path :NodePath
 var CARD :Node = null
+var MENU :Node = null
 var DEBUG_LOG :Node = null
 var DEBUG_SCROLL :Node = null
 
 
 func _ready() -> void:
 	CARD = get_node(card_path)
-	DEBUG_LOG = get_node(debug_log_path)
+	MENU = get_node(menu_path)
+	MENU.connect("close_menu", _on_close_menu)
+	DEBUG_LOG = get_node(debug_log_lbl_path)
 	DEBUG_SCROLL = DEBUG_LOG.get_parent()
 	draw_card()
 	# TODO: card should be empty first
@@ -42,4 +44,8 @@ func _scroll_to_bottom():
 
 
 func _on_btn_menu_pressed() -> void:
-	show_menu.emit()
+	MENU.visible = true
+
+
+func _on_close_menu() -> void:
+	MENU.visible = false

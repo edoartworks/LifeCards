@@ -1,29 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://f0xnalit6yck"]
+[gd_scene load_steps=4 format=3 uid="uid://f0xnalit6yck"]
 
 [ext_resource type="Script" path="res://Game/screen_main.gd" id="1_7ymd8"]
-[ext_resource type="PackedScene" uid="uid://misl3tfjpq0x" path="res://Game/mode_card.tscn" id="1_e5ns8"]
-[ext_resource type="PackedScene" uid="uid://ktkatts3phbm" path="res://Game/mode_add_q.tscn" id="2_b2ui6"]
-[ext_resource type="PackedScene" uid="uid://d1f7oecpsrav" path="res://Game/mode_menu.tscn" id="4_e2i5t"]
+[ext_resource type="PackedScene" uid="uid://misl3tfjpq0x" path="res://Game/screen_card.tscn" id="1_e5ns8"]
+[ext_resource type="PackedScene" uid="uid://ktkatts3phbm" path="res://Game/screen_add_question.tscn" id="2_b2ui6"]
 
 [node name="screen_main" type="CanvasLayer"]
 script = ExtResource("1_7ymd8")
-mode_card_path = NodePath("canvlayer_card_mode/mode_card")
-mode_add_q_path = NodePath("canvlayer_add_q/mode_add_q")
-mode_menu = NodePath("canvlayer_menu/mode_menu")
+screen_card_path = NodePath("screen_card")
+screen_add_q_path = NodePath("screen_add_question")
 
-[node name="canvlayer_card_mode" type="CanvasLayer" parent="."]
-
-[node name="mode_card" parent="canvlayer_card_mode" instance=ExtResource("1_e5ns8")]
+[node name="screen_card" parent="." instance=ExtResource("1_e5ns8")]
 metadata/_edit_use_anchors_ = true
 
-[node name="canvlayer_menu" type="CanvasLayer" parent="."]
-layer = 2
-visible = false
-
-[node name="mode_menu" parent="canvlayer_menu" instance=ExtResource("4_e2i5t")]
-
-[node name="canvlayer_add_q" type="CanvasLayer" parent="."]
+[node name="screen_add_question" parent="." instance=ExtResource("2_b2ui6")]
 layer = 3
 visible = false
-
-[node name="mode_add_q" parent="canvlayer_add_q" instance=ExtResource("2_b2ui6")]

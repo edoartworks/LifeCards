@@ -1,11 +1,9 @@
-extends Control
+extends CanvasLayer
 
-
-signal close_add_q_UI
 
 @export var txted_add_question_path : NodePath
-var TXTED_ADD_QUESTION :TextEdit = null
 @export var cont_add_q_path : NodePath
+var TXTED_ADD_QUESTION :TextEdit = null
 var CONT_ADD_QUESTION :Container = null
 
 var initial_cont_size_y
@@ -57,9 +55,9 @@ func _on_btn_confirm_pressed() -> void:
 		return
 	add_user_question(q_text)
 	TXTED_ADD_QUESTION.text = ""
-	close_add_q_UI.emit()
+	SignalBus.close_add_question_screen.emit()
 
 
 func _on_btn_cancel_pressed() -> void:
 	TXTED_ADD_QUESTION.text = ""
-	close_add_q_UI.emit()
+	SignalBus.close_add_question_screen.emit()

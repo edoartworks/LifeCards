@@ -18,7 +18,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://Game/Global.gd"
+Global="*res://Game/Globals/Global.gd"
+SignalBus="*res://Game/Globals/SignalBus.gd"
 
 [display]
 

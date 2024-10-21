@@ -1,19 +1,21 @@
 extends Node
 
-var RESET_USER_QUESTIONS = false
 var QUESTIONS_FILE_PATH = "res://Data/questions.txt"
 var QUESTIONS_USER_FILE_PATH = "user://questions.txt"
 
 var QUESTIONS: Array[String] = []
 var CURRENT_QUESTION_IDX = 0
 
+# DEBUG
+var RESET_USER_QUESTIONS = false
 var DEBUG_LOG = ""
 
 func _ready() -> void:
 	copy_questions_to_user_file()
 	load_questions()
-	# TODO: remove before shipping
-	#set_half_resolution()
+	# DEBUG
+	if OS.get_name() == "Windows":
+		set_half_resolution()
 
 
 func read_text_file(file_path) -> Array[String]:

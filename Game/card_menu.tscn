@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1f7oecpsrav"]
+
+[ext_resource type="Script" path="res://Game/card_menu.gd" id="1_6yltm"]
+[ext_resource type="Theme" uid="uid://fa3sqrgi1208" path="res://Art/th_custom01.theme" id="2_5darv"]
+[ext_resource type="Texture2D" uid="uid://pm7346njvp7s" path="res://Art/icon_cancel.png" id="3_i1vdj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5mgnx"]
+bg_color = Color(0.6497, 0.73, 0.727323, 0.941176)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gmrec"]
+
+[node name="card_menu" type="CanvasLayer"]
+script = ExtResource("1_6yltm")
+
+[node name="BG" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_5darv")
+theme_override_styles/panel = SubResource("StyleBoxFlat_5mgnx")
+
+[node name="cont_menu" type="VBoxContainer" parent="BG"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -540.0
+offset_top = -1776.0
+offset_right = 540.0
+offset_bottom = -128.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="lbl_title" type="Label" parent="BG/cont_menu"]
+layout_mode = 2
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/font_size = 120
+text = "Card menu"
+horizontal_alignment = 1
+
+[node name="spacer" type="Control" parent="BG/cont_menu"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="btn_add_q" type="Button" parent="BG/cont_menu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = SubResource("StyleBoxFlat_gmrec")
+text = "Add custom question"
+
+[node name="spacer2" type="Control" parent="BG/cont_menu"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="btn_close_menu" type="Button" parent="BG/cont_menu"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 100
+icon = ExtResource("3_i1vdj")
+
+[connection signal="pressed" from="BG/cont_menu/btn_add_q" to="." method="_on_btn_add_q_pressed"]
+[connection signal="pressed" from="BG/cont_menu/btn_close_menu" to="." method="_on_btn_close_menu_pressed"]
