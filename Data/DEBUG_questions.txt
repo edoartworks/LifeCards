@@ -1,12 +1,8 @@
 # This is a comment and will not part of the questions.
-# 
-# Don't make your question longer than this line, to prevent display issues
-#
-What's your favourite name?
-What is your favourite butterfly?
-Can you swim?
+# Blank lines will be discarded
+
+Very long question crazy long wow how will this fit in this small card? Let's get to 100 characters!!
 Can you sneeze with eyes open?
 How do you feel about water?
 What do you think of paper planes?
 Tell me about your fingers?
-Very long question crazy long wow how will this fit in this small card?

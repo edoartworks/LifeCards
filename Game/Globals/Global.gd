@@ -1,13 +1,13 @@
 extends Node
 
-var QUESTIONS_FILE_PATH = "res://Data/questions.txt"
+var QUESTIONS_FILE_PATH = "res://Data/DEBUG_questions.txt"
 var QUESTIONS_USER_FILE_PATH = "user://questions.txt"
 
 var QUESTIONS: Array[String] = []
 var CURRENT_QUESTION_IDX = 0
 
 # DEBUG
-var RESET_USER_QUESTIONS = false
+var RESET_USER_QUESTIONS = true
 var DEBUG_LOG = ""
 
 func _ready() -> void:
@@ -36,7 +36,7 @@ func load_questions() -> void:
 	QUESTIONS = read_text_file(QUESTIONS_USER_FILE_PATH)
 	# Shuffle questions
 	if QUESTIONS.size() > 0:
-		QUESTIONS.shuffle()
+		pass#QUESTIONS.shuffle()
 		##debug(QUESTIONS)
 	else:
 		debug("No questions loaded.")

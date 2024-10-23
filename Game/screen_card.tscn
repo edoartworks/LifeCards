@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://misl3tfjpq0x"]
+[gd_scene load_steps=9 format=3 uid="uid://misl3tfjpq0x"]
 
 [ext_resource type="Script" path="res://Game/screen_card.gd" id="1_6i3pm"]
 [ext_resource type="PackedScene" uid="uid://by76aqaw7clul" path="res://Game/card_02.tscn" id="3_80x67"]
@@ -8,9 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://758uvwgicrj2" path="res://Art/icon_arrow.png" id="6_vlu3g"]
 [ext_resource type="PackedScene" uid="uid://d1f7oecpsrav" path="res://Game/card_menu.tscn" id="7_8jahr"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_15ndv"]
-bg_color = Color(0.4864, 0.64, 0.63488, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6es5q"]
 bg_color = Color(1, 0.683554, 0.938661, 1)
 
@@ -18,6 +15,7 @@ bg_color = Color(1, 0.683554, 0.938661, 1)
 script = ExtResource("1_6i3pm")
 card_path = NodePath("BG/cont_safe_area/VBoxContainer/card_02")
 menu_path = NodePath("card_menu")
+prog_bar_path = NodePath("BG/cont_safe_area/VBoxContainer/progress_bar_deck")
 debug_log_lbl_path = NodePath("BG/cont_safe_area/VBoxContainer/cont_debug_log/lbl_debug_log")
 
 [node name="BG" type="Panel" parent="."]
@@ -49,20 +47,13 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 
-[node name="ProgressBar" type="ProgressBar" parent="BG/cont_safe_area/VBoxContainer"]
+[node name="progress_bar_deck" type="ProgressBar" parent="BG/cont_safe_area/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-value = 22.0
+max_value = 10.0
+value = 1.0
 rounded = true
 show_percentage = false
-
-[node name="test" type="Button" parent="BG/cont_safe_area/VBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(200, 50)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_15ndv")
-action_mode = 0
-icon_alignment = 1
 
 [node name="spacer3" type="Control" parent="BG/cont_safe_area/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
@@ -150,4 +141,5 @@ layer = 2
 visible = false
 
 [connection signal="pressed" from="BG/cont_safe_area/VBoxContainer/cont_btns_bg/cont_btns/btn_menu" to="." method="_on_btn_menu_pressed"]
+[connection signal="pressed" from="BG/cont_safe_area/VBoxContainer/cont_btns_bg/cont_btns/btn_back" to="." method="_on_btn_back_pressed"]
 [connection signal="pressed" from="BG/cont_safe_area/VBoxContainer/cont_btns_bg/cont_btns/btn_fwd" to="." method="_on_btn_fwd_pressed"]
