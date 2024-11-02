@@ -14,7 +14,7 @@ bg_color = Color(1, 0.683554, 0.938661, 1)
 [node name="screen_card" type="CanvasLayer"]
 script = ExtResource("1_6i3pm")
 card_path = NodePath("BG/cont_safe_area/VBoxContainer/card_02")
-menu_path = NodePath("card_menu")
+menu_path = NodePath("card_menu_overlay/card_menu")
 prog_bar_path = NodePath("BG/cont_safe_area/VBoxContainer/progress_bar_deck")
 debug_log_lbl_path = NodePath("BG/cont_safe_area/VBoxContainer/cont_debug_log/lbl_debug_log")
 
@@ -24,7 +24,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("3_fjgbr")
 
 [node name="cont_safe_area" type="MarginContainer" parent="BG"]
 layout_mode = 1
@@ -120,6 +119,7 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="cont_debug_log" type="ScrollContainer" parent="BG/cont_safe_area/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 3
@@ -136,10 +136,31 @@ theme_override_font_sizes/font_size = 66
 text = "DEBUG"
 vertical_alignment = 2
 
-[node name="card_menu" parent="." instance=ExtResource("7_8jahr")]
+[node name="card_menu_overlay" type="CanvasLayer" parent="."]
 layer = 2
 visible = false
+
+[node name="obscure" type="Panel" parent="card_menu_overlay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Panel_Obscure"
+
+[node name="card_menu" parent="card_menu_overlay" instance=ExtResource("7_8jahr")]
+anchor_left = 0.074
+anchor_top = 0.864
+anchor_right = 0.074
+anchor_bottom = 0.864
+offset_left = -15.92
+offset_top = -306.88
+offset_right = 558.08
+offset_bottom = 3.12
+grow_horizontal = 1
+grow_vertical = 0
 
 [connection signal="pressed" from="BG/cont_safe_area/VBoxContainer/cont_btns_bg/cont_btns/btn_menu" to="." method="_on_btn_menu_pressed"]
 [connection signal="pressed" from="BG/cont_safe_area/VBoxContainer/cont_btns_bg/cont_btns/btn_back" to="." method="_on_btn_back_pressed"]
 [connection signal="pressed" from="BG/cont_safe_area/VBoxContainer/cont_btns_bg/cont_btns/btn_fwd" to="." method="_on_btn_fwd_pressed"]
+[connection signal="gui_input" from="card_menu_overlay/obscure" to="." method="_on_obscure_gui_input"]

@@ -19,7 +19,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_3pbqw")
 theme_override_styles/panel = SubResource("StyleBoxFlat_5mgnx")
 
 [node name="cont_margin_main" type="MarginContainer" parent="BG"]

@@ -7,6 +7,7 @@ extends CanvasLayer
 @export var debug_log_lbl_path :NodePath
 var CARD :Node = null
 var MENU :Node = null
+var MENU_OVERLAY :Node = null
 var PROG_BAR :ProgressBar = null
 var DEBUG_LOG :Node = null
 var DEBUG_SCROLL :Node = null
@@ -15,8 +16,8 @@ var DEBUG_SCROLL :Node = null
 func _ready() -> void:
 	CARD = get_node(card_path)
 	MENU = get_node(menu_path)
+	MENU_OVERLAY = MENU.get_parent()
 	PROG_BAR = get_node(prog_bar_path)
-	MENU.connect("close_menu", _on_close_menu)
 	DEBUG_LOG = get_node(debug_log_lbl_path)
 	DEBUG_SCROLL = DEBUG_LOG.get_parent()
 	
@@ -66,8 +67,9 @@ func _scroll_to_bottom():
 
 
 func _on_btn_menu_pressed() -> void:
-	MENU.visible = true
+	MENU_OVERLAY.visible = true
 
 
-func _on_close_menu() -> void:
-	MENU.visible = false
+func _on_obscure_gui_input(event: InputEvent) -> void:
+	if event is InputEventScreenTouch and event.is_pressed():
+		MENU_OVERLAY.visible = false
