@@ -34,6 +34,7 @@ func add_user_question(new_question) -> void:
 	file.close()
 	
 	Global.QUESTIONS.append(new_question)
+	SignalBus.new_question_added.emit()
 	Global.debug("Added question: " + new_question)
 
 

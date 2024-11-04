@@ -21,11 +21,12 @@ func _ready() -> void:
 	DEBUG_LOG = get_node(debug_log_lbl_path)
 	DEBUG_SCROLL = DEBUG_LOG.get_parent()
 	
+	SignalBus.connect("current_question_deleted", _on_current_question_deleted)
+	SignalBus.connect("new_question_added", _on_new_question_added)
 	# Init UI
 	CARD.set_card_text(Global.QUESTIONS[0])
 	PROG_BAR.max_value = Global.QUESTIONS.size()
 	PROG_BAR.value = 1
-	
 
 
 func _process(_delta: float) -> void:
@@ -36,30 +37,34 @@ func _process(_delta: float) -> void:
 	call_deferred("_scroll_to_bottom")
 
 
-func change_card_fwd() -> void:
+func change_card_fwd() -> bool:
 	if Global.CURRENT_QUESTION_IDX < Global.QUESTIONS.size() -1:
 		Global.CURRENT_QUESTION_IDX += 1
 		CARD.set_card_text(Global.QUESTIONS[Global.CURRENT_QUESTION_IDX])
-		PROG_BAR.value += 1
+		return true
 	else:
 		Global.debug("No more questions")
+		return false
 
 
-func change_card_back() -> void:
+func change_card_back() -> bool:
 	if Global.CURRENT_QUESTION_IDX > 0:
 		Global.CURRENT_QUESTION_IDX -= 1
 		CARD.set_card_text(Global.QUESTIONS[Global.CURRENT_QUESTION_IDX])
-		PROG_BAR.value -= 1
+		return true
 	else:
 		Global.debug("Reached first questions")
+		return false
 
 
 func _on_btn_fwd_pressed() -> void:
-	change_card_fwd()
+	if change_card_fwd():
+		PROG_BAR.value += 1
 
 
 func _on_btn_back_pressed() -> void:
-	change_card_back()
+	if change_card_back():
+		PROG_BAR.value -= 1
 
 
 func _scroll_to_bottom():
@@ -73,3 +78,21 @@ func _on_btn_menu_pressed() -> void:
 func _on_obscure_gui_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch and event.is_pressed():
 		MENU_OVERLAY.visible = false
+
+
+func _on_current_question_deleted() -> void:
+	PROG_BAR.max_value -= 1
+	Global.CURRENT_QUESTION_IDX -= 1
+	if not change_card_fwd():
+		Global.CURRENT_QUESTION_IDX += 1
+		if not change_card_back():
+			CARD.set_card_text("")
+			Global.debug("No more questions left in the deck!")
+
+
+func _on_new_question_added() -> void:
+	PROG_BAR.max_value += 1
+	# known bug: minor visual. ignore, probably forever.
+		# When adding a new Q when only one Q is left in the deck,
+		# the prog bar kinda bugs out, but not in a disruptive way.
+		# and should fix when user restart the app.
