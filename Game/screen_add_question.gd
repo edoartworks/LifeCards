@@ -56,9 +56,9 @@ func _on_btn_confirm_pressed() -> void:
 		return
 	add_user_question(q_text)
 	TXTED_ADD_QUESTION.text = ""
-	SignalBus.close_add_question_screen.emit()
+	SignalBus.hide_add_question_screen.emit()
 
 
 func _on_btn_cancel_pressed() -> void:
 	TXTED_ADD_QUESTION.text = ""
-	SignalBus.close_add_question_screen.emit()
+	SignalBus.hide_add_question_screen.emit()

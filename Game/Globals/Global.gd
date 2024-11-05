@@ -14,6 +14,9 @@ var DEBUG_LOG = ""
 func _ready() -> void:
 	copy_questions_to_user_file()
 	load_questions()
+	
+	SignalBus.shuffle_deck.connect(shuffle_deck)
+	
 	# DEBUG
 	if OS.get_name() == "Windows":
 		set_half_resolution()
@@ -35,12 +38,14 @@ func read_text_file(file_path) -> Array[String]:
 
 func load_questions() -> void:
 	QUESTIONS = read_text_file(QUESTIONS_USER_FILE_PATH)
-	# Shuffle questions
 	if QUESTIONS.size() > 0:
-		pass#QUESTIONS.shuffle()
-		##debug(QUESTIONS)
+		pass#shuffle_deck()
 	else:
 		debug("No questions loaded.")
+
+
+func shuffle_deck() -> void:
+	QUESTIONS.shuffle()
 
 
 func copy_questions_to_user_file() -> void:

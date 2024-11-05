@@ -1,8 +1,8 @@
-extends PanelContainer
+extends Control
 
 
 func _on_btn_add_q_pressed() -> void:
-	SignalBus.open_add_question_screen.emit()
+	SignalBus.show_add_question_screen.emit()
 
 
 func _on_btn_delete_q_pressed() -> void:
@@ -32,3 +32,7 @@ func delete_current_question() -> void:
 
 	Global.QUESTIONS.erase(current_question)
 	Global.debug("Deleted question: " + current_question)
+
+
+func _on_btn_shuffle_deck_pressed() -> void:
+	SignalBus.shuffle_deck.emit()

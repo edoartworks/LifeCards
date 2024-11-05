@@ -21,10 +21,12 @@ func _ready() -> void:
 	DEBUG_LOG = get_node(debug_log_lbl_path)
 	DEBUG_SCROLL = DEBUG_LOG.get_parent()
 	
-	SignalBus.connect("current_question_deleted", _on_current_question_deleted)
-	SignalBus.connect("new_question_added", _on_new_question_added)
-	# Init UI
-	CARD.set_card_text(Global.QUESTIONS[0])
+	SignalBus.current_question_deleted.connect(_on_current_question_deleted)
+	SignalBus.new_question_added.connect(_on_new_question_added)
+	SignalBus.shuffle_deck.connect(_on_deck_shuffled)
+	
+	# Init UI elements
+	refresh_card_text()
 	PROG_BAR.max_value = Global.QUESTIONS.size()
 	PROG_BAR.value = 1
 
@@ -40,7 +42,7 @@ func _process(_delta: float) -> void:
 func change_card_fwd() -> bool:
 	if Global.CURRENT_QUESTION_IDX < Global.QUESTIONS.size() -1:
 		Global.CURRENT_QUESTION_IDX += 1
-		CARD.set_card_text(Global.QUESTIONS[Global.CURRENT_QUESTION_IDX])
+		refresh_card_text()
 		return true
 	else:
 		Global.debug("No more questions")
@@ -50,7 +52,7 @@ func change_card_fwd() -> bool:
 func change_card_back() -> bool:
 	if Global.CURRENT_QUESTION_IDX > 0:
 		Global.CURRENT_QUESTION_IDX -= 1
-		CARD.set_card_text(Global.QUESTIONS[Global.CURRENT_QUESTION_IDX])
+		refresh_card_text()
 		return true
 	else:
 		Global.debug("Reached first questions")
@@ -96,3 +98,13 @@ func _on_new_question_added() -> void:
 		# When adding a new Q when only one Q is left in the deck,
 		# the prog bar kinda bugs out, but not in a disruptive way.
 		# and should fix when user restart the app.
+
+
+func _on_deck_shuffled() -> void:
+	Global.CURRENT_QUESTION_IDX = 0
+	PROG_BAR.value = 1
+	refresh_card_text()
+
+
+func refresh_card_text() -> void:
+	CARD.set_card_text(Global.QUESTIONS[Global.CURRENT_QUESTION_IDX])
