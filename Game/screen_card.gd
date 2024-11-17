@@ -2,11 +2,10 @@ extends CanvasLayer
 
 
 @export var card_path :NodePath
-@export var menu_path :NodePath
+@export var menu_overlay_path :NodePath
 @export var prog_bar_path :NodePath
 @export var debug_log_lbl_path :NodePath
 var CARD :Node = null
-var MENU :Node = null
 var MENU_OVERLAY :Node = null
 var PROG_BAR :ProgressBar = null
 var DEBUG_LOG :Node = null
@@ -15,8 +14,7 @@ var DEBUG_SCROLL :Node = null
 
 func _ready() -> void:
 	CARD = get_node(card_path)
-	MENU = get_node(menu_path)
-	MENU_OVERLAY = MENU.get_parent()
+	MENU_OVERLAY = get_node(menu_overlay_path)
 	PROG_BAR = get_node(prog_bar_path)
 	DEBUG_LOG = get_node(debug_log_lbl_path)
 	DEBUG_SCROLL = DEBUG_LOG.get_parent()
@@ -108,3 +106,7 @@ func _on_deck_shuffled() -> void:
 
 func refresh_card_text() -> void:
 	CARD.set_card_text(Global.QUESTIONS[Global.CURRENT_QUESTION_IDX])
+
+
+func _on_btn_exit_pressed() -> void:
+	SignalBus.card_screen_exit_pressed.emit()

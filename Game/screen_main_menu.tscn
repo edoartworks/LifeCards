@@ -1,0 +1,87 @@
+[gd_scene load_steps=6 format=3 uid="uid://do5i6g52xs23h"]
+
+[ext_resource type="Texture2D" uid="uid://mp5ihfvdta5v" path="res://Art/main_menu_art.png" id="1_7mw7c"]
+[ext_resource type="Texture2D" uid="uid://cjandkwd2k8ao" path="res://Art/icon_play.png" id="1_jjcyo"]
+[ext_resource type="Script" path="res://Game/screen_main_menu.gd" id="1_nexgn"]
+[ext_resource type="Texture2D" uid="uid://cufj1v6ral63b" path="res://Art/icon_question.png" id="2_gstxq"]
+[ext_resource type="Texture2D" uid="uid://myq5nitciwec" path="res://Art/icon_settings.png" id="2_p1x5k"]
+
+[node name="screen_main_menu" type="CanvasLayer"]
+script = ExtResource("1_nexgn")
+
+[node name="BG" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="BG"]
+layout_mode = 2
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -540.0
+offset_top = -1680.0
+offset_right = 540.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
+
+[node name="cont_menu" type="VBoxContainer" parent="BG/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="lbl_title" type="Label" parent="BG/MarginContainer/cont_menu"]
+layout_mode = 2
+theme_type_variation = &"Label_Title"
+text = "LIFE CARDS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="lbl_subtitle" type="Label" parent="BG/MarginContainer/cont_menu"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_type_variation = &"Label_Subtitle"
+text = "Connect deeper"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="spacer4" type="Control" parent="BG/MarginContainer/cont_menu"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="art" type="TextureRect" parent="BG/MarginContainer/cont_menu"]
+layout_mode = 2
+size_flags_vertical = 2
+texture = ExtResource("1_7mw7c")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="spacer3" type="Control" parent="BG/MarginContainer/cont_menu"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="btn_help" type="Button" parent="BG/MarginContainer/cont_menu"]
+layout_mode = 2
+theme_type_variation = &"Button_Icon_BG"
+icon = ExtResource("2_gstxq")
+icon_alignment = 1
+
+[node name="btn_settings" type="Button" parent="BG/MarginContainer/cont_menu"]
+layout_mode = 2
+theme_type_variation = &"Button_Icon_BG"
+icon = ExtResource("2_p1x5k")
+icon_alignment = 1
+
+[node name="btn_play" type="Button" parent="BG/MarginContainer/cont_menu"]
+layout_mode = 2
+theme_type_variation = &"Button_Icon_BG"
+icon = ExtResource("1_jjcyo")
+icon_alignment = 1
+
+[connection signal="pressed" from="BG/MarginContainer/cont_menu/btn_play" to="." method="_on_btn_play_pressed"]
