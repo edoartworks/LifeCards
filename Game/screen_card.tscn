@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://misl3tfjpq0x"]
 
 [ext_resource type="Script" path="res://Game/screen_card.gd" id="1_6i3pm"]
-[ext_resource type="Texture2D" uid="uid://pm7346njvp7s" path="res://Art/icon_cancel.png" id="2_fjf3g"]
+[ext_resource type="Texture2D" uid="uid://g70ufsqhcejp" path="res://Art/icon_cancel_small.png" id="2_vexda"]
 [ext_resource type="PackedScene" uid="uid://by76aqaw7clul" path="res://Game/card_02.tscn" id="3_80x67"]
 [ext_resource type="Texture2D" uid="uid://blqmevr5wam4q" path="res://Art/icon_dots.png" id="5_pv87m"]
 [ext_resource type="Texture2D" uid="uid://c5yy0o310pypc" path="res://Art/icon_arrow_l.png" id="6_8r6ww"]
@@ -49,7 +49,8 @@ size_flags_horizontal = 3
 
 [node name="btn_exit" type="Button" parent="BG/cont_safe_area/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-icon = ExtResource("2_fjf3g")
+theme_type_variation = &"Button_Icon_BG"
+icon = ExtResource("2_vexda")
 
 [node name="spacer2" type="Control" parent="BG/cont_safe_area/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -57,7 +58,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.02
 
 [node name="spacer3" type="Control" parent="BG/cont_safe_area/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="progress_bar_deck" type="ProgressBar" parent="BG/cont_safe_area/VBoxContainer"]
@@ -148,7 +149,7 @@ text = "DEBUG"
 vertical_alignment = 2
 
 [node name="card_menu_overlay" type="CanvasLayer" parent="."]
-layer = 2
+layer = 99
 visible = false
 
 [node name="obscure" type="Panel" parent="card_menu_overlay"]

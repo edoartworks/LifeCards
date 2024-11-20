@@ -15,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="BG"]
 layout_mode = 2
@@ -84,4 +85,6 @@ theme_type_variation = &"Button_Icon_BG"
 icon = ExtResource("1_jjcyo")
 icon_alignment = 1
 
+[connection signal="pressed" from="BG/MarginContainer/cont_menu/btn_help" to="." method="_on_btn_help_pressed"]
+[connection signal="pressed" from="BG/MarginContainer/cont_menu/btn_settings" to="." method="_on_btn_settings_pressed"]
 [connection signal="pressed" from="BG/MarginContainer/cont_menu/btn_play" to="." method="_on_btn_play_pressed"]

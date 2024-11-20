@@ -1,22 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://f0xnalit6yck"]
+[gd_scene load_steps=6 format=3 uid="uid://f0xnalit6yck"]
 
 [ext_resource type="Script" path="res://Game/screen_main.gd" id="1_7ymd8"]
 [ext_resource type="PackedScene" uid="uid://misl3tfjpq0x" path="res://Game/screen_card.tscn" id="1_e5ns8"]
 [ext_resource type="PackedScene" uid="uid://ktkatts3phbm" path="res://Game/screen_add_question.tscn" id="2_b2ui6"]
+[ext_resource type="PackedScene" uid="uid://cwnlvil864wbg" path="res://Game/screen_help.tscn" id="3_xdku1"]
 [ext_resource type="PackedScene" uid="uid://do5i6g52xs23h" path="res://Game/screen_main_menu.tscn" id="4_7ncln"]
 
 [node name="screen_main" type="CanvasLayer"]
 script = ExtResource("1_7ymd8")
 screen_add_q_path = NodePath("screen_add_question")
 screen_card_path = NodePath("screen_card")
+screen_help_path = NodePath("screen_help")
 
 [node name="screen_main_menu" parent="." instance=ExtResource("4_7ncln")]
 
-[node name="screen_card" parent="." instance=ExtResource("1_e5ns8")]
+[node name="screen_help" parent="." instance=ExtResource("3_xdku1")]
 layer = 2
+visible = false
+
+[node name="screen_card" parent="." instance=ExtResource("1_e5ns8")]
+layer = 3
 visible = false
 metadata/_edit_use_anchors_ = true
 
 [node name="screen_add_question" parent="." instance=ExtResource("2_b2ui6")]
-layer = 3
+layer = 4
 visible = false

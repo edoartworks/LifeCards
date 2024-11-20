@@ -1,0 +1,83 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwnlvil864wbg"]
+
+[ext_resource type="Texture2D" uid="uid://cfveb17qyderm" path="res://Art/icon_confirm.png" id="1_7ut6m"]
+[ext_resource type="Script" path="res://Game/screen_help.gd" id="1_fbdoe"]
+
+[node name="screen_help" type="CanvasLayer"]
+script = ExtResource("1_fbdoe")
+
+[node name="BG" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="BG"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -540.0
+offset_top = -1680.0
+offset_right = 540.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_right = 60
+
+[node name="cont_menu" type="VBoxContainer" parent="BG/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="lbl_title" type="Label" parent="BG/MarginContainer/cont_menu"]
+layout_mode = 2
+theme_type_variation = &"Label_Title"
+text = "LIFE CARDS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="spacer4" type="Control" parent="BG/MarginContainer/cont_menu"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="BG/MarginContainer/cont_menu"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_type_variation = &"Label_Body"
+text = "is a game about connecting deeper with strangers, friends or lovers.
+
+There are no rules. 
+Ask questions. Answer questions. Skip questions.
+
+Don't be scared 
+to open yourself up, 
+be vulnerable.
+Dare to trust.
+
+Respect others' boundaries,
+and your own boundaries."
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BG/MarginContainer/cont_menu"]
+layout_mode = 2
+
+[node name="spacer" type="Control" parent="BG/MarginContainer/cont_menu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="btn_exit" type="Button" parent="BG/MarginContainer/cont_menu/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"Button_Icon_BG"
+icon = ExtResource("1_7ut6m")
+
+[node name="spacer2" type="Control" parent="BG/MarginContainer/cont_menu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.02
+
+[connection signal="pressed" from="BG/MarginContainer/cont_menu/HBoxContainer/btn_exit" to="." method="_on_btn_exit_pressed"]
