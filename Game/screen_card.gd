@@ -19,8 +19,12 @@ func _ready() -> void:
 	DEBUG_LOG = get_node(debug_log_lbl_path)
 	DEBUG_SCROLL = DEBUG_LOG.get_parent()
 	
-	SignalBus.current_question_deleted.connect(_on_current_question_deleted)
+	SignalBus.card_swipe_left.connect(_on_btn_fwd_pressed)
+	SignalBus.card_swipe_right.connect(_on_btn_back_pressed)
+	
+	SignalBus.card_menu_add_question_pressed.connect(_on_card_menu_add_question_pressed)
 	SignalBus.new_question_added.connect(_on_new_question_added)
+	SignalBus.current_question_deleted.connect(_on_current_question_deleted)
 	SignalBus.shuffle_deck.connect(_on_deck_shuffled)
 	
 	# Init UI elements
@@ -76,6 +80,7 @@ func _on_btn_menu_pressed() -> void:
 
 
 func _on_obscure_gui_input(event: InputEvent) -> void:
+	# Hide menu overlay when screen is touched outside the menu area
 	if event is InputEventScreenTouch and event.is_pressed():
 		MENU_OVERLAY.visible = false
 
@@ -96,6 +101,10 @@ func _on_new_question_added() -> void:
 		# When adding a new Q when only one Q is left in the deck,
 		# the prog bar kinda bugs out, but not in a disruptive way.
 		# and should fix when user restart the app.
+
+
+func _on_card_menu_add_question_pressed() -> void:
+	MENU_OVERLAY.visible = false
 
 
 func _on_deck_shuffled() -> void:

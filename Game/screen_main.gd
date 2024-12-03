@@ -20,26 +20,29 @@ func _ready():
 	SignalBus.card_menu_add_question_pressed.connect(show_add_question_screen)
 	SignalBus.hide_add_question_screen.connect(hide_add_question_screen)
 	
-	SCREEN_ADD_Q.set_process(false)
+	SCREEN_ADD_Q.process_mode = Node.PROCESS_MODE_DISABLED
+	SCREEN_CARD.process_mode = Node.PROCESS_MODE_DISABLED
 
 func show_add_question_screen():
 	ProjectSettings.set_setting("application/run/low_processor_mode", false)
-	SCREEN_ADD_Q.set_process(true)
+	SCREEN_ADD_Q.process_mode = Node.PROCESS_MODE_INHERIT
 	SCREEN_ADD_Q.visible = true
 
 
 func hide_add_question_screen():
 	ProjectSettings.set_setting("application/run/low_processor_mode", true)
-	SCREEN_ADD_Q.set_process(false)
+	SCREEN_ADD_Q.process_mode = Node.PROCESS_MODE_DISABLED
 	SCREEN_ADD_Q.visible = false
 
 
 func show_card_screen():
 	SCREEN_CARD.visible = true
+	SCREEN_CARD.process_mode = Node.PROCESS_MODE_INHERIT
 
 
 func hide_card_screen():
 	SCREEN_CARD.visible = false
+	SCREEN_CARD.process_mode = Node.PROCESS_MODE_DISABLED
 
 
 func show_help_screen():

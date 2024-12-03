@@ -16,13 +16,13 @@ metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="BG"]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.133
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -540.0
-offset_top = -1680.0
+offset_top = 0.639999
 offset_right = 540.0
 offset_bottom = -80.0
 grow_horizontal = 2
@@ -42,19 +42,19 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="spacer4" type="Control" parent="BG/MarginContainer/cont_menu"]
-custom_minimum_size = Vector2(0, 20)
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="BG/MarginContainer/cont_menu"]
+[node name="help_text" type="Label" parent="BG/MarginContainer/cont_menu"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_type_variation = &"Label_Body"
 text = "is a game about connecting deeper with strangers, friends or lovers.
 
 There are no rules. 
-Ask questions. Answer questions. Skip questions.
+Ask questions. Answer questions. Skip questions. Pass the phone.
 
-Don't be scared 
+Have courage
 to open yourself up, 
 be vulnerable.
 Dare to trust.
@@ -62,6 +62,11 @@ Dare to trust.
 Respect others' boundaries,
 and your own boundaries."
 autowrap_mode = 3
+
+[node name="spacer5" type="Control" parent="BG/MarginContainer/cont_menu"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BG/MarginContainer/cont_menu"]
 layout_mode = 2

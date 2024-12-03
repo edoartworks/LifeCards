@@ -31,3 +31,9 @@ signal card_screen_exit_pressed
 
 @warning_ignore("unused_signal")
 signal help_screen_exit_pressed
+
+@warning_ignore("unused_signal")
+signal card_swipe_left
+
+@warning_ignore("unused_signal")
+signal card_swipe_right
