@@ -2,7 +2,7 @@ extends Control
 
 
 func _on_btn_add_q_pressed() -> void:
-	SignalBus.card_menu_add_question_pressed.emit()
+	SignalBus.show_add_question_screen.emit()
 
 
 func _on_btn_delete_q_pressed() -> void:

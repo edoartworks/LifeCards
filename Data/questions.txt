@@ -44,16 +44,15 @@ What makes a life worth living for you?
 Where do you think you are in the introvert/extrovert spectrum?
 What is a skill you would like to learn or develop? 
 Is there an element of your life where you lack confidence? 
-Describe your relationship with your family.
+Briefly describe your relationship with your close family.
 What’s brought you here? 
 What does adventure look like to you? 
 What’s your idea of a good challenge? 
 Describe an experience you found challenging.
 Describe one of the best days of your life so far.
-What's something you're looking forward to right now?
+What's something you're looking forward to today or tomorrow?
 What's a place that feels like home to you?
-What's a lesson you learned from a failure?
-What's a hobby you've always wanted to try?
+What's a hobby you've always wanted to try but never got the chance to?
 What's something that you're really grateful about right now?
 What's a goal you're working towards?
 What's a value you think is underrated?
@@ -61,3 +60,27 @@ Describe a memory that makes you laugh?
 What's a way you like to relax?
 What's something that makes you feel connected to others?
 What's a way you like to express yourself creatively?
+How do you like to celebrate important people in your life?
+How do you like to celebrate important events in your life?
+What's a place that holds a special significance or meaning to you?
+What's a moment that made you realize you were growing up?
+What's something you used to believe in that you no longer do?
+Who's someone you've lost touch with that you wish you could reconnect with?
+What's a book or movie that changed your perspective on life?
+What's something that you had initial doubts about, but then changed your mind on later?
+What's a place you've visited that felt like a different world?
+What's a tradition or ritual that's important to you?
+What's something you've learned from a difficult conversation?
+What's a memory that's tied to a specific smell or scent?
+What's something you're looking forward to learning or exploring in the future?
+What's a way you like to take care of yourself during stressful times?
+What's something you've learned from a cultural or societal difference?
+What's a way you like to challenge your own assumptions or biases?
+What's something you've learned from a personal struggle or challenge?
+If you could switch lives with someone for a day, who would it be and why?
+What's one of the most spontaneous thing you've ever done? Would you do it again?
+What's one of the biggest risk you've ever taken? Was it worth it?
+If you could create a new holiday, what would it be and how would people celebrate it?
+What's an interesting thing you've learned recently?
+What's an interesting fact about your family history? How has it shaped who you are today?
+What's a big cultural or societal norm that you think needs to be challenged? Why?

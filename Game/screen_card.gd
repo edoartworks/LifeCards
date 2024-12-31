@@ -16,13 +16,15 @@ func _ready() -> void:
 	CARD = get_node(card_path)
 	MENU_OVERLAY = get_node(menu_overlay_path)
 	PROG_BAR = get_node(prog_bar_path)
-	DEBUG_LOG = get_node(debug_log_lbl_path)
-	DEBUG_SCROLL = DEBUG_LOG.get_parent()
+	if Global.DEBUG_MODE:
+		DEBUG_LOG = get_node(debug_log_lbl_path)
+		DEBUG_SCROLL = DEBUG_LOG.get_parent()
+		DEBUG_SCROLL.visible = true
 	
 	SignalBus.card_swipe_left.connect(_on_btn_fwd_pressed)
 	SignalBus.card_swipe_right.connect(_on_btn_back_pressed)
 	
-	SignalBus.card_menu_add_question_pressed.connect(_on_card_menu_add_question_pressed)
+	SignalBus.show_add_question_screen.connect(_on_card_menu_add_question_pressed)
 	SignalBus.new_question_added.connect(_on_new_question_added)
 	SignalBus.current_question_deleted.connect(_on_current_question_deleted)
 	SignalBus.shuffle_deck.connect(_on_deck_shuffled)
@@ -34,11 +36,12 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	# Update debug log
-	if DEBUG_LOG.text == Global.DEBUG_LOG:
-		return
-	DEBUG_LOG.text = Global.DEBUG_LOG
-	call_deferred("_scroll_to_bottom")
+	if Global.DEBUG_MODE:
+		# Update debug log
+		if DEBUG_LOG.text == Global.DEBUG_LOG:
+			return
+		DEBUG_LOG.text = Global.DEBUG_LOG
+		call_deferred("_debug_scroll_to_bottom")
 
 
 func change_card_fwd() -> bool:
@@ -61,6 +64,10 @@ func change_card_back() -> bool:
 		return false
 
 
+func refresh_card_text() -> void:
+	CARD.set_card_text(Global.QUESTIONS[Global.CURRENT_QUESTION_IDX])
+
+
 func _on_btn_fwd_pressed() -> void:
 	if change_card_fwd():
 		PROG_BAR.value += 1
@@ -71,7 +78,7 @@ func _on_btn_back_pressed() -> void:
 		PROG_BAR.value -= 1
 
 
-func _scroll_to_bottom():
+func _debug_scroll_to_bottom():
 	DEBUG_SCROLL.scroll_vertical = DEBUG_SCROLL.get_v_scroll_bar().max_value
 
 
@@ -111,10 +118,6 @@ func _on_deck_shuffled() -> void:
 	Global.CURRENT_QUESTION_IDX = 0
 	PROG_BAR.value = 1
 	refresh_card_text()
-
-
-func refresh_card_text() -> void:
-	CARD.set_card_text(Global.QUESTIONS[Global.CURRENT_QUESTION_IDX])
 
 
 func _on_btn_exit_pressed() -> void:

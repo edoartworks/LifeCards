@@ -1,25 +1,35 @@
 extends Node
 
-var QUESTIONS_FILE_PATH = "res://Data/DEBUG_questions.txt"
-#var QUESTIONS_FILE_PATH = "res://Data/questions.txt"
+var DEBUG_MODE = true
+
+var QUESTIONS_FILE_PATH = "res://Data/questions.txt"
 var QUESTIONS_USER_FILE_PATH = "user://questions.txt"
 
 var QUESTIONS: Array[String] = []
 var CURRENT_QUESTION_IDX = 0
 
-# DEBUG
-var RESET_USER_QUESTIONS = true
+var DEBUG_QS_FILE_PATH = "res://Data/DEBUG_questions.txt"
+var DEBUG_RESET_USR_QS = false
 var DEBUG_LOG = ""
 
+
 func _ready() -> void:
+	if DEBUG_MODE:
+		QUESTIONS_FILE_PATH = DEBUG_QS_FILE_PATH
+		DEBUG_RESET_USR_QS = true
+		if OS.get_name() == "Windows":
+			set_half_resolution()
+	
 	copy_questions_to_user_file()
 	load_questions()
 	
 	SignalBus.shuffle_deck.connect(shuffle_deck)
-	
-	# DEBUG
-	if OS.get_name() == "Windows":
-		set_half_resolution()
+
+
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_WM_GO_BACK_REQUEST:
+			SignalBus.android_back_request.emit()
 
 
 func read_text_file(file_path) -> Array[String]:
@@ -39,7 +49,7 @@ func read_text_file(file_path) -> Array[String]:
 func load_questions() -> void:
 	QUESTIONS = read_text_file(QUESTIONS_USER_FILE_PATH)
 	if QUESTIONS.size() > 0:
-		pass#shuffle_deck()
+		shuffle_deck()
 	else:
 		debug("No questions loaded.")
 
@@ -49,7 +59,7 @@ func shuffle_deck() -> void:
 
 
 func copy_questions_to_user_file() -> void:
-	if not FileAccess.file_exists(QUESTIONS_USER_FILE_PATH) or RESET_USER_QUESTIONS:
+	if not FileAccess.file_exists(QUESTIONS_USER_FILE_PATH) or DEBUG_RESET_USR_QS:
 		var file = FileAccess.open(QUESTIONS_FILE_PATH, FileAccess.READ)
 		if not file:
 			debug(str("Failed to open res file: ", QUESTIONS_FILE_PATH))
