@@ -16,10 +16,6 @@ func _ready() -> void:
 	CARD = get_node(card_path)
 	MENU_OVERLAY = get_node(menu_overlay_path)
 	PROG_BAR = get_node(prog_bar_path)
-	if Global.DEBUG_MODE:
-		DEBUG_LOG = get_node(debug_log_lbl_path)
-		DEBUG_SCROLL = DEBUG_LOG.get_parent()
-		DEBUG_SCROLL.visible = true
 	
 	SignalBus.card_swipe_left.connect(_on_btn_fwd_pressed)
 	SignalBus.card_swipe_right.connect(_on_btn_back_pressed)
@@ -33,6 +29,10 @@ func _ready() -> void:
 	refresh_card_text()
 	PROG_BAR.max_value = Global.QUESTIONS.size()
 	PROG_BAR.value = 1
+	if Global.DEBUG_MODE:
+		DEBUG_LOG = get_node(debug_log_lbl_path)
+		DEBUG_SCROLL = DEBUG_LOG.get_parent()
+		DEBUG_SCROLL.visible = true
 
 
 func _process(_delta: float) -> void:
@@ -66,6 +66,12 @@ func change_card_back() -> bool:
 
 func refresh_card_text() -> void:
 	CARD.set_card_text(Global.QUESTIONS[Global.CURRENT_QUESTION_IDX])
+
+
+func set_card_to_first() -> void:
+	Global.CURRENT_QUESTION_IDX = 0
+	PROG_BAR.value = 1
+	refresh_card_text()
 
 
 func _on_btn_fwd_pressed() -> void:
@@ -115,10 +121,15 @@ func _on_card_menu_add_question_pressed() -> void:
 
 
 func _on_deck_shuffled() -> void:
-	Global.CURRENT_QUESTION_IDX = 0
-	PROG_BAR.value = 1
-	refresh_card_text()
+	set_card_to_first()
 
 
 func _on_btn_exit_pressed() -> void:
 	SignalBus.card_screen_exit_pressed.emit()
+
+
+func _on_btn_back_to_first_pressed() -> void:
+	if Global.CURRENT_QUESTION_IDX > 0:
+		set_card_to_first()
+	else:
+		Global.debug("Already at first questions")
