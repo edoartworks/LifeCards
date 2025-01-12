@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7wye7vxg5u13"]
+
+[ext_resource type="Texture2D" uid="uid://d147pe4qujumd" path="res://Art/icon_toggle_off.png" id="1_1tgwu"]
+[ext_resource type="Script" path="res://Game/settings_toggle.gd" id="1_w2fx3"]
+
+[node name="toggle" type="PanelContainer"]
+theme_type_variation = &"PanelContainer_Toggle"
+script = ExtResource("1_w2fx3")
+display_text = "setting"
+
+[node name="h_cont" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="lbl_text" type="Label" parent="h_cont"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0699425, 0.148939, 0.185547, 1)
+theme_override_font_sizes/font_size = 80
+text = "setting"
+
+[node name="spacer" type="Control" parent="h_cont"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="t_toggle" type="TextureRect" parent="h_cont"]
+layout_mode = 2
+texture = ExtResource("1_1tgwu")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

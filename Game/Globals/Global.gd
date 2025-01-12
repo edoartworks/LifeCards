@@ -2,25 +2,39 @@ extends Node
 
 var DEBUG_MODE = true
 
-var QUESTIONS_FILE_PATH = "res://Data/questions.txt"
-var QUESTIONS_USER_FILE_PATH = "user://questions.txt"
+var QUESTIONS_SRC_PATH = "res://Data/questions.txt"
+var QUESTIONS_USER_PATH = "user://questions.txt"
+var SETTINGS_SRC_PATH = "res://Data/settings.cfg"
+var SETTINGS_USER_PATH = "user://settings.cfg"
 
 var QUESTIONS: Array[String] = []
 var CURRENT_QUESTION_IDX = 0
 
 var DEBUG_QS_FILE_PATH = "res://Data/DEBUG_questions.txt"
 var DEBUG_RESET_USR_QS = false
+var DEBUG_RESET_SETTINGS = false
 var DEBUG_LOG = ""
 
 
 func _ready() -> void:
 	if DEBUG_MODE:
-		QUESTIONS_FILE_PATH = DEBUG_QS_FILE_PATH
+		QUESTIONS_SRC_PATH = DEBUG_QS_FILE_PATH
 		DEBUG_RESET_USR_QS = true
+		DEBUG_RESET_SETTINGS = true
 		if OS.get_name() == "Windows":
 			set_half_resolution()
 	
-	copy_questions_to_user_file()
+	# Copy data once on app first launch
+	if not FileAccess.file_exists(QUESTIONS_USER_PATH) or DEBUG_RESET_USR_QS:
+		copy_file(QUESTIONS_SRC_PATH, QUESTIONS_USER_PATH)
+	else:
+		debug("User questions found. Skip res file copy")
+		
+	if not FileAccess.file_exists(SETTINGS_USER_PATH) or DEBUG_RESET_SETTINGS:
+		copy_file(SETTINGS_SRC_PATH, SETTINGS_USER_PATH)
+	else:
+		debug("User settings found. Skip res file copy")
+	
 	load_questions()
 	
 	SignalBus.shuffle_deck.connect(shuffle_deck)
@@ -32,7 +46,7 @@ func _notification(what: int) -> void:
 			SignalBus.android_back_request.emit()
 
 
-func read_text_file(file_path) -> Array[String]:
+func _read_text_file(file_path) -> Array[String]:
 	var lines: Array[String] = []
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	if file:
@@ -46,11 +60,35 @@ func read_text_file(file_path) -> Array[String]:
 	return lines
 
 
-func load_questions() -> void:
-	QUESTIONS = read_text_file(QUESTIONS_USER_FILE_PATH)
-	if QUESTIONS.size() > 0:
-		shuffle_deck()
+# Assuming we only have one "main" section in the cfg
+func get_setting(key: String) -> Variant:
+	var config = ConfigFile.new()
+	var err = config.load(SETTINGS_USER_PATH)
+	if err != OK:
+		debug("Error loading settings file.")
+		return null
+	return config.get_value("main", key, null)
+
+
+func set_setting(key: String, value: Variant) -> void:
+	var config = ConfigFile.new()
+	var err = config.load(SETTINGS_USER_PATH)
+	if err != OK:
+		debug("Error loading settings file.")
+		return
+	
+	if config.has_section_key("main", key):
+		config.set_value("main", key, value)
+		var save_err = config.save(SETTINGS_USER_PATH)
+		if save_err != OK:
+			debug("Error saving settings file.")
 	else:
+		assert(false, str("Trying to set key that does not exist: " + key))
+
+
+func load_questions() -> void:
+	QUESTIONS = _read_text_file(QUESTIONS_USER_PATH)
+	if QUESTIONS.size() == 0:
 		debug("No questions loaded.")
 
 
@@ -58,25 +96,24 @@ func shuffle_deck() -> void:
 	QUESTIONS.shuffle()
 
 
-func copy_questions_to_user_file() -> void:
-	if not FileAccess.file_exists(QUESTIONS_USER_FILE_PATH) or DEBUG_RESET_USR_QS:
-		var file = FileAccess.open(QUESTIONS_FILE_PATH, FileAccess.READ)
-		if not file:
-			debug(str("Failed to open res file: ", QUESTIONS_FILE_PATH))
+func copy_file(source_path: String, destination_path: String, override_existing: bool = true) -> void:
+	var source_file = FileAccess.open(source_path, FileAccess.READ)
+	if source_file:
+		if FileAccess.file_exists(destination_path) and not override_existing:
+			debug(str("Destination file already exists and override is not allowed: " + destination_path))
+			source_file.close()
 			return
 		
-		var content = file.get_as_text()
-		file.close()
-		file = FileAccess.open(QUESTIONS_USER_FILE_PATH, FileAccess.WRITE)
-		if not file:
-			debug(str("Failed to open user file: ", QUESTIONS_USER_FILE_PATH))
-			return
-		
-		file.store_string(content)
-		file.close()
+		var destination_file = FileAccess.open(destination_path, FileAccess.WRITE)
+		if destination_file:
+			destination_file.store_buffer(source_file.get_buffer(source_file.get_length()))
+			destination_file.close()
+			debug(str("File copied successfully to user folder: " + destination_path))
+		else:
+			debug(str("Failed to open user file: " + destination_path))
+		source_file.close()
 	else:
-		debug("User questions found. Skip res file copy")
-		return
+		debug(str("Failed to open source file: " + source_path))
 
 
 ### DEBUG
