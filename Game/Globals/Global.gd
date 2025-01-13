@@ -31,7 +31,9 @@ func _ready() -> void:
 		debug("User questions found. Skip res file copy")
 		
 	if not FileAccess.file_exists(SETTINGS_USER_PATH) or DEBUG_RESET_SETTINGS:
-		copy_file(SETTINGS_SRC_PATH, SETTINGS_USER_PATH)
+		# First build settings file in res, then copy it to user path
+		call_deferred("build_settings")
+		call_deferred("copy_file", SETTINGS_SRC_PATH, SETTINGS_USER_PATH)
 	else:
 		debug("User settings found. Skip res file copy")
 	
@@ -60,6 +62,35 @@ func _read_text_file(file_path) -> Array[String]:
 	return lines
 
 
+func build_settings() -> void:
+	# Build settings file by reading values from the settings screen
+	# and writing it to the res file.
+	# Clear settings first
+	var config = ConfigFile.new()
+	var err = config.load(SETTINGS_SRC_PATH)
+	config.clear()
+	if err != OK:
+		debug("Error loading settings file.")
+		return
+		
+	var save_err = config.save(SETTINGS_SRC_PATH)
+	if save_err != OK:
+		debug("Error saving settings file.")
+	
+	var scene = get_node("/root/screen_main/screen_settings")
+	if scene:
+		var settings_nodes = scene.get_tree().get_nodes_in_group("settings")
+		if settings_nodes:
+			for node in settings_nodes:
+				var key = node.get("setting_key")
+				var value = node.get("setting_value")
+				set_setting(key, value, true)
+		else:
+			debug("No settings found in settings screen")
+	else:
+		debug("Failed to get screen settings")
+
+
 # Assuming we only have one "main" section in the cfg
 func get_setting(key: String) -> Variant:
 	var config = ConfigFile.new()
@@ -67,23 +98,27 @@ func get_setting(key: String) -> Variant:
 	if err != OK:
 		debug("Error loading settings file.")
 		return null
+		
 	return config.get_value("main", key, null)
 
 
-func set_setting(key: String, value: Variant) -> void:
+func set_setting(key: String, value: Variant, source_file: bool = false) -> void:
 	var config = ConfigFile.new()
-	var err = config.load(SETTINGS_USER_PATH)
+	var path
+	if source_file:
+		path = SETTINGS_SRC_PATH
+	else:
+		path = SETTINGS_USER_PATH
+	var err = config.load(path)
 	if err != OK:
 		debug("Error loading settings file.")
 		return
 	
-	if config.has_section_key("main", key):
-		config.set_value("main", key, value)
-		var save_err = config.save(SETTINGS_USER_PATH)
-		if save_err != OK:
-			debug("Error saving settings file.")
-	else:
-		assert(false, str("Trying to set key that does not exist: " + key))
+	config.set_value("main", key, value)
+	debug(str("set setting: " + str(key) + "=" + str(value)))
+	var save_err = config.save(path)
+	if save_err != OK:
+		debug("Error saving settings file.")
 
 
 func load_questions() -> void:

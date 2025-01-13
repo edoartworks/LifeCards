@@ -56,7 +56,8 @@ text = "Add custom question"
 [node name="toggle_shuffle_play" parent="BG/MarginContainer/cont_main" instance=ExtResource("2_6drmw")]
 layout_mode = 2
 display_text = "Shuffle deck on play"
-setting_key = "shuffle_on_plau"
+setting_key = "shuffle_on_play"
+setting_value = true
 
 [node name="spacer5" type="Control" parent="BG/MarginContainer/cont_main"]
 custom_minimum_size = Vector2(0, 60)

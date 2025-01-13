@@ -30,6 +30,10 @@ window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
 
+[global_group]
+
+settings="settings stored on disk"
+
 [gui]
 
 theme/custom="res://Art/th_custom01.theme"
