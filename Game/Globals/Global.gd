@@ -18,6 +18,7 @@ var DEBUG_LOG = ""
 
 func _ready() -> void:
 	if DEBUG_MODE:
+		debug("DEBUG MODE: ON")
 		QUESTIONS_SRC_PATH = DEBUG_QS_FILE_PATH
 		DEBUG_RESET_USR_QS = true
 		DEBUG_RESET_SETTINGS = true
@@ -29,17 +30,22 @@ func _ready() -> void:
 		copy_file(QUESTIONS_SRC_PATH, QUESTIONS_USER_PATH)
 	else:
 		debug("User questions found. Skip res file copy")
-		
+	
+	# Build settings file
+	call_deferred("build_settings")
 	if not FileAccess.file_exists(SETTINGS_USER_PATH) or DEBUG_RESET_SETTINGS:
-		# First build settings file in res, then copy it to user path
-		call_deferred("build_settings")
 		call_deferred("copy_file", SETTINGS_SRC_PATH, SETTINGS_USER_PATH)
 	else:
 		debug("User settings found. Skip res file copy")
+		SignalBus.update_settings_UI.emit()
 	
 	load_questions()
 	
-	SignalBus.shuffle_deck.connect(shuffle_deck)
+	SignalBus.shuffle_deck.connect(_shuffle_deck)
+
+
+func _shuffle_deck() -> void:
+	QUESTIONS.shuffle()
 
 
 func _notification(what: int) -> void:
@@ -65,13 +71,14 @@ func _read_text_file(file_path) -> Array[String]:
 func build_settings() -> void:
 	# Build settings file by reading values from the settings screen
 	# and writing it to the res file.
-	# Clear settings first
+	
+	# Clear source settings first
 	var config = ConfigFile.new()
 	var err = config.load(SETTINGS_SRC_PATH)
-	config.clear()
 	if err != OK:
 		debug("Error loading settings file.")
 		return
+	config.clear()
 		
 	var save_err = config.save(SETTINGS_SRC_PATH)
 	if save_err != OK:
@@ -125,10 +132,6 @@ func load_questions() -> void:
 	QUESTIONS = _read_text_file(QUESTIONS_USER_PATH)
 	if QUESTIONS.size() == 0:
 		debug("No questions loaded.")
-
-
-func shuffle_deck() -> void:
-	QUESTIONS.shuffle()
 
 
 func copy_file(source_path: String, destination_path: String, override_existing: bool = true) -> void:

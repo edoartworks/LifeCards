@@ -16,21 +16,24 @@ signal toggle_pressed(setting_key: String, new_toggle_state: bool)
 
 func _ready() -> void:
 	lbl_text.text = display_text
-	update_texture()
 	add_to_group("settings")
+	call_deferred("update_value_from_user_file")
+	call_deferred("update_texture")
 
 
 func _process(_delta: float) -> void:
-	# Preview string in editor
+	# Preview in editor
 	if Engine.is_editor_hint():
-		_ready()
+		lbl_text.text = display_text
+		add_to_group("settings")
+		update_texture()
 
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch and event.is_pressed():
 		setting_value = not setting_value
 		update_texture()
-		toggle_pressed.emit(setting_value)
+		toggle_pressed.emit(setting_key, setting_value)
 
 
 func update_texture() -> void:
@@ -38,3 +41,7 @@ func update_texture() -> void:
 		toggle_texture.texture = TOGGLE_ON_ART
 	else:
 		toggle_texture.texture = TOGGLE_OFF_ART
+
+
+func update_value_from_user_file() -> void:
+	setting_value = Global.get_setting(setting_key)

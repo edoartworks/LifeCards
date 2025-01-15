@@ -7,7 +7,7 @@
 theme_type_variation = &"PanelContainer_Toggle"
 script = ExtResource("1_w2fx3")
 display_text = "setting"
-setting_value = null
+setting_key = "key"
 
 [node name="h_cont" type="HBoxContainer" parent="."]
 layout_mode = 2
