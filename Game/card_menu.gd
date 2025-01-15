@@ -11,9 +11,9 @@ func _on_btn_delete_q_pressed() -> void:
 
 
 func delete_current_question() -> void:
-	var file = FileAccess.open(Global.QUESTIONS_USER_FILE_PATH, FileAccess.READ_WRITE)
+	var file = FileAccess.open(Global.QUESTIONS_USER_PATH, FileAccess.READ_WRITE)
 	if not file:
-		Global.debug(str("Failed to open user file: ", Global.QUESTIONS_USER_FILE_PATH))
+		Global.debug(str("Failed to open user file: ", Global.QUESTIONS_USER_PATH))
 		return
 		
 	var content = file.get_as_text()
