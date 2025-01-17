@@ -42,6 +42,7 @@ func _ready() -> void:
 	load_questions()
 	
 	SignalBus.shuffle_deck.connect(_shuffle_deck)
+	SignalBus.reset_deck_default.connect(_reset_questions_to_default)
 
 
 func _shuffle_deck() -> void:
@@ -128,12 +129,6 @@ func set_setting(key: String, value: Variant, source_file: bool = false) -> void
 		debug("Error saving settings file.")
 
 
-func load_questions() -> void:
-	QUESTIONS = _read_text_file(QUESTIONS_USER_PATH)
-	if QUESTIONS.size() == 0:
-		debug("No questions loaded.")
-
-
 func copy_file(source_path: String, destination_path: String, override_existing: bool = true) -> void:
 	var source_file = FileAccess.open(source_path, FileAccess.READ)
 	if source_file:
@@ -152,6 +147,17 @@ func copy_file(source_path: String, destination_path: String, override_existing:
 		source_file.close()
 	else:
 		debug(str("Failed to open source file: " + source_path))
+
+
+func load_questions() -> void:
+	QUESTIONS = _read_text_file(QUESTIONS_USER_PATH)
+	if QUESTIONS.size() == 0:
+		debug("No questions loaded.")
+
+
+func _reset_questions_to_default() -> void:
+	copy_file(QUESTIONS_SRC_PATH, QUESTIONS_USER_PATH)
+	load_questions()
 
 
 ### DEBUG

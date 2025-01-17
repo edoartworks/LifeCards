@@ -24,15 +24,14 @@ func _ready() -> void:
 	SignalBus.new_question_added.connect(_on_new_question_added)
 	SignalBus.current_question_deleted.connect(_on_current_question_deleted)
 	SignalBus.shuffle_deck.connect(_on_deck_shuffled)
+	SignalBus.reset_deck_default.connect(_on_deck_reset)
 	
-	# Init UI elements
-	refresh_card_text()
-	PROG_BAR.max_value = Global.QUESTIONS.size()
-	PROG_BAR.value = 1
 	if Global.DEBUG_MODE:
 		DEBUG_LOG = get_node(debug_log_lbl_path)
 		DEBUG_SCROLL = DEBUG_LOG.get_parent()
 		DEBUG_SCROLL.visible = true
+	
+	init_UI()
 
 
 func _process(_delta: float) -> void:
@@ -42,6 +41,12 @@ func _process(_delta: float) -> void:
 			return
 		DEBUG_LOG.text = Global.DEBUG_LOG
 		call_deferred("_debug_scroll_to_bottom")
+
+
+func init_UI() -> void:
+	refresh_card_text()
+	PROG_BAR.max_value = Global.QUESTIONS.size()
+	PROG_BAR.value = 1
 
 
 func change_card_fwd() -> bool:
@@ -85,7 +90,7 @@ func _on_btn_back_pressed() -> void:
 
 
 func _debug_scroll_to_bottom():
-	DEBUG_SCROLL.scroll_vertical = DEBUG_SCROLL.get_v_scroll_bar().max_value
+	DEBUG_SCROLL.set_deferred("scroll_vertical", DEBUG_SCROLL.get_v_scroll_bar().max_value)
 
 
 func _on_btn_menu_pressed() -> void:
@@ -122,6 +127,10 @@ func _on_card_menu_add_question_pressed() -> void:
 
 func _on_deck_shuffled() -> void:
 	set_card_to_first()
+
+
+func _on_deck_reset() -> void:
+	init_UI()
 
 
 func _on_btn_exit_pressed() -> void:

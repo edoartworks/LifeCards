@@ -43,3 +43,6 @@ signal card_swipe_right
 
 @warning_ignore("unused_signal")
 signal android_back_request
+
+@warning_ignore("unused_signal")
+signal reset_deck_default
