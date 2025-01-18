@@ -158,6 +158,7 @@ func load_questions() -> void:
 func _reset_questions_to_default() -> void:
 	copy_file(QUESTIONS_SRC_PATH, QUESTIONS_USER_PATH)
 	load_questions()
+	CURRENT_QUESTION_IDX = 0
 
 
 ### DEBUG

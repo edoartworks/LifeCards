@@ -14,4 +14,8 @@ func _on_toggle_shuffle_play_toggle_pressed(setting_key: String, new_toggle_stat
 
 
 func _on_btn_reset_deck_pressed() -> void:
+	Popups.show_confirm(self, _on_btn_reset_deck_confirmed)
+
+
+func _on_btn_reset_deck_confirmed():
 	SignalBus.reset_deck_default.emit()

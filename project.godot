@@ -21,6 +21,7 @@ config/icon="res://Art/app_icon.png"
 
 Global="*res://Game/Globals/Global.gd"
 SignalBus="*res://Game/Globals/SignalBus.gd"
+Popups="*res://Game/Globals/Popups.gd"
 
 [display]
 

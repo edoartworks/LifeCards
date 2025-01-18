@@ -34,7 +34,7 @@ theme_override_constants/margin_right = 40
 
 [node name="cont_menu" type="VBoxContainer" parent="BG/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 15
+theme_override_constants/separation = 16
 
 [node name="lbl_title" type="Label" parent="BG/MarginContainer/cont_menu"]
 layout_mode = 2
