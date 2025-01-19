@@ -24,6 +24,9 @@ signal main_menu_play_pressed
 signal main_menu_settings_pressed
 
 @warning_ignore("unused_signal")
+signal main_menu_filter_pressed
+
+@warning_ignore("unused_signal")
 signal main_menu_help_pressed
 
 @warning_ignore("unused_signal")
@@ -34,6 +37,9 @@ signal help_screen_exit_pressed
 
 @warning_ignore("unused_signal")
 signal settings_screen_exit_pressed
+
+@warning_ignore("unused_signal")
+signal filters_screen_exit_pressed
 
 @warning_ignore("unused_signal")
 signal card_swipe_left

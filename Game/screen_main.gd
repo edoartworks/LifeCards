@@ -8,6 +8,8 @@ var SCREEN_CARD: Node = null
 var SCREEN_HELP: Node = null
 @export var screen_settings_path: NodePath
 var SCREEN_SETTINGS: Node = null
+@export var screen_filters_path: NodePath
+var SCREEN_FILTERS: Node = null
 
 
 func _ready():
@@ -16,6 +18,7 @@ func _ready():
 	SCREEN_CARD = get_node(screen_card_path)
 	SCREEN_HELP = get_node(screen_help_path)
 	SCREEN_SETTINGS = get_node(screen_settings_path)
+	SCREEN_FILTERS = get_node(screen_filters_path)
 	
 	SignalBus.main_menu_play_pressed.connect(show_card_screen)
 	SignalBus.card_screen_exit_pressed.connect(hide_card_screen)
@@ -23,6 +26,8 @@ func _ready():
 	SignalBus.help_screen_exit_pressed.connect(hide_help_screen)
 	SignalBus.main_menu_settings_pressed.connect(show_settings_screen)
 	SignalBus.settings_screen_exit_pressed.connect(hide_settings_screen)
+	SignalBus.main_menu_filter_pressed.connect(show_filters_screen)
+	SignalBus.filters_screen_exit_pressed.connect(hide_filters_screen)
 	
 	SignalBus.android_back_request.connect(_on_android_back_request)
 	
@@ -73,6 +78,14 @@ func hide_settings_screen():
 	SCREEN_SETTINGS.visible = false
 
 
+func show_filters_screen():
+	SCREEN_FILTERS.visible = true
+
+
+func hide_filters_screen():
+	SCREEN_FILTERS.visible = false
+
+
 func _on_android_back_request():
 	var layers = get_tree().current_scene.get_children()
 	var highest_visible_layer_node = null
@@ -93,6 +106,8 @@ func _on_android_back_request():
 				hide_help_screen()
 			SCREEN_SETTINGS:
 				hide_settings_screen()
+			SCREEN_FILTERS:
+				hide_filters_screen()
 
 
 

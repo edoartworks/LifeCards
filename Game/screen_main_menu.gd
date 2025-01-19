@@ -13,3 +13,7 @@ func _on_btn_settings_pressed() -> void:
 
 func _on_btn_help_pressed() -> void:
 	SignalBus.main_menu_help_pressed.emit()
+
+
+func _on_btn_filter_pressed() -> void:
+	SignalBus.main_menu_filter_pressed.emit()

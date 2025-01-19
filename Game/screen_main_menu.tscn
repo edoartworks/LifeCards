@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://do5i6g52xs23h"]
+[gd_scene load_steps=7 format=3 uid="uid://do5i6g52xs23h"]
 
 [ext_resource type="Texture2D" uid="uid://mp5ihfvdta5v" path="res://Art/main_menu_art.png" id="1_7mw7c"]
 [ext_resource type="Texture2D" uid="uid://cjandkwd2k8ao" path="res://Art/icon_play.png" id="1_jjcyo"]
 [ext_resource type="Script" path="res://Game/screen_main_menu.gd" id="1_nexgn"]
 [ext_resource type="Texture2D" uid="uid://cufj1v6ral63b" path="res://Art/icon_question.png" id="2_gstxq"]
 [ext_resource type="Texture2D" uid="uid://myq5nitciwec" path="res://Art/icon_settings.png" id="2_p1x5k"]
+[ext_resource type="Texture2D" uid="uid://llvlin0jugsr" path="res://Art/icon_menu.png" id="5_qlsdc"]
 
 [node name="screen_main_menu" type="CanvasLayer"]
 script = ExtResource("1_nexgn")
@@ -79,6 +80,12 @@ theme_type_variation = &"Button_Icon_BG"
 icon = ExtResource("2_p1x5k")
 icon_alignment = 1
 
+[node name="btn_filter" type="Button" parent="BG/MarginContainer/cont_menu"]
+layout_mode = 2
+theme_type_variation = &"Button_Icon_BG"
+icon = ExtResource("5_qlsdc")
+icon_alignment = 1
+
 [node name="btn_play" type="Button" parent="BG/MarginContainer/cont_menu"]
 layout_mode = 2
 theme_type_variation = &"Button_Icon_BG"
@@ -87,4 +94,5 @@ icon_alignment = 1
 
 [connection signal="pressed" from="BG/MarginContainer/cont_menu/btn_help" to="." method="_on_btn_help_pressed"]
 [connection signal="pressed" from="BG/MarginContainer/cont_menu/btn_settings" to="." method="_on_btn_settings_pressed"]
+[connection signal="pressed" from="BG/MarginContainer/cont_menu/btn_filter" to="." method="_on_btn_filter_pressed"]
 [connection signal="pressed" from="BG/MarginContainer/cont_menu/btn_play" to="." method="_on_btn_play_pressed"]

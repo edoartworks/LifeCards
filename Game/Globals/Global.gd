@@ -4,8 +4,8 @@ var DEBUG_MODE = true
 
 var QUESTIONS_SRC_PATH = "res://Data/questions.txt"
 var QUESTIONS_USER_PATH = "user://questions.txt"
-var SETTINGS_SRC_PATH = "res://Data/settings.cfg"
-var SETTINGS_USER_PATH = "user://settings.cfg"
+var CONFIG_SRC_PATH = "res://Data/config.cfg"
+var CONFIG_USER_PATH = "user://config.cfg"
 
 var QUESTIONS: Array[String] = []
 var CURRENT_QUESTION_IDX = 0
@@ -33,8 +33,8 @@ func _ready() -> void:
 	
 	# Build settings file
 	call_deferred("build_settings")
-	if not FileAccess.file_exists(SETTINGS_USER_PATH) or DEBUG_RESET_SETTINGS:
-		call_deferred("copy_file", SETTINGS_SRC_PATH, SETTINGS_USER_PATH)
+	if not FileAccess.file_exists(CONFIG_USER_PATH) or DEBUG_RESET_SETTINGS:
+		call_deferred("copy_file", CONFIG_SRC_PATH, CONFIG_USER_PATH)
 	else:
 		debug("User settings found. Skip res file copy")
 		SignalBus.update_settings_UI.emit()
@@ -75,13 +75,13 @@ func build_settings() -> void:
 	
 	# Clear source settings first
 	var config = ConfigFile.new()
-	var err = config.load(SETTINGS_SRC_PATH)
+	var err = config.load(CONFIG_SRC_PATH)
 	if err != OK:
 		debug("Error loading settings file.")
 		return
 	config.clear()
 		
-	var save_err = config.save(SETTINGS_SRC_PATH)
+	var save_err = config.save(CONFIG_SRC_PATH)
 	if save_err != OK:
 		debug("Error saving settings file.")
 	
@@ -102,27 +102,27 @@ func build_settings() -> void:
 # Assuming we only have one "main" section in the cfg
 func get_setting(key: String) -> Variant:
 	var config = ConfigFile.new()
-	var err = config.load(SETTINGS_USER_PATH)
+	var err = config.load(CONFIG_USER_PATH)
 	if err != OK:
 		debug("Error loading settings file.")
 		return null
 		
-	return config.get_value("main", key, null)
+	return config.get_value("settings", key, null)
 
 
 func set_setting(key: String, value: Variant, source_file: bool = false) -> void:
 	var config = ConfigFile.new()
 	var path
 	if source_file:
-		path = SETTINGS_SRC_PATH
+		path = CONFIG_SRC_PATH
 	else:
-		path = SETTINGS_USER_PATH
+		path = CONFIG_USER_PATH
 	var err = config.load(path)
 	if err != OK:
 		debug("Error loading settings file.")
 		return
 	
-	config.set_value("main", key, value)
+	config.set_value("settings", key, value)
 	debug(str("set setting: " + str(key) + "=" + str(value)))
 	var save_err = config.save(path)
 	if save_err != OK:

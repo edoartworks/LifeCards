@@ -1,11 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8ds5p7u08cgn"]
+[gd_scene load_steps=4 format=3 uid="uid://baumhp28csf0f"]
 
-[ext_resource type="Script" path="res://Game/screen_settings.gd" id="1_hu3bw"]
-[ext_resource type="PackedScene" uid="uid://c7wye7vxg5u13" path="res://Game/settings_toggle.tscn" id="2_6drmw"]
-[ext_resource type="Texture2D" uid="uid://cfveb17qyderm" path="res://Art/icon_confirm.png" id="2_nu078"]
+[ext_resource type="PackedScene" uid="uid://clyul6nuh52rm" path="res://Game/filter_toggle.tscn" id="1_7dq4n"]
+[ext_resource type="Script" path="res://Game/screen_filters.gd" id="1_7pc1o"]
+[ext_resource type="Texture2D" uid="uid://cfveb17qyderm" path="res://Art/icon_confirm.png" id="2_tqkps"]
 
-[node name="screen_settings" type="CanvasLayer"]
-script = ExtResource("1_hu3bw")
+[node name="screen_filters" type="CanvasLayer"]
+script = ExtResource("1_7pc1o")
 
 [node name="BG" type="Panel" parent="."]
 anchors_preset = 15
@@ -38,36 +38,26 @@ theme_override_constants/separation = 15
 [node name="lbl_title" type="Label" parent="BG/MarginContainer/cont_main"]
 layout_mode = 2
 theme_type_variation = &"Label_Title"
-text = "SETTINGS"
+text = "FILTERS"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="lbl_subtitle" type="Label" parent="BG/MarginContainer/cont_main"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_type_variation = &"Label_Subtitle"
+text = "Customize your deck"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="spacer4" type="Control" parent="BG/MarginContainer/cont_main"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="btn_reset_deck" type="Button" parent="BG/MarginContainer/cont_main"]
+[node name="filter_toggle" parent="BG/MarginContainer/cont_main" instance=ExtResource("1_7dq4n")]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_type_variation = &"Button_Text_Menu"
-text = "Reset deck to default"
-
-[node name="spacer6" type="Control" parent="BG/MarginContainer/cont_main"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-
-[node name="btn_add_q" type="Button" parent="BG/MarginContainer/cont_main"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_type_variation = &"Button_Text_Menu"
-text = "Add custom question"
-
-[node name="toggle_shuffle_play" parent="BG/MarginContainer/cont_main" instance=ExtResource("2_6drmw")]
-layout_mode = 2
-display_text = "Shuffle deck on play"
-setting_key = "shuffle_on_play"
-setting_value = null
 
 [node name="spacer5" type="Control" parent="BG/MarginContainer/cont_main"]
 custom_minimum_size = Vector2(0, 60)
@@ -83,14 +73,11 @@ size_flags_horizontal = 3
 [node name="btn_exit" type="Button" parent="BG/MarginContainer/cont_main/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"Button_Icon_BG"
-icon = ExtResource("2_nu078")
+icon = ExtResource("2_tqkps")
 
 [node name="spacer2" type="Control" parent="BG/MarginContainer/cont_main/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.02
 
-[connection signal="pressed" from="BG/MarginContainer/cont_main/btn_reset_deck" to="." method="_on_btn_reset_deck_pressed"]
-[connection signal="pressed" from="BG/MarginContainer/cont_main/btn_add_q" to="." method="_on_btn_add_q_pressed"]
-[connection signal="toggle_pressed" from="BG/MarginContainer/cont_main/toggle_shuffle_play" to="." method="_on_toggle_shuffle_play_toggle_pressed"]
 [connection signal="pressed" from="BG/MarginContainer/cont_main/HBoxContainer/btn_exit" to="." method="_on_btn_exit_pressed"]
