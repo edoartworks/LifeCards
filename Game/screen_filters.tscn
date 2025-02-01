@@ -56,10 +56,45 @@ custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="filter_toggle" parent="BG/MarginContainer/cont_main" instance=ExtResource("1_7dq4n")]
+[node name="lbl_subtitle2" type="Label" parent="BG/MarginContainer/cont_main"]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+theme_type_variation = &"Label_Body"
+text = "What type of questions 
+do you want to see?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="spacer5" type="Control" parent="BG/MarginContainer/cont_main"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="filter_toggle_1" parent="BG/MarginContainer/cont_main" instance=ExtResource("1_7dq4n")]
+layout_mode = 2
+display_text = "Light and fun"
+filter_key = "1"
+filter_enabled = true
+
+[node name="filter_toggle_2" parent="BG/MarginContainer/cont_main" instance=ExtResource("1_7dq4n")]
+layout_mode = 2
+display_text = "Reflective"
+filter_key = "2"
+filter_enabled = true
+
+[node name="filter_toggle_3" parent="BG/MarginContainer/cont_main" instance=ExtResource("1_7dq4n")]
+layout_mode = 2
+display_text = "Deep"
+filter_key = "3"
+filter_enabled = true
+
+[node name="filter_toggle_4" parent="BG/MarginContainer/cont_main" instance=ExtResource("1_7dq4n")]
+layout_mode = 2
+display_text = "Very deep"
+filter_key = "4"
+filter_enabled = true
+
+[node name="spacer6" type="Control" parent="BG/MarginContainer/cont_main"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 

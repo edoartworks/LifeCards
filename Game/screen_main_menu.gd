@@ -3,7 +3,7 @@ extends CanvasLayer
 
 func _on_btn_play_pressed() -> void:
 	SignalBus.main_menu_play_pressed.emit()
-	if Global.get_setting("shuffle_on_play"):
+	if Global.get_config("settings", "shuffle_on_play"):
 		SignalBus.shuffle_deck.emit()
 
 

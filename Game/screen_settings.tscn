@@ -67,7 +67,6 @@ text = "Add custom question"
 layout_mode = 2
 display_text = "Shuffle deck on play"
 setting_key = "shuffle_on_play"
-setting_value = null
 
 [node name="spacer5" type="Control" parent="BG/MarginContainer/cont_main"]
 custom_minimum_size = Vector2(0, 60)
@@ -92,5 +91,4 @@ size_flags_stretch_ratio = 0.02
 
 [connection signal="pressed" from="BG/MarginContainer/cont_main/btn_reset_deck" to="." method="_on_btn_reset_deck_pressed"]
 [connection signal="pressed" from="BG/MarginContainer/cont_main/btn_add_q" to="." method="_on_btn_add_q_pressed"]
-[connection signal="toggle_pressed" from="BG/MarginContainer/cont_main/toggle_shuffle_play" to="." method="_on_toggle_shuffle_play_toggle_pressed"]
 [connection signal="pressed" from="BG/MarginContainer/cont_main/HBoxContainer/btn_exit" to="." method="_on_btn_exit_pressed"]

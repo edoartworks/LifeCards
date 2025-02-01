@@ -11,8 +11,6 @@ var TOGGLE_OFF_ART = load("res://Art/icon_toggle_off.png")
 @onready var lbl_text = $h_cont/lbl_text
 @onready var toggle_texture = $h_cont/t_toggle
 
-signal toggle_pressed(setting_key: String, new_toggle_state: bool)
-
 
 func _ready() -> void:
 	lbl_text.text = display_text
@@ -33,7 +31,7 @@ func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch and event.is_pressed():
 		filter_enabled = not filter_enabled
 		update_texture()
-		toggle_pressed.emit(filter_key, filter_enabled)
+		update_config()
 
 
 func update_texture() -> void:
@@ -43,6 +41,10 @@ func update_texture() -> void:
 		toggle_texture.texture = TOGGLE_OFF_ART
 
 
+func update_config(source_file = false) -> void:
+	Global.set_config("filters", filter_key, filter_enabled, source_file)
+
+
 func update_value_from_user_file() -> void:
-	return
-	#setting_value = Global.get_filter(filter_key)
+	filter_enabled = Global.get_config("filters", filter_key)
+	

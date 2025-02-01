@@ -9,10 +9,6 @@ func _on_btn_add_q_pressed() -> void:
 	SignalBus.show_add_question_screen.emit()
 
 
-func _on_toggle_shuffle_play_toggle_pressed(setting_key: String, new_toggle_state: bool) -> void:
-	Global.set_setting(setting_key, new_toggle_state)
-
-
 func _on_btn_reset_deck_pressed() -> void:
 	Popups.show_confirm(self, _on_btn_reset_deck_confirmed)
 
