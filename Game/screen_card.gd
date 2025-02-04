@@ -25,13 +25,14 @@ func _ready() -> void:
 	SignalBus.current_question_deleted.connect(_on_current_question_deleted)
 	SignalBus.shuffle_deck.connect(_on_deck_shuffled)
 	SignalBus.reset_deck_default.connect(_on_deck_reset)
+	SignalBus.on_questions_reloaded.connect(_on_deck_reset)
 	
 	if Global.DEBUG_MODE:
 		DEBUG_LOG = get_node(debug_log_lbl_path)
 		DEBUG_SCROLL = DEBUG_LOG.get_parent()
 		DEBUG_SCROLL.visible = true
 	
-	init_UI()
+	init_UI.call_deferred() # deferred to wait for questions to be loaded
 
 
 func _process(_delta: float) -> void:

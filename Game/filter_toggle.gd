@@ -11,6 +11,8 @@ var TOGGLE_OFF_ART = load("res://Art/icon_toggle_off.png")
 @onready var lbl_text = $h_cont/lbl_text
 @onready var toggle_texture = $h_cont/t_toggle
 
+signal toggled
+
 
 func _ready() -> void:
 	lbl_text.text = display_text
@@ -32,6 +34,7 @@ func _on_gui_input(event: InputEvent) -> void:
 		filter_enabled = not filter_enabled
 		update_texture()
 		update_config()
+		toggled.emit()
 
 
 func update_texture() -> void:

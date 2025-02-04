@@ -2,16 +2,15 @@ extends Node
 
 var DEBUG_MODE = true
 
-var QUESTIONS_SRC_PATH = "res://Data/questions.txt"
-var QUESTIONS_YML_PATH = "res://Data/questions.yml"
-var QUESTIONS_USER_PATH = "user://questions.txt"
+var QUESTIONS_SRC_PATH = "res://Data/questions.yml"
+var QUESTIONS_USER_PATH = "user://questions.yml"
 var CONFIG_SRC_PATH = "res://Data/config.cfg"
 var CONFIG_USER_PATH = "user://config.cfg"
 
 var QUESTIONS: Array[String] = []
 var CURRENT_QUESTION_IDX = 0
 
-var DEBUG_QS_FILE_PATH = "res://Data/DEBUG_questions.txt"
+var DEBUG_QS_FILE_PATH = "res://Data/DEBUG_questions.yml"
 var DEBUG_RESET_USR_QS = false
 var DEBUG_RESET_CONFIG = false
 var DEBUG_LOG = ""
@@ -22,23 +21,27 @@ func _ready() -> void:
 		debug("DEBUG MODE: ON")
 		QUESTIONS_SRC_PATH = DEBUG_QS_FILE_PATH
 		DEBUG_RESET_USR_QS = true
-		#DEBUG_RESET_CONFIG = true
+		DEBUG_RESET_CONFIG = true
 		if OS.get_name() == "Windows":
 			_set_half_resolution()
 	
+	# On first launch, build config and load questions
 	var IS_APP_FIRST_LAUNCH
 	if get_config("app", "is_first_launch") == null:
 		IS_APP_FIRST_LAUNCH = true
 	else:
 		IS_APP_FIRST_LAUNCH = false
 	
-	if IS_APP_FIRST_LAUNCH or DEBUG_RESET_USR_QS:
-		copy_file(QUESTIONS_SRC_PATH, QUESTIONS_USER_PATH)
-	_load_questions()
-	
 	if IS_APP_FIRST_LAUNCH or DEBUG_RESET_CONFIG:
 		_build_config.call_deferred()
 		copy_file.call_deferred(CONFIG_SRC_PATH, CONFIG_USER_PATH)
+	
+	if IS_APP_FIRST_LAUNCH or DEBUG_RESET_USR_QS:
+		copy_file.call_deferred(QUESTIONS_SRC_PATH, QUESTIONS_USER_PATH)
+		_load_questions.call_deferred()
+	else:
+		_load_questions()
+	
 	
 	if IS_APP_FIRST_LAUNCH:
 		set_config.call_deferred("app", "is_first_launch", false)
@@ -54,19 +57,33 @@ func _notification(what: int) -> void:
 
 
 func _load_questions() -> void:
-	QUESTIONS = _read_text_file(QUESTIONS_USER_PATH)
-	# TODO: change to yaml
+	var all_questions: Dictionary = _parse_yaml_file(QUESTIONS_USER_PATH)
+	var filtered_questions: Array[String] = []
+
+	for category in all_questions.keys():
+		var filter_value = get_config("filters", category)
+		if filter_value:
+			filtered_questions.append_array(all_questions[category])
+	QUESTIONS = filtered_questions
+
 	if QUESTIONS.size() == 0:
 		debug("No questions loaded.")
 	else:
 		debug("Questions loaded.")
-		
+
+
+func reload_questions() -> void:
+	_load_questions()
+	CURRENT_QUESTION_IDX = 0
+	SignalBus.on_questions_reloaded.emit()
+	debug("Questions reloaded")
 
 
 func _reset_questions_to_default() -> void:
 	copy_file(QUESTIONS_SRC_PATH, QUESTIONS_USER_PATH)
 	_load_questions()
 	CURRENT_QUESTION_IDX = 0
+	debug("Questions reset to default")
 
 
 func _shuffle_deck() -> void:
@@ -74,33 +91,32 @@ func _shuffle_deck() -> void:
 
 
 func _parse_yaml_file(file_path: String) -> Dictionary:
-	var questions_dict: Dictionary = {}
+	var all_questions: Dictionary = {}
 	var file := FileAccess.open(file_path, FileAccess.ModeFlags.READ)
 	if file == null:
 		push_error("Unable to open file: " + file_path)
 		return {}
-
-	var lines = file.get_as_text().split("\n")
-	file.close()
-
-	var current_key = ""
-	var question_list = []
-
-	for line in lines:
-		line = line.strip_edges()
+	
+	var line: String
+	var current_key: String = ""
+	var question_list: Array = []
+	
+	while not file.eof_reached():
+		line = file.get_line().strip_edges()
 		if line.ends_with(":"):
 			if current_key != "":
-				questions_dict[current_key] = question_list
+				all_questions[current_key] = question_list
 			current_key = line.trim_suffix(":")
 			question_list = []
 		elif line.begins_with("-"):
 			var question = line.lstrip("-").strip_edges()
 			question_list.append(question)
-
+	
 	if current_key != "":
-		questions_dict[current_key] = question_list
-
-	return questions_dict
+		all_questions[current_key] = question_list
+	
+	file.close()
+	return all_questions
 
 
 func _read_text_file(file_path) -> Array[String]:

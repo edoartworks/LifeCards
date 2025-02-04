@@ -4,9 +4,6 @@ extends Node
 # Until this is implemented https://github.com/godotengine/godot/pull/76020
 
 @warning_ignore("unused_signal")
-signal on_app_first_launch
-
-@warning_ignore("unused_signal")
 signal show_add_question_screen
 
 @warning_ignore("unused_signal")
@@ -56,3 +53,6 @@ signal android_back_request
 
 @warning_ignore("unused_signal")
 signal reset_deck_default
+
+@warning_ignore("unused_signal")
+signal on_questions_reloaded

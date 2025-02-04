@@ -1,5 +1,5 @@
 extends Control
-
+!fix add and delete question
 
 func _on_btn_add_q_pressed() -> void:
 	SignalBus.show_add_question_screen.emit()
