@@ -9,6 +9,7 @@
 script = ExtResource("1_tx0tm")
 txted_add_question_path = NodePath("BG/cont_margin_main/cont_v_main/txted_add_question")
 cont_add_q_path = NodePath("BG/cont_margin_main")
+cat_option_btn_path = NodePath("BG/cont_margin_main/cont_v_main/HBoxContainer/OptionButton")
 
 [node name="BG" type="Panel" parent="."]
 anchors_preset = 15
@@ -42,15 +43,43 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 placeholder_text = "type your question here"
+deselect_on_focus_loss_enabled = false
 middle_mouse_paste_enabled = false
 wrap_mode = 1
 caret_blink = true
 caret_multiple = false
 
 [node name="spacer3" type="Control" parent="BG/cont_margin_main/cont_v_main"]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.02
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BG/cont_margin_main/cont_v_main"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="BG/cont_margin_main/cont_v_main/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"Label_Subtitle"
+text = "Category:  "
+vertical_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="BG/cont_margin_main/cont_v_main/HBoxContainer"]
+layout_mode = 2
+selected = 0
+item_count = 4
+popup/item_0/text = "Light and fun"
+popup/item_1/text = "Reflective"
+popup/item_1/id = 1
+popup/item_2/text = "Deep"
+popup/item_2/id = 2
+popup/item_3/text = "Very deep"
+popup/item_3/id = 3
+
+[node name="spacer4" type="Control" parent="BG/cont_margin_main/cont_v_main"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
 
 [node name="cont_bottom" type="HBoxContainer" parent="BG/cont_margin_main/cont_v_main"]
 layout_mode = 2

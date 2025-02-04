@@ -1,6 +1,6 @@
 extends Node
 
-var DEBUG_MODE = true
+var DEBUG_MODE = false
 
 var QUESTIONS_SRC_PATH = "res://Data/questions.yml"
 var QUESTIONS_USER_PATH = "user://questions.yml"
@@ -8,7 +8,10 @@ var CONFIG_SRC_PATH = "res://Data/config.cfg"
 var CONFIG_USER_PATH = "user://config.cfg"
 
 var QUESTIONS: Array[String] = []
+var ALL_QUESTIONS = {}
 var CURRENT_QUESTION_IDX = 0
+
+var IS_KEYBOARD_OPEN = false
 
 var DEBUG_QS_FILE_PATH = "res://Data/DEBUG_questions.yml"
 var DEBUG_RESET_USR_QS = false
@@ -57,25 +60,21 @@ func _notification(what: int) -> void:
 
 
 func _load_questions() -> void:
-	var all_questions: Dictionary = _parse_yaml_file(QUESTIONS_USER_PATH)
+	ALL_QUESTIONS = _parse_yaml_file(QUESTIONS_USER_PATH)
 	var filtered_questions: Array[String] = []
 
-	for category in all_questions.keys():
+	for category in ALL_QUESTIONS.keys():
 		var filter_value = get_config("filters", category)
 		if filter_value:
-			filtered_questions.append_array(all_questions[category])
+			filtered_questions.append_array(ALL_QUESTIONS[category])
 	QUESTIONS = filtered_questions
 
-	if QUESTIONS.size() == 0:
-		debug("No questions loaded.")
-	else:
-		debug("Questions loaded.")
 
-
-func reload_questions() -> void:
+func reload_questions(question_deleted = false) -> void:
 	_load_questions()
-	CURRENT_QUESTION_IDX = 0
-	SignalBus.on_questions_reloaded.emit()
+	if not question_deleted:
+		CURRENT_QUESTION_IDX = 0
+		SignalBus.on_questions_reloaded.emit()
 	debug("Questions reloaded")
 
 
@@ -94,7 +93,7 @@ func _parse_yaml_file(file_path: String) -> Dictionary:
 	var all_questions: Dictionary = {}
 	var file := FileAccess.open(file_path, FileAccess.ModeFlags.READ)
 	if file == null:
-		push_error("Unable to open file: " + file_path)
+		Global.debug("Unable to open file: " + file_path)
 		return {}
 	
 	var line: String

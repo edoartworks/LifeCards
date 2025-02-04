@@ -24,8 +24,8 @@ func _ready() -> void:
 	SignalBus.new_question_added.connect(_on_new_question_added)
 	SignalBus.current_question_deleted.connect(_on_current_question_deleted)
 	SignalBus.shuffle_deck.connect(_on_deck_shuffled)
-	SignalBus.reset_deck_default.connect(_on_deck_reset)
-	SignalBus.on_questions_reloaded.connect(_on_deck_reset)
+	SignalBus.reset_deck_default.connect(init_UI)
+	SignalBus.on_questions_reloaded.connect(init_UI)
 	
 	if Global.DEBUG_MODE:
 		DEBUG_LOG = get_node(debug_log_lbl_path)
@@ -47,7 +47,7 @@ func _process(_delta: float) -> void:
 func init_UI() -> void:
 	refresh_card_text()
 	PROG_BAR.max_value = Global.QUESTIONS.size()
-	PROG_BAR.value = 1
+	PROG_BAR.value = Global.CURRENT_QUESTION_IDX + 1
 
 
 func change_card_fwd() -> bool:
@@ -76,7 +76,7 @@ func refresh_card_text() -> void:
 
 func set_card_to_first() -> void:
 	Global.CURRENT_QUESTION_IDX = 0
-	PROG_BAR.value = 1
+	PROG_BAR.value = Global.CURRENT_QUESTION_IDX + 1
 	refresh_card_text()
 
 
@@ -128,10 +128,6 @@ func _on_card_menu_add_question_pressed() -> void:
 
 func _on_deck_shuffled() -> void:
 	set_card_to_first()
-
-
-func _on_deck_reset() -> void:
-	init_UI()
 
 
 func _on_btn_exit_pressed() -> void:
