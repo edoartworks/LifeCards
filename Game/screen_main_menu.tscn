@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Game/screen_main_menu.gd" id="1_nexgn"]
 [ext_resource type="Texture2D" uid="uid://cufj1v6ral63b" path="res://Art/icon_question.png" id="2_gstxq"]
 [ext_resource type="Texture2D" uid="uid://myq5nitciwec" path="res://Art/icon_settings.png" id="2_p1x5k"]
-[ext_resource type="Texture2D" uid="uid://llvlin0jugsr" path="res://Art/icon_menu.png" id="5_qlsdc"]
+[ext_resource type="Texture2D" uid="uid://d3p2cycdc84hq" path="res://Art/icon_filters.png" id="4_k1g1d"]
 
 [node name="screen_main_menu" type="CanvasLayer"]
 script = ExtResource("1_nexgn")
@@ -98,7 +98,7 @@ size_flags_stretch_ratio = 0.2
 [node name="btn_filter" type="Button" parent="BG/MarginContainer/cont_menu/cont_btns_bg/cont_btns"]
 layout_mode = 2
 theme_type_variation = &"Button_Icon_BG"
-icon = ExtResource("5_qlsdc")
+icon = ExtResource("4_k1g1d")
 icon_alignment = 1
 
 [node name="spacer6" type="Control" parent="BG/MarginContainer/cont_menu/cont_btns_bg/cont_btns"]
@@ -122,7 +122,7 @@ size_flags_stretch_ratio = 0.25
 [node name="spacer5" type="Control" parent="BG/MarginContainer/cont_menu"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.1
 
 [node name="art" type="TextureRect" parent="BG"]
 layout_mode = 1
