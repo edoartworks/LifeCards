@@ -70,14 +70,6 @@ func _load_questions() -> void:
 	QUESTIONS = filtered_questions
 
 
-func reload_questions(question_deleted = false) -> void:
-	_load_questions()
-	if not question_deleted:
-		CURRENT_QUESTION_IDX = 0
-		SignalBus.on_questions_reloaded.emit()
-	debug("Questions reloaded")
-
-
 func _reset_questions_to_default() -> void:
 	copy_file(QUESTIONS_SRC_PATH, QUESTIONS_USER_PATH)
 	_load_questions()
@@ -168,6 +160,22 @@ func _build_config() -> void:
 			debug("No filters found in filters screen")
 	else:
 		debug("Failed to get filters screen")
+
+func reload_questions(question_deleted = false) -> void:
+	_load_questions()
+	if not question_deleted:
+		CURRENT_QUESTION_IDX = 0
+		SignalBus.on_questions_reloaded.emit()
+	debug("Questions reloaded")
+
+
+func get_current_question_category() -> String:
+	var current_q = QUESTIONS[CURRENT_QUESTION_IDX]
+	for key in ALL_QUESTIONS.keys():
+		for q in ALL_QUESTIONS[key]:
+			if q == current_q:
+				return str(key)
+	return ""
 
 
 func get_config(section: String, key: String) -> Variant:
