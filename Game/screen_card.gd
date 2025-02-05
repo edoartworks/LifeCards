@@ -29,7 +29,7 @@ func _ready() -> void:
 	SignalBus.card_swipe_left.connect(_on_btn_fwd_pressed)
 	SignalBus.card_swipe_right.connect(_on_btn_back_pressed)
 	
-	SignalBus.show_add_question_screen.connect(_on_card_menu_add_question_pressed)
+	SignalBus.show_add_question_screen.connect(_hide_menu_overlay)
 	SignalBus.new_question_added.connect(_on_new_question_added)
 	SignalBus.current_question_deleted.connect(_on_current_question_deleted)
 	SignalBus.shuffle_deck.connect(_on_deck_shuffled)
@@ -148,12 +148,13 @@ func _on_new_question_added() -> void:
 		# and should fix when user restart the app.
 
 
-func _on_card_menu_add_question_pressed() -> void:
+func _hide_menu_overlay() -> void:
 	MENU_OVERLAY.visible = false
 
 
 func _on_deck_shuffled() -> void:
 	_set_card_to_first()
+	_hide_menu_overlay()
 
 
 func _on_btn_exit_pressed() -> void:
