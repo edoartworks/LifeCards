@@ -19,7 +19,6 @@ screen_filters_path = NodePath("screen_filters")
 [node name="screen_main_menu" parent="." instance=ExtResource("4_7ncln")]
 
 [node name="screen_help" parent="." instance=ExtResource("3_xdku1")]
-layer = 2
 visible = false
 
 [node name="screen_settings" parent="." instance=ExtResource("4_a44py")]

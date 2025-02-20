@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwnlvil864wbg"]
+[gd_scene load_steps=4 format=3 uid="uid://cwnlvil864wbg"]
 
 [ext_resource type="Texture2D" uid="uid://cfveb17qyderm" path="res://Art/icon_confirm.png" id="1_7ut6m"]
 [ext_resource type="Script" path="res://Game/screen_help.gd" id="1_fbdoe"]
+[ext_resource type="Texture2D" uid="uid://blqmevr5wam4q" path="res://Art/icon_dots.png" id="2_tka4m"]
 
 [node name="screen_help" type="CanvasLayer"]
+layer = 2
 script = ExtResource("1_fbdoe")
+screen_more_path = NodePath("screen_more")
 
 [node name="BG" type="Panel" parent="."]
 anchors_preset = 15
@@ -17,18 +20,13 @@ metadata/_edit_use_anchors_ = true
 [node name="MarginContainer" type="MarginContainer" parent="BG"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
 anchor_top = 0.133
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -540.0
 offset_top = 0.639999
-offset_right = 540.0
-offset_bottom = -80.0
 grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/margin_left = 60
-theme_override_constants/margin_right = 60
+theme_override_constants/margin_left = 90
+theme_override_constants/margin_right = 90
 
 [node name="cont_main" type="VBoxContainer" parent="BG/MarginContainer"]
 layout_mode = 2
@@ -36,40 +34,49 @@ theme_override_constants/separation = 15
 
 [node name="lbl_title" type="Label" parent="BG/MarginContainer/cont_main"]
 layout_mode = 2
+size_flags_vertical = 0
 theme_type_variation = &"Label_Title"
 text = "LIFE CARDS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="spacer4" type="Control" parent="BG/MarginContainer/cont_main"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
 [node name="help_text" type="Label" parent="BG/MarginContainer/cont_main"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+size_flags_vertical = 3
 theme_type_variation = &"Label_Body"
-text = "is a game about connecting deeper with strangers, friends or lovers.
+text = "is about connecting deeper with friends, lovers 
+or strangers.
 
-There are no rules. 
-Ask questions. Answer questions. Skip questions. Pass the phone.
+Ask questions.
+Answer or skip questions.
+Pass the phone.
+
+Respect others' boundaries,
+and your own boundaries.
 
 Have courage
 to open yourself up, 
 be vulnerable.
-Dare to trust.
-
-Respect others' boundaries,
-and your own boundaries."
+Dare to trust."
+horizontal_alignment = 1
 autowrap_mode = 3
+clip_text = true
 
 [node name="spacer5" type="Control" parent="BG/MarginContainer/cont_main"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BG/MarginContainer/cont_main"]
 layout_mode = 2
+size_flags_vertical = 8
+
+[node name="btn_more" type="Button" parent="BG/MarginContainer/cont_main/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"Button_Icon_BG"
+icon = ExtResource("2_tka4m")
 
 [node name="spacer" type="Control" parent="BG/MarginContainer/cont_main/HBoxContainer"]
 layout_mode = 2
@@ -85,4 +92,83 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.02
 
+[node name="spacer6" type="Control" parent="BG/MarginContainer/cont_main"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.06
+
+[node name="screen_more" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
+
+[node name="BG" type="Panel" parent="screen_more"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Panel_2"
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="screen_more/BG"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.133
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.639999
+grow_horizontal = 2
+theme_override_constants/margin_left = 90
+theme_override_constants/margin_right = 90
+
+[node name="cont_menu" type="VBoxContainer" parent="screen_more/BG/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="more_text" type="Label" parent="screen_more/BG/MarginContainer/cont_menu"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"Label_Body"
+text = "Developed using Godot engine."
+horizontal_alignment = 1
+autowrap_mode = 3
+clip_text = true
+
+[node name="btn_something" type="Button" parent="screen_more/BG/MarginContainer/cont_menu"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"Button_Text"
+text = "Link to source code..."
+
+[node name="spacer7" type="Control" parent="screen_more/BG/MarginContainer/cont_menu"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="screen_more/BG/MarginContainer/cont_menu"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="spacer" type="Control" parent="screen_more/BG/MarginContainer/cont_menu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="btn_more_exit" type="Button" parent="screen_more/BG/MarginContainer/cont_menu/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"Button_Icon_BG"
+icon = ExtResource("1_7ut6m")
+
+[node name="spacer2" type="Control" parent="screen_more/BG/MarginContainer/cont_menu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.02
+
+[node name="spacer6" type="Control" parent="screen_more/BG/MarginContainer/cont_menu"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.07
+
+[connection signal="pressed" from="BG/MarginContainer/cont_main/HBoxContainer/btn_more" to="." method="_on_btn_more_pressed"]
 [connection signal="pressed" from="BG/MarginContainer/cont_main/HBoxContainer/btn_exit" to="." method="_on_btn_exit_pressed"]
+[connection signal="pressed" from="screen_more/BG/MarginContainer/cont_menu/HBoxContainer/btn_more_exit" to="." method="_on_btn_more_exit_pressed"]
