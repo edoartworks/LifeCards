@@ -40,13 +40,18 @@ text = "LIFE CARDS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="spacer5" type="Control" parent="BG/MarginContainer/cont_main"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.02
+
 [node name="help_text" type="Label" parent="BG/MarginContainer/cont_main"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"Label_Body"
-text = "is about connecting deeper with friends, lovers 
-or strangers.
+text = "is about connecting deeper with friends, lovers or strangers.
 
 Ask questions.
 Answer or skip questions.
@@ -62,12 +67,6 @@ Dare to trust."
 horizontal_alignment = 1
 autowrap_mode = 3
 clip_text = true
-
-[node name="spacer5" type="Control" parent="BG/MarginContainer/cont_main"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.05
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BG/MarginContainer/cont_main"]
 layout_mode = 2
@@ -107,7 +106,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_type_variation = &"Panel_2"
 metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="screen_more/BG"]
@@ -123,28 +121,40 @@ theme_override_constants/margin_right = 90
 
 [node name="cont_menu" type="VBoxContainer" parent="screen_more/BG/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 40
 
 [node name="more_text" type="Label" parent="screen_more/BG/MarginContainer/cont_menu"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"Label_Body"
-text = "Developed using Godot engine."
+text = "Inspired by the game 
+\"Spark\" by Yes Theory
+and many others.
+
+Developed using Godot Engine"
 horizontal_alignment = 1
 autowrap_mode = 3
 clip_text = true
 
-[node name="btn_something" type="Button" parent="screen_more/BG/MarginContainer/cont_menu"]
+[node name="btn_link_github" type="LinkButton" parent="screen_more/BG/MarginContainer/cont_menu"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 0
 theme_type_variation = &"Button_Text"
-text = "Link to source code..."
+text = "Open source code [GitHub]"
+uri = "https://github.com/edoartworks/LifeCards"
+
+[node name="btn_link_mail" type="LinkButton" parent="screen_more/BG/MarginContainer/cont_menu"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_type_variation = &"Button_Text"
+text = "Send feedback or report issue"
+uri = "mailto:edoardospinozzi@gmail.com"
 
 [node name="spacer7" type="Control" parent="screen_more/BG/MarginContainer/cont_menu"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.1
+size_flags_stretch_ratio = 0.08
 
 [node name="HBoxContainer" type="HBoxContainer" parent="screen_more/BG/MarginContainer/cont_menu"]
 layout_mode = 2
@@ -167,7 +177,7 @@ size_flags_stretch_ratio = 0.02
 [node name="spacer6" type="Control" parent="screen_more/BG/MarginContainer/cont_menu"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.07
+size_flags_stretch_ratio = 0.04
 
 [connection signal="pressed" from="BG/MarginContainer/cont_main/HBoxContainer/btn_more" to="." method="_on_btn_more_pressed"]
 [connection signal="pressed" from="BG/MarginContainer/cont_main/HBoxContainer/btn_exit" to="." method="_on_btn_exit_pressed"]
