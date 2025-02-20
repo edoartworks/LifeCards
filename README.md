@@ -1,6 +1,5 @@
 # LifeCards
- is about connecting deeper with friends, lovers 
-or strangers.
+is about connecting deeper with friends, lovers or strangers.
 
 Ask questions.
 Answer or skip questions.
@@ -17,4 +16,4 @@ Dare to trust.
 ---------------------------------------------
 Inspired by the game "Spark" by Yes Theory, and many other similar ones.
 
-Developed using Godot Engine [https://godotengine.org/]
+Developed using Godot Engine [ https://godotengine.org/ ]
