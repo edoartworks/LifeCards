@@ -149,7 +149,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme_type_variation = &"Button_Text"
 text = "Send feedback or report issue"
-uri = "mailto:edoardospinozzi@gmail.com"
+uri = "mailto:edoardospinozzi@gmail.com?subject=Life Cards: feedback or issue"
 
 [node name="spacer7" type="Control" parent="screen_more/BG/MarginContainer/cont_menu"]
 layout_mode = 2
