@@ -132,12 +132,12 @@ func _build_config() -> void:
 	var config = ConfigFile.new()
 	var err = config.load(CONFIG_SRC_PATH)
 	if err != OK:
-		debug(str("Error loading config file." + err))
+		debug(str("Error loading config file." + str(err)))
 		return
 	config.clear()
 	var save_err = config.save(CONFIG_SRC_PATH)
 	if save_err != OK:
-		debug(str("Error saving config file." + save_err))
+		debug(str("Error saving config file." + str(save_err)))
 	
 	var scene = get_node("/root/screen_main/screen_settings")
 	if scene:
@@ -182,7 +182,7 @@ func get_config(section: String, key: String) -> Variant:
 	var config = ConfigFile.new()
 	var err = config.load(CONFIG_USER_PATH)
 	if err != OK:
-		debug(str("Error loading config file." + err))
+		debug(str("Error loading config file." + str(err)))
 		return null
 	
 	if not config.has_section_key(section, key):
@@ -201,7 +201,7 @@ func set_config(section: String, key: String, value: Variant, source_file: bool 
 		path = CONFIG_USER_PATH
 	var err = config.load(path)
 	if err != OK:
-		debug(str("Error loading config file." + err))
+		debug(str("Error loading config file." + str(err)))
 		return
 	
 	config.set_value(section, key, value)

@@ -82,13 +82,11 @@ filter_enabled = true
 layout_mode = 2
 display_text = "Deep"
 filter_key = "3"
-filter_enabled = true
 
 [node name="filter_toggle_4" parent="BG/MarginContainer/cont_main" instance=ExtResource("1_7dq4n")]
 layout_mode = 2
 display_text = "Very deep"
 filter_key = "4"
-filter_enabled = true
 
 [node name="spacer6" type="Control" parent="BG/MarginContainer/cont_main"]
 custom_minimum_size = Vector2(0, 60)
