@@ -51,18 +51,19 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"Label_Body"
-text = "is about connecting deeper with friends, lovers or strangers.
+text = "is about connecting deeper
+with friends, lovers or strangers.
 
-Ask questions.
-Answer or skip questions.
-Pass the phone.
+You decide how to play.
+Ask and answer questions.
+Let the conversation flow.
 
 Respect others' boundaries,
 and your own boundaries.
 
-Have courage
-to open yourself up, 
-be vulnerable.
+Have courage.
+Be open.
+Be vulnerable.
 Dare to trust."
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -121,7 +122,6 @@ theme_override_constants/margin_right = 90
 
 [node name="cont_menu" type="VBoxContainer" parent="screen_more/BG/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 40
 
 [node name="more_text" type="Label" parent="screen_more/BG/MarginContainer/cont_menu"]
 custom_minimum_size = Vector2(0, 100)
@@ -137,14 +137,50 @@ horizontal_alignment = 1
 autowrap_mode = 3
 clip_text = true
 
-[node name="btn_link_github" type="LinkButton" parent="screen_more/BG/MarginContainer/cont_menu"]
+[node name="PanelContainer" type="PanelContainer" parent="screen_more/BG/MarginContainer/cont_menu"]
+layout_mode = 2
+theme_type_variation = &"PanelContainer_Help"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="screen_more/BG/MarginContainer/cont_menu/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="btn_link_donate1" type="LinkButton" parent="screen_more/BG/MarginContainer/cont_menu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"Button_Text"
+text = "Like the app?"
+underline = 2
+uri = "https://coindrop.to/edoartworks"
+
+[node name="btn_link_donate2" type="LinkButton" parent="screen_more/BG/MarginContainer/cont_menu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"Button_Text"
+text = "Support the project 💙"
+uri = "https://coindrop.to/edoartworks"
+
+[node name="spacer8" type="Control" parent="screen_more/BG/MarginContainer/cont_menu"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.08
+
+[node name="PanelContainer2" type="PanelContainer" parent="screen_more/BG/MarginContainer/cont_menu"]
+layout_mode = 2
+theme_type_variation = &"PanelContainer_Help"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="screen_more/BG/MarginContainer/cont_menu/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="btn_link_github" type="LinkButton" parent="screen_more/BG/MarginContainer/cont_menu/PanelContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_type_variation = &"Button_Text"
 text = "Open source code [GitHub]"
 uri = "https://github.com/edoartworks/LifeCards"
 
-[node name="btn_link_mail" type="LinkButton" parent="screen_more/BG/MarginContainer/cont_menu"]
+[node name="btn_link_mail" type="LinkButton" parent="screen_more/BG/MarginContainer/cont_menu/PanelContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_type_variation = &"Button_Text"
@@ -177,7 +213,7 @@ size_flags_stretch_ratio = 0.02
 [node name="spacer6" type="Control" parent="screen_more/BG/MarginContainer/cont_menu"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.04
+size_flags_stretch_ratio = 0.11
 
 [connection signal="pressed" from="BG/MarginContainer/cont_main/HBoxContainer/btn_more" to="." method="_on_btn_more_pressed"]
 [connection signal="pressed" from="BG/MarginContainer/cont_main/HBoxContainer/btn_exit" to="." method="_on_btn_exit_pressed"]
