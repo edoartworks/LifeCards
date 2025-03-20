@@ -1,17 +1,17 @@
 # LifeCards
 is about connecting deeper with friends, lovers or strangers.
 
-You decide how to play.
-Ask and answer questions.
-Let the conversation flow.
+You decide how to play.  
+Ask and answer questions.   
+Let the conversation flow.   
 
-Respect others' boundaries,
+Respect others' boundaries,  
 and your own boundaries.
 
-Have courage.
-Be open.
-Be vulnerable.
-Dare to trust.
+Have courage.  
+Be open.  
+Be vulnerable.  
+Dare to trust.  
  
 ───── ⋆⋅☆⋅⋆ ─────
 
