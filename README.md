@@ -1,16 +1,18 @@
+![lifecards](https://github.com/edoartworks/LifeCards/blob/main/Art/main_menu_art.png)
+
 # LifeCards
 is about connecting deeper with friends, lovers or strangers.
 
-Ask questions.
-Answer or skip questions.
-Pass the phone.
+You decide how to play.
+Ask and answer questions.
+Let the conversation flow.
 
 Respect others' boundaries,
 and your own boundaries.
 
-Have courage
-to open yourself up, 
-be vulnerable.
+Have courage.
+Be open.
+Be vulnerable.
 Dare to trust.
  
 ---------------------------------------------
