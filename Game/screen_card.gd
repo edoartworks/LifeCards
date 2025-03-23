@@ -30,11 +30,11 @@ func _ready() -> void:
 	SignalBus.card_swipe_right.connect(_on_btn_back_pressed)
 	
 	SignalBus.show_add_question_screen.connect(_hide_menu_overlay)
-	SignalBus.new_question_added.connect(_on_new_question_added)
+	SignalBus.new_question_added.connect(_init_UI)
 	SignalBus.current_question_deleted.connect(_on_current_question_deleted)
 	SignalBus.shuffle_deck.connect(_on_deck_shuffled)
 	SignalBus.reset_deck_default.connect(_init_UI)
-	SignalBus.on_questions_reloaded.connect(_init_UI)
+	SignalBus.filters_screen_exit_pressed.connect(_init_UI)
 	
 	if Global.DEBUG_MODE:
 		DEBUG_LOG = get_node(debug_log_lbl_path)
@@ -100,12 +100,6 @@ func _refresh_card_text() -> void:
 	_update_category_art()
 
 
-func _set_card_to_first() -> void:
-	Global.CURRENT_QUESTION_IDX = 0
-	PROG_BAR.value = Global.CURRENT_QUESTION_IDX + 1
-	_refresh_card_text()
-
-
 func _on_btn_fwd_pressed() -> void:
 	if _change_card_fwd():
 		PROG_BAR.value += 1
@@ -145,11 +139,17 @@ func _on_new_question_added() -> void:
 	# known bug: minor visual. ignore, probably forever.
 		# When adding a new Q when only one Q is left in the deck,
 		# the prog bar kinda bugs out, but not in a disruptive way.
-		# and should fix when user restart the app.
+		# and should fix when user restarts the app.
 
 
 func _hide_menu_overlay() -> void:
 	MENU_OVERLAY.visible = false
+
+
+func _set_card_to_first() -> void:
+	Global.set_card_idx_to_first()
+	PROG_BAR.value = Global.CURRENT_QUESTION_IDX + 1
+	_refresh_card_text()
 
 
 func _on_deck_shuffled() -> void:

@@ -53,6 +53,3 @@ signal android_back_request
 
 @warning_ignore("unused_signal")
 signal reset_deck_default
-
-@warning_ignore("unused_signal")
-signal on_questions_reloaded

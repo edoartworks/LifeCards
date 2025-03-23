@@ -35,8 +35,7 @@ func delete_current_question() -> void:
 			file.store_line("  - " + question)
 	file.close()
 	
-	Global.debug("Deleted question: " + current_question)
-	Global.reload_questions(true)
+	Global.debug("Deleting question: " + current_question)
 
 
 func _on_btn_shuffle_deck_pressed() -> void:

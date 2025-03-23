@@ -116,5 +116,6 @@ func _on_android_back_request():
 
 # DEBUG
 func _input(event):
-	if event.is_action_pressed("back"):
-		_on_android_back_request()
+	if Global.DEBUG_MODE:
+		if event.is_action_pressed("back"):
+			_on_android_back_request()

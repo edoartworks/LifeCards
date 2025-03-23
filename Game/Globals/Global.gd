@@ -10,6 +10,7 @@ var CONFIG_USER_PATH = "user://config.cfg"
 var QUESTIONS: Array[String] = []
 var ALL_QUESTIONS = {}
 var CURRENT_QUESTION_IDX = 0
+var IS_DECK_SHUFFLED = false
 
 var IS_KEYBOARD_OPEN = false
 
@@ -50,7 +51,9 @@ func _ready() -> void:
 		set_config.call_deferred("app", "is_first_launch", false)
 	
 	SignalBus.shuffle_deck.connect(_shuffle_deck)
-	SignalBus.reset_deck_default.connect(_reset_questions_to_default)
+	SignalBus.reset_deck_default.connect(_reset_deck_to_default)
+	SignalBus.filters_screen_exit_pressed.connect(_reset_deck_to_user)
+	SignalBus.current_question_deleted.connect(_load_questions)
 
 
 func _notification(what: int) -> void:
@@ -60,30 +63,41 @@ func _notification(what: int) -> void:
 
 
 func _load_questions() -> void:
+	# Load questions from user file, then filter them by category settings
 	ALL_QUESTIONS = _parse_yaml_file(QUESTIONS_USER_PATH)
 	var filtered_questions: Array[String] = []
-
 	for category in ALL_QUESTIONS.keys():
 		var filter_value = get_config("filters", category)
 		if filter_value:
 			filtered_questions.append_array(ALL_QUESTIONS[category])
 	QUESTIONS = filtered_questions
+	debug("Questions loaded")
 
 
-func _reset_questions_to_default() -> void:
+func _reset_deck_to_default() -> void:
+	# Replace user file with default source file
 	copy_file(QUESTIONS_SRC_PATH, QUESTIONS_USER_PATH)
-	_load_questions()
-	CURRENT_QUESTION_IDX = 0
+	_reset_deck_to_user()
 	debug("Questions reset to default")
+
+
+func _reset_deck_to_user():
+	# Reload deck then set card to first
+	_load_questions()
+	set_card_idx_to_first()
+	IS_DECK_SHUFFLED = false
+	debug("Questions reset to user")
 
 
 func _shuffle_deck() -> void:
 	QUESTIONS.shuffle()
+	set_card_idx_to_first()
+	IS_DECK_SHUFFLED = true
 
 
 func _parse_yaml_file(file_path: String) -> Dictionary:
 	var all_questions: Dictionary = {}
-	var file := FileAccess.open(file_path, FileAccess.ModeFlags.READ)
+	var file := FileAccess.open(file_path, FileAccess.READ)
 	if file == null:
 		Global.debug("Unable to open file: " + file_path)
 		return {}
@@ -161,12 +175,42 @@ func _build_config() -> void:
 	else:
 		debug("Failed to get filters screen")
 
-func reload_questions(question_deleted = false) -> void:
-	_load_questions()
-	if not question_deleted:
-		CURRENT_QUESTION_IDX = 0
-		SignalBus.on_questions_reloaded.emit()
-	debug("Questions reloaded")
+
+func set_card_idx_to_first():
+	CURRENT_QUESTION_IDX = 0
+
+
+func add_user_question(category: String, new_question: String):
+	var file = FileAccess.open(QUESTIONS_USER_PATH, FileAccess.WRITE)
+	if not file:
+		debug("Failed to open user file: " + QUESTIONS_USER_PATH)
+		return
+
+	# Update ALL_QUESTIONS with the new question.
+	var current_all_questions: Dictionary = ALL_QUESTIONS
+	var current_cat_questions: Array = current_all_questions.get(category, [])
+	current_cat_questions.append(new_question)
+	current_all_questions[category] = current_cat_questions
+
+	# Rewrite the updated ALL_QUESTIONS back to the file.
+	for category_key in current_all_questions.keys():
+		file.store_line(category_key + ":")
+		for question in current_all_questions[category_key]:
+			file.store_line("  - " + question)
+	file.close()
+
+	# Handle updating the active deck (QUESTIONS)
+	if IS_DECK_SHUFFLED:
+		# Only insert the question into the active deck if its category is enabled.
+		if get_config("filters", category):
+			QUESTIONS.insert(CURRENT_QUESTION_IDX, new_question)
+	else:
+		_load_questions()
+
+	SignalBus.new_question_added.emit()
+	debug("Added question: [" + category + "] " + new_question)
+	# TODO: bug: if adding a Q to a category that's currently disabled
+	# The progress bar will go up by 1, but it shouldn't
 
 
 func get_current_question_category() -> String:
