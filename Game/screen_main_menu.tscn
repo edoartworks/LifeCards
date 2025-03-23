@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://do5i6g52xs23h"]
 
-[ext_resource type="Texture2D" uid="uid://mp5ihfvdta5v" path="res://Art/main_menu_art.png" id="1_7mw7c"]
+[ext_resource type="Texture2D" uid="uid://mp5ihfvdta5v" path="res://Art/art_main_menu.png" id="1_7mw7c"]
 [ext_resource type="Texture2D" uid="uid://cjandkwd2k8ao" path="res://Art/icon_play.png" id="1_jjcyo"]
 [ext_resource type="Script" path="res://Game/screen_main_menu.gd" id="1_nexgn"]
 [ext_resource type="Texture2D" uid="uid://cufj1v6ral63b" path="res://Art/icon_question.png" id="2_gstxq"]
@@ -17,6 +17,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="art" type="TextureRect" parent="BG"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.133
+anchor_right = 1.0
+anchor_bottom = 0.133
+offset_top = 294.64
+offset_bottom = 771.359
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 2
+texture = ExtResource("1_7mw7c")
+expand_mode = 5
+stretch_mode = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="BG"]
 layout_mode = 2
@@ -123,21 +138,6 @@ size_flags_stretch_ratio = 0.25
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
-
-[node name="art" type="TextureRect" parent="BG"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.133
-anchor_right = 1.0
-anchor_bottom = 0.133
-offset_top = 294.64
-offset_bottom = 771.359
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 2
-texture = ExtResource("1_7mw7c")
-expand_mode = 5
-stretch_mode = 4
 
 [connection signal="pressed" from="BG/MarginContainer/cont_menu/cont_btns_bg/cont_btns/btn_help" to="." method="_on_btn_help_pressed"]
 [connection signal="pressed" from="BG/MarginContainer/cont_menu/cont_btns_bg/cont_btns/btn_settings" to="." method="_on_btn_settings_pressed"]

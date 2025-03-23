@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Game/screen_card.gd" id="1_6i3pm"]
 [ext_resource type="Texture2D" uid="uid://g70ufsqhcejp" path="res://Art/icon_cancel_small.png" id="2_vexda"]
-[ext_resource type="PackedScene" uid="uid://by76aqaw7clul" path="res://Game/card_02.tscn" id="3_80x67"]
+[ext_resource type="PackedScene" uid="uid://by76aqaw7clul" path="res://Game/card.tscn" id="3_80x67"]
 [ext_resource type="Texture2D" uid="uid://xpkqv8b7000u" path="res://Art/art_category_1.png" id="5_4jntk"]
 [ext_resource type="Texture2D" uid="uid://wyb84s0k8w42" path="res://Art/icon_arrow_start.png" id="5_f1xb2"]
 [ext_resource type="Texture2D" uid="uid://blqmevr5wam4q" path="res://Art/icon_dots.png" id="5_pv87m"]
@@ -16,7 +16,7 @@ bg_color = Color(1, 0.683554, 0.938661, 1)
 
 [node name="screen_card" type="CanvasLayer"]
 script = ExtResource("1_6i3pm")
-card_path = NodePath("BG/cont_margin/VBoxContainer/card_02")
+card_path = NodePath("BG/cont_margin/VBoxContainer/card")
 menu_overlay_path = NodePath("card_menu_overlay")
 prog_bar_path = NodePath("BG/cont_margin/VBoxContainer/progress_bar_deck")
 categ_art_path = NodePath("BG/cont_margin/VBoxContainer/category_art")
@@ -94,7 +94,7 @@ show_percentage = false
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="card_02" parent="BG/cont_margin/VBoxContainer" instance=ExtResource("3_80x67")]
+[node name="card" parent="BG/cont_margin/VBoxContainer" instance=ExtResource("3_80x67")]
 layout_mode = 2
 
 [node name="spacer5" type="Control" parent="BG/cont_margin/VBoxContainer"]
