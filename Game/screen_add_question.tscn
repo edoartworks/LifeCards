@@ -38,25 +38,8 @@ theme_override_constants/margin_right = 40
 [node name="cont_v_main" type="VBoxContainer" parent="BG/cont_margin_main"]
 layout_mode = 2
 
-[node name="txted_add_question" type="TextEdit" parent="BG/cont_margin_main/cont_v_main"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-placeholder_text = "type your question here"
-deselect_on_focus_loss_enabled = false
-middle_mouse_paste_enabled = false
-wrap_mode = 1
-caret_blink = true
-caret_multiple = false
-
-[node name="spacer3" type="Control" parent="BG/cont_margin_main/cont_v_main"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.02
-
 [node name="HBoxContainer" type="HBoxContainer" parent="BG/cont_margin_main/cont_v_main"]
 layout_mode = 2
-alignment = 2
 
 [node name="Label" type="Label" parent="BG/cont_margin_main/cont_v_main/HBoxContainer"]
 layout_mode = 2
@@ -76,10 +59,25 @@ popup/item_2/id = 2
 popup/item_3/text = "Very deep"
 popup/item_3/id = 3
 
+[node name="spacer3" type="Control" parent="BG/cont_margin_main/cont_v_main"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="txted_add_question" type="TextEdit" parent="BG/cont_margin_main/cont_v_main"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+placeholder_text = "type your question here"
+deselect_on_focus_loss_enabled = false
+middle_mouse_paste_enabled = false
+wrap_mode = 1
+caret_blink = true
+caret_multiple = false
+
 [node name="spacer4" type="Control" parent="BG/cont_margin_main/cont_v_main"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.1
+size_flags_stretch_ratio = 0.05
 
 [node name="cont_bottom" type="HBoxContainer" parent="BG/cont_margin_main/cont_v_main"]
 layout_mode = 2
@@ -133,6 +131,11 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
+
+[node name="spacer6" type="Control" parent="BG/cont_margin_main/cont_v_main"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
 
 [connection signal="pressed" from="BG/cont_margin_main/cont_v_main/cont_bottom/cont_btns_bg/cont_btns/btn_cancel" to="." method="_on_btn_cancel_pressed"]
 [connection signal="pressed" from="BG/cont_margin_main/cont_v_main/cont_bottom/cont_btns_bg/cont_btns/btn_confirm" to="." method="_on_btn_confirm_pressed"]
