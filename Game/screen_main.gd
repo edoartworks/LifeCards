@@ -87,7 +87,7 @@ func hide_filters_screen():
 
 
 func _on_android_back_request():
-	Global.debug("android back request")
+	Debug.log("android back request")
 	var layers = get_tree().current_scene.get_children()
 	var highest_visible_layer_node = null
 	var highest_visible_layer = -1
@@ -102,7 +102,7 @@ func _on_android_back_request():
 			SCREEN_ADD_Q:
 				# Little bug here, not sure what's going on but seems like
 				# back_request is called when typing. So this kinda works
-				if not Global.IS_KEYBOARD_OPEN:
+				if not Main.IS_KEYBOARD_OPEN:
 					hide_add_question_screen()
 			SCREEN_CARD:
 				hide_card_screen()
@@ -116,6 +116,6 @@ func _on_android_back_request():
 
 # DEBUG
 func _input(event):
-	if Global.DEBUG_MODE:
+	if Main.DEBUG_MODE:
 		if event.is_action_pressed("back"):
 			_on_android_back_request()

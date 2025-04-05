@@ -14,18 +14,18 @@ func _process(_delta) :
 		if get_global_rect().has_point(mouse_pos) and !swiping:
 			swiping = true
 			startPos = mouse_pos
-			#Global.debug(str("Start Position: ", startPos))
+			#Debug.log(str("Start Position: ", startPos))
 	if Input.is_action_pressed("touch_press"):
 		if swiping:
 			curPos = get_global_mouse_position()
 			if get_global_rect().has_point(curPos):
 				if startPos.distance_to(curPos) >= length:
 					if abs(startPos.y - curPos.y) <= vertical_tolerance and startPos.x < curPos.x:
-						#Global.debug("Right Swipe!")
+						#Debug.log("Right Swipe!")
 						SignalBus.card_swipe_right.emit()
 						swiping = false
 					elif abs(startPos.y - curPos.y) <= vertical_tolerance and startPos.x > curPos.x:
-						#Global.debug("Left Swipe!")
+						#Debug.log("Left Swipe!")
 						SignalBus.card_swipe_left.emit()
 						swiping = false
 			else:

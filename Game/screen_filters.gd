@@ -27,7 +27,7 @@ func _validate_toggles():
 	# Disable the exit button if no toggle buttons are enabled
 	btn_exit.disabled = (toggled_count == 0)
 	if toggled_count == 0:
-		Global.debug("ALL FILTERS DISABLED!! impossible")
+		Debug.log("ALL FILTERS DISABLED!! impossible")
 
 
 func _on_btn_exit_pressed() -> void:

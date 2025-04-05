@@ -19,8 +19,12 @@ config/icon="res://Art/app_icon.png"
 
 [autoload]
 
-Global="*res://Game/Globals/Global.gd"
+Main="*res://Game/Globals/Main.gd"
+Debug="*res://Game/Globals/Debug.gd"
+Config="*res://Game/Globals/Config.gd"
+File="*res://Game/Globals/File.gd"
 SignalBus="*res://Game/Globals/SignalBus.gd"
+Deck="*res://Game/Globals/Deck.gd"
 Popups="*res://Game/Globals/Popups.gd"
 
 [display]

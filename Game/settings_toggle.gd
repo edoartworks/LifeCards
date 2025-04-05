@@ -42,8 +42,8 @@ func update_texture() -> void:
 
 
 func update_config(source_file = false) -> void:
-	Global.set_config("settings", setting_key, setting_value, source_file)
+	Config.set_config("settings", setting_key, setting_value, source_file)
 
 
 func update_value_from_user_file() -> void:
-	setting_value = Global.get_config("settings", setting_key)
+	setting_value = Config.get_config("settings", setting_key)

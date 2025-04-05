@@ -29,28 +29,28 @@ func _adjust_to_keyboard() -> void:
 	if keyb_heigh > 0:
 		var new_size_y = initial_cont_size_y - keyb_heigh
 		CONT_ADD_QUESTION.set_size(Vector2(CONT_ADD_QUESTION.size.x, new_size_y))
-		if not Global.IS_KEYBOARD_OPEN:
-			Global.IS_KEYBOARD_OPEN = true
+		if not Main.IS_KEYBOARD_OPEN:
+			Main.IS_KEYBOARD_OPEN = true
 	else:
 		CONT_ADD_QUESTION.set_size(Vector2(CONT_ADD_QUESTION.size.x, initial_cont_size_y))
-		if Global.IS_KEYBOARD_OPEN:
-			Global.IS_KEYBOARD_OPEN = false
+		if Main.IS_KEYBOARD_OPEN:
+			Main.IS_KEYBOARD_OPEN = false
 
 
 func _on_btn_confirm_pressed() -> void:
 	var q_text: String = ""
 	q_text = TXTED_ADD_QUESTION.text.strip_edges()
 	if q_text.is_empty():
-		Global.debug("Invalid question entered. Fix and try again")
+		Debug.log("Invalid question entered. Fix and try again")
 		return
 	var selected_category = str(CAT_OPTION.get_selected_id() + 1)
 	
-	Global.add_user_question(selected_category, q_text)
+	Deck.add_user_question(selected_category, q_text)
 	TXTED_ADD_QUESTION.text = ""
 	SignalBus.hide_add_question_screen.emit()
 
 
 func _on_btn_cancel_pressed() -> void:
-	Global.debug("Adding question cancelled")
+	Debug.log("Adding question cancelled")
 	TXTED_ADD_QUESTION.text = ""
 	SignalBus.hide_add_question_screen.emit()

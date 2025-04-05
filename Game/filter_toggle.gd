@@ -45,9 +45,9 @@ func update_texture() -> void:
 
 
 func update_config(source_file = false) -> void:
-	Global.set_config("filters", filter_key, filter_enabled, source_file)
+	Config.set_config("filters", filter_key, filter_enabled, source_file)
 
 
 func update_value_from_user_file() -> void:
-	filter_enabled = Global.get_config("filters", filter_key)
+	filter_enabled = Config.get_config("filters", filter_key)
 	

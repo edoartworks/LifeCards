@@ -36,7 +36,7 @@ func _ready() -> void:
 	SignalBus.reset_deck_default.connect(_init_UI)
 	SignalBus.filters_screen_exit_pressed.connect(_init_UI)
 	
-	if Global.DEBUG_MODE:
+	if Main.DEBUG_MODE:
 		DEBUG_LOG = get_node(debug_log_lbl_path)
 		DEBUG_SCROLL = DEBUG_LOG.get_parent()
 		DEBUG_SCROLL.visible = true
@@ -45,42 +45,42 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if Global.DEBUG_MODE:
+	if Main.DEBUG_MODE:
 		# Update debug log
-		if DEBUG_LOG.text == Global.DEBUG_LOG:
+		if DEBUG_LOG.text == Debug.DEBUG_LOG:
 			return
-		DEBUG_LOG.text = Global.DEBUG_LOG
+		DEBUG_LOG.text = Debug.DEBUG_LOG
 		call_deferred("_debug_scroll_to_bottom")
 
 
 func _init_UI() -> void:
 	_refresh_card_text()
-	PROG_BAR.max_value = Global.QUESTIONS.size()
-	PROG_BAR.value = Global.CURRENT_QUESTION_IDX + 1
+	PROG_BAR.max_value = Deck.QUESTIONS.size()
+	PROG_BAR.value = Deck.CURRENT_QUESTION_IDX + 1
 
 
 func _change_card_fwd() -> bool:
-	if Global.CURRENT_QUESTION_IDX < Global.QUESTIONS.size() -1:
-		Global.CURRENT_QUESTION_IDX += 1
+	if Deck.CURRENT_QUESTION_IDX < Deck.QUESTIONS.size() -1:
+		Deck.CURRENT_QUESTION_IDX += 1
 		_refresh_card_text()
 		return true
 	else:
-		Global.debug("No more questions")
+		Debug.log("No more questions")
 		return false
 
 
 func _change_card_back() -> bool:
-	if Global.CURRENT_QUESTION_IDX > 0:
-		Global.CURRENT_QUESTION_IDX -= 1
+	if Deck.CURRENT_QUESTION_IDX > 0:
+		Deck.CURRENT_QUESTION_IDX -= 1
 		_refresh_card_text()
 		return true
 	else:
-		Global.debug("Reached first questions")
+		Debug.log("Reached first questions")
 		return false
 
 
 func _update_category_art() -> void:
-	var current_q_categ = Global.get_current_question_category()
+	var current_q_categ = Deck.get_current_question_category()
 	if prev_q_cat == "0":
 		prev_q_cat = current_q_categ
 	
@@ -96,7 +96,7 @@ func _update_category_art() -> void:
 
 
 func _refresh_card_text() -> void:
-	CARD.set_card_text(Global.QUESTIONS[Global.CURRENT_QUESTION_IDX])
+	CARD.set_card_text(Deck.QUESTIONS[Deck.CURRENT_QUESTION_IDX])
 	_update_category_art()
 
 
@@ -126,12 +126,12 @@ func _on_obscure_gui_input(event: InputEvent) -> void:
 
 func _on_current_question_deleted() -> void:
 	PROG_BAR.max_value -= 1
-	Global.CURRENT_QUESTION_IDX -= 1
+	Deck.CURRENT_QUESTION_IDX -= 1
 	if not _change_card_fwd():
-		Global.CURRENT_QUESTION_IDX += 1
+		Deck.CURRENT_QUESTION_IDX += 1
 		if not _change_card_back():
 			CARD.set_card_text("")
-			Global.debug("No more questions left in the deck!")
+			Debug.log("No more questions left in the deck!")
 
 
 func _on_new_question_added() -> void:
@@ -147,8 +147,8 @@ func _hide_menu_overlay() -> void:
 
 
 func _set_card_to_first() -> void:
-	Global.set_card_idx_to_first()
-	PROG_BAR.value = Global.CURRENT_QUESTION_IDX + 1
+	Deck.set_card_idx_to_first()
+	PROG_BAR.value = Deck.CURRENT_QUESTION_IDX + 1
 	_refresh_card_text()
 
 
@@ -162,7 +162,7 @@ func _on_btn_exit_pressed() -> void:
 
 
 func _on_btn_back_to_first_pressed() -> void:
-	if Global.CURRENT_QUESTION_IDX > 0:
+	if Deck.CURRENT_QUESTION_IDX > 0:
 		_set_card_to_first()
 	else:
-		Global.debug("Already at first questions")
+		Debug.log("Already at first questions")
