@@ -4,7 +4,7 @@ func parse_yaml_file(file_path: String) -> Dictionary:
 	var all_questions: Dictionary = {}
 	var file := FileAccess.open(file_path, FileAccess.READ)
 	if file == null:
-		Debug.log("Unable to open file: " + file_path)
+		Debug.log("Failed to open file: " + file_path)
 		return {}
 	
 	var line: String
@@ -39,7 +39,7 @@ func read_text_file(file_path) -> Array[String]:
 				lines.append(line)
 		file.close()
 	else:
-		Debug.log(str("Failed to open file at path: ", file_path))
+		Debug.log(str("Failed to open file: ", file_path))
 	return lines
 
 
@@ -55,9 +55,9 @@ func copy_file(source_path: String, destination_path: String, override_existing:
 		if destination_file:
 			destination_file.store_buffer(source_file.get_buffer(source_file.get_length()))
 			destination_file.close()
-			Debug.log(str("File copied to user folder: " + destination_path))
+			Debug.log(str("File [" + source_path + "] copied to: [" + destination_path + "]"))
 		else:
-			Debug.log(str("Failed to open user file: " + destination_path))
+			Debug.log(str("Failed to open file: " + destination_path))
 		source_file.close()
 	else:
 		Debug.log(str("Failed to open source file: " + source_path))

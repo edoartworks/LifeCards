@@ -71,7 +71,6 @@ func add_user_question(category: String, new_question: String):
 			file.store_line("  - " + question)
 	file.close()
 
-	# Handle updating the active deck (QUESTIONS)
 	if IS_DECK_SHUFFLED:
 		# Only insert the question into the active deck if its category is enabled.
 		if Config.get_config("filters", category):
@@ -81,8 +80,50 @@ func add_user_question(category: String, new_question: String):
 
 	SignalBus.new_question_added.emit()
 	Debug.log("Added question: [" + category + "] " + new_question)
-	# TODO: bug: if adding a Q to a category that's currently disabled
-	# The progress bar will go up by 1, but it shouldn't
+
+
+func delete_current_question() -> bool:
+	var file = FileAccess.open(QUESTIONS_USER_PATH, FileAccess.WRITE)
+	if not file:
+		Debug.log(str("Failed to open user file: ", QUESTIONS_USER_PATH))
+		return false
+	
+	var questions_dict: Dictionary = ALL_QUESTIONS
+	if QUESTIONS.is_empty():
+		Debug.log("Trying to delete question on empty list.")
+		return false
+	
+	# Delete question
+	var current_question = QUESTIONS[CURRENT_QUESTION_IDX]
+	for category in questions_dict.keys():
+		if Config.get_config("filters", category) and current_question in questions_dict[category]:
+			questions_dict[category].erase(current_question)
+			break
+	# Write all categories back to the file, including empty ones for reusability
+	for category_key in questions_dict.keys():
+		file.store_line(category_key + ":")
+		for question in questions_dict[category_key]:
+			file.store_line("  - " + question)
+	file.close()
+	Debug.log("Deleting question: " + current_question)
+	return true
+
+
+func delete_all_questions() -> void:
+	var file = FileAccess.open(QUESTIONS_USER_PATH, FileAccess.WRITE)
+	if not file:
+		Debug.log(str("Failed to open user file: ", QUESTIONS_USER_PATH))
+		return
+	
+	var questions_dict: Dictionary = ALL_QUESTIONS
+	for category in questions_dict.keys():
+		questions_dict[category] = []  # Empty the list for each category
+	
+	for category_key in questions_dict.keys():
+		file.store_line(category_key + ":")
+	
+	file.close()
+	Debug.log("All questions deleted, file reset to empty categories.")
 
 
 func get_current_question_category() -> String:

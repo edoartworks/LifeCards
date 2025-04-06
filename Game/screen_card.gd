@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-
 @export var card_path :NodePath
 @export var menu_overlay_path :NodePath
 @export var prog_bar_path :NodePath
@@ -96,8 +95,9 @@ func _update_category_art() -> void:
 
 
 func _refresh_card_text() -> void:
-	CARD.set_card_text(Deck.QUESTIONS[Deck.CURRENT_QUESTION_IDX])
-	_update_category_art()
+	if not Deck.QUESTIONS.is_empty():
+		CARD.set_card_text(Deck.QUESTIONS[Deck.CURRENT_QUESTION_IDX])
+		_update_category_art()
 
 
 func _on_btn_fwd_pressed() -> void:
@@ -131,6 +131,7 @@ func _on_current_question_deleted() -> void:
 		Deck.CURRENT_QUESTION_IDX += 1
 		if not _change_card_back():
 			CARD.set_card_text("")
+			CATEG_ART.texture = null
 			Debug.log("No more questions left in the deck!")
 
 

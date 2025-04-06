@@ -2,7 +2,7 @@ extends Node
 
 var IS_KEYBOARD_OPEN = false # Read/write from other screens
 
-var DEBUG_MODE = false
+var DEBUG_MODE = true
 var DEBUG_QS_FILE_PATH = "res://Data/DEBUG_questions.yml"
 var DEBUG_RESET_USR_QS = false
 var DEBUG_RESET_CONFIG = false
