@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c7wye7vxg5u13"]
 
 [ext_resource type="Texture2D" uid="uid://d147pe4qujumd" path="res://Art/icon_toggle_off.png" id="1_1tgwu"]
-[ext_resource type="Script" path="res://Game/settings_toggle.gd" id="1_w2fx3"]
+[ext_resource type="Script" uid="uid://bkeg5fuu24qww" path="res://Game/settings_toggle.gd" id="1_w2fx3"]
 
 [node name="toggle" type="PanelContainer"]
 theme_type_variation = &"PanelContainer_Toggle"

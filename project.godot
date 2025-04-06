@@ -13,7 +13,7 @@ config_version=5
 config/name="LifeCards"
 run/main_scene="res://Game/screen_main.tscn"
 config/quit_on_go_back=false
-config/features=PackedStringArray("4.3", "Mobile")
+config/features=PackedStringArray("4.4", "Mobile")
 run/low_processor_mode=true
 config/icon="res://Art/app_icon.png"
 
@@ -60,8 +60,8 @@ back={
 
 [input_devices]
 
-pointing/emulate_touch_from_mouse=true
 pointing/android/enable_long_press_as_right_click=true
+pointing/emulate_touch_from_mouse=true
 
 [rendering]
 

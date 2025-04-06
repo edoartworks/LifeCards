@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://misl3tfjpq0x"]
 
-[ext_resource type="Script" path="res://Game/screen_card.gd" id="1_6i3pm"]
+[ext_resource type="Script" uid="uid://dol8k0s0na56l" path="res://Game/screen_card.gd" id="1_6i3pm"]
 [ext_resource type="Texture2D" uid="uid://g70ufsqhcejp" path="res://Art/icon_cancel_small.png" id="2_vexda"]
 [ext_resource type="PackedScene" uid="uid://by76aqaw7clul" path="res://Game/card.tscn" id="3_80x67"]
 [ext_resource type="Texture2D" uid="uid://xpkqv8b7000u" path="res://Art/art_category_1.png" id="5_4jntk"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c5yy0o310pypc" path="res://Art/icon_arrow_l.png" id="6_8r6ww"]
 [ext_resource type="Texture2D" uid="uid://758uvwgicrj2" path="res://Art/icon_arrow.png" id="6_vlu3g"]
 [ext_resource type="PackedScene" uid="uid://d1f7oecpsrav" path="res://Game/card_menu.tscn" id="7_8jahr"]
-[ext_resource type="Script" path="res://Game/swipe_area.gd" id="7_8lvu1"]
+[ext_resource type="Script" uid="uid://b113hey6c53hu" path="res://Game/swipe_area.gd" id="7_8lvu1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6es5q"]
 bg_color = Color(1, 0.683554, 0.938661, 1)

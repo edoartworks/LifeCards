@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cwnlvil864wbg"]
 
 [ext_resource type="Texture2D" uid="uid://cfveb17qyderm" path="res://Art/icon_confirm.png" id="1_7ut6m"]
-[ext_resource type="Script" path="res://Game/screen_help.gd" id="1_fbdoe"]
+[ext_resource type="Script" uid="uid://cdkoksjbi3i3d" path="res://Game/screen_help.gd" id="1_fbdoe"]
 [ext_resource type="Texture2D" uid="uid://blqmevr5wam4q" path="res://Art/icon_dots.png" id="2_tka4m"]
 
 [node name="screen_help" type="CanvasLayer"]

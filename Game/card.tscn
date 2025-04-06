@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://by76aqaw7clul"]
 
-[ext_resource type="Script" path="res://Game/card.gd" id="2_gyovr"]
+[ext_resource type="Script" uid="uid://lbuw4xywxa7i" path="res://Game/card.gd" id="2_gyovr"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a2e7p"]
 content_margin_left = 40.0

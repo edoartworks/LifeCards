@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://f0xnalit6yck"]
 
-[ext_resource type="Script" path="res://Game/screen_main.gd" id="1_7ymd8"]
+[ext_resource type="Script" uid="uid://dy2lllqjq7tgw" path="res://Game/screen_main.gd" id="1_7ymd8"]
 [ext_resource type="PackedScene" uid="uid://misl3tfjpq0x" path="res://Game/screen_card.tscn" id="1_e5ns8"]
 [ext_resource type="PackedScene" uid="uid://ktkatts3phbm" path="res://Game/screen_add_question.tscn" id="2_b2ui6"]
 [ext_resource type="PackedScene" uid="uid://cwnlvil864wbg" path="res://Game/screen_help.tscn" id="3_xdku1"]

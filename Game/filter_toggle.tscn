@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://clyul6nuh52rm"]
 
-[ext_resource type="Script" path="res://Game/filter_toggle.gd" id="1_y3n4v"]
+[ext_resource type="Script" uid="uid://bsxl2cj4w4tbu" path="res://Game/filter_toggle.gd" id="1_y3n4v"]
 [ext_resource type="Texture2D" uid="uid://d147pe4qujumd" path="res://Art/icon_toggle_off.png" id="2_q233t"]
 
 [node name="toggle" type="PanelContainer"]

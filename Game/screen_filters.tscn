@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://baumhp28csf0f"]
 
 [ext_resource type="PackedScene" uid="uid://clyul6nuh52rm" path="res://Game/filter_toggle.tscn" id="1_7dq4n"]
-[ext_resource type="Script" path="res://Game/screen_filters.gd" id="1_7pc1o"]
+[ext_resource type="Script" uid="uid://bu4ygv85rjug4" path="res://Game/screen_filters.gd" id="1_7pc1o"]
 [ext_resource type="Texture2D" uid="uid://cfveb17qyderm" path="res://Art/icon_confirm.png" id="2_tqkps"]
 
 [node name="screen_filters" type="CanvasLayer"]

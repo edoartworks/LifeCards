@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c8ds5p7u08cgn"]
 
-[ext_resource type="Script" path="res://Game/screen_settings.gd" id="1_hu3bw"]
+[ext_resource type="Script" uid="uid://bpndy5vl3e7o7" path="res://Game/screen_settings.gd" id="1_hu3bw"]
 [ext_resource type="PackedScene" uid="uid://c7wye7vxg5u13" path="res://Game/settings_toggle.tscn" id="2_6drmw"]
 [ext_resource type="Texture2D" uid="uid://cfveb17qyderm" path="res://Art/icon_confirm.png" id="2_nu078"]
 
