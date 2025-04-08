@@ -6,7 +6,9 @@ extends Control
 func _ready() -> void:
 	SignalBus.font_size_less.connect(_font_size_less)
 	SignalBus.font_size_more.connect(_font_size_more)
-	
+	update_font_from_cfg.call_deferred()
+
+func update_font_from_cfg() -> void:
 	var font_size_cfg = Config.get_config("settings", "font_size")
 	if font_size_cfg:
 		CARD_TEXT.label_settings.font_size = font_size_cfg

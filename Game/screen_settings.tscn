@@ -49,6 +49,12 @@ size_flags_horizontal = 5
 theme_type_variation = &"Button_Text_Menu"
 text = "Reset deck to default"
 
+[node name="btn_del_all_q" type="Button" parent="BG/MarginContainer/cont_main"]
+layout_mode = 2
+size_flags_horizontal = 5
+theme_type_variation = &"Button_Text_Menu"
+text = "Delete all questions"
+
 [node name="spacer6" type="Control" parent="BG/MarginContainer/cont_main"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -64,6 +70,7 @@ text = "Add custom question"
 layout_mode = 2
 display_text = "Shuffle on play"
 setting_key = "shuffle_on_play"
+setting_value = true
 
 [node name="spacer5" type="Control" parent="BG/MarginContainer/cont_main"]
 custom_minimum_size = Vector2(0, 60)
@@ -92,5 +99,6 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 
 [connection signal="pressed" from="BG/MarginContainer/cont_main/btn_reset_deck" to="." method="_on_btn_reset_deck_pressed"]
+[connection signal="pressed" from="BG/MarginContainer/cont_main/btn_del_all_q" to="." method="_on_btn_del_all_q_pressed"]
 [connection signal="pressed" from="BG/MarginContainer/cont_main/btn_add_q" to="." method="_on_btn_add_q_pressed"]
 [connection signal="pressed" from="BG/MarginContainer/cont_main/HBoxContainer/btn_exit" to="." method="_on_btn_exit_pressed"]

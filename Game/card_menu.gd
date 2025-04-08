@@ -6,8 +6,11 @@ func _on_btn_add_q_pressed() -> void:
 
 
 func _on_btn_delete_q_pressed() -> void:
-	if Deck.delete_current_question():
-		SignalBus.current_question_deleted.emit()
+	Popups.show_confirm(self, _on_btn_delete_q_pressed_confirmed)
+
+
+func _on_btn_delete_q_pressed_confirmed() -> void:
+	Deck.delete_current_question()
 
 
 func _on_btn_shuffle_deck_pressed() -> void:

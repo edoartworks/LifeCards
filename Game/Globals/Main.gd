@@ -2,10 +2,8 @@ extends Node
 
 var IS_KEYBOARD_OPEN = false # Read/write from other screens
 
-var DEBUG_MODE = true
+var DEBUG_MODE = false
 var DEBUG_QS_FILE_PATH = "res://Data/DEBUG_questions.yml"
-var DEBUG_RESET_USR_QS = false
-var DEBUG_RESET_CONFIG = false
 
 
 func _ready() -> void:
@@ -13,6 +11,8 @@ func _ready() -> void:
 	var CONFIG_USER_PATH = Config.CONFIG_USER_PATH
 	var QUESTIONS_SRC_PATH = Deck.QUESTIONS_SRC_PATH
 	var QUESTIONS_USER_PATH = Deck.QUESTIONS_USER_PATH
+	var DEBUG_RESET_USR_QS = false
+	var DEBUG_RESET_CONFIG = false
 	
 	if DEBUG_MODE:
 		Debug.log("DEBUG MODE: ON")
@@ -26,11 +26,15 @@ func _ready() -> void:
 	var IS_APP_FIRST_LAUNCH
 	if Config.get_config("app", "is_first_launch") == null:
 		IS_APP_FIRST_LAUNCH = true
+		Debug.log("Initialising app for first launch...")
 	else:
 		IS_APP_FIRST_LAUNCH = false
 	
-	if IS_APP_FIRST_LAUNCH or DEBUG_RESET_CONFIG:
+	# Dev
+	if OS.get_name() == "Windows":
 		Config.build_config.call_deferred()
+	
+	if IS_APP_FIRST_LAUNCH or DEBUG_RESET_CONFIG:
 		File.copy_file.call_deferred(CONFIG_SRC_PATH, CONFIG_USER_PATH)
 	
 	if IS_APP_FIRST_LAUNCH or DEBUG_RESET_USR_QS:
@@ -38,7 +42,6 @@ func _ready() -> void:
 		Deck.load_questions.call_deferred()
 	else:
 		Deck.load_questions()
-	
 	
 	if IS_APP_FIRST_LAUNCH:
 		Config.set_config.call_deferred("app", "is_first_launch", false)

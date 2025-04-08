@@ -15,7 +15,7 @@ var TOGGLE_OFF_ART = load("res://Art/icon_toggle_off.png")
 func _ready() -> void:
 	lbl_text.text = display_text
 	add_to_group("settings")
-	update_value_from_user_file.call_deferred()
+	update_value_from_cfg.call_deferred()
 	update_texture.call_deferred()
 
 
@@ -45,5 +45,5 @@ func update_config(source_file = false) -> void:
 	Config.set_config("settings", setting_key, setting_value, source_file)
 
 
-func update_value_from_user_file() -> void:
+func update_value_from_cfg() -> void:
 	setting_value = Config.get_config("settings", setting_key)

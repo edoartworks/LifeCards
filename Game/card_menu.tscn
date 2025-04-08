@@ -56,7 +56,7 @@ text = "Add custom question"
 layout_mode = 2
 size_flags_horizontal = 4
 theme_type_variation = &"Button_Text"
-text = "Delete question"
+text = "Delete this question"
 
 [node name="btn_shuffle deck" type="Button" parent="MarginContainer/cont_menu"]
 layout_mode = 2

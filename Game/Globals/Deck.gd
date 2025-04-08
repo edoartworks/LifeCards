@@ -10,7 +10,6 @@ var IS_DECK_SHUFFLED = false
 
 func _ready() -> void:
 	SignalBus.shuffle_deck.connect(shuffle_deck)
-	SignalBus.current_question_deleted.connect(load_questions)
 	SignalBus.filters_screen_exit_pressed.connect(reset_deck_to_user)
 	SignalBus.reset_deck_default.connect(reset_deck_to_default)
 
@@ -71,10 +70,9 @@ func add_user_question(category: String, new_question: String):
 			file.store_line("  - " + question)
 	file.close()
 
-	if IS_DECK_SHUFFLED:
-		# Only insert the question into the active deck if its category is enabled.
-		if Config.get_config("filters", category):
-			QUESTIONS.insert(CURRENT_QUESTION_IDX, new_question)
+	# Insert the question into the active deck or reload deck.
+	if IS_DECK_SHUFFLED and Config.get_config("filters", category):
+		QUESTIONS.insert(CURRENT_QUESTION_IDX, new_question)
 	else:
 		load_questions()
 
@@ -83,29 +81,37 @@ func add_user_question(category: String, new_question: String):
 
 
 func delete_current_question() -> bool:
-	var file = FileAccess.open(QUESTIONS_USER_PATH, FileAccess.WRITE)
-	if not file:
-		Debug.log(str("Failed to open user file: ", QUESTIONS_USER_PATH))
-		return false
-	
 	var questions_dict: Dictionary = ALL_QUESTIONS
 	if QUESTIONS.is_empty():
 		Debug.log("Trying to delete question on empty list.")
 		return false
 	
-	# Delete question
-	var current_question = QUESTIONS[CURRENT_QUESTION_IDX]
+	var file = FileAccess.open(QUESTIONS_USER_PATH, FileAccess.WRITE)
+	if not file:
+		Debug.log(str("Failed to open user file: ", QUESTIONS_USER_PATH))
+		return false
+	
+	# Delete  question
+	var question_to_delete = QUESTIONS[CURRENT_QUESTION_IDX]
 	for category in questions_dict.keys():
-		if Config.get_config("filters", category) and current_question in questions_dict[category]:
-			questions_dict[category].erase(current_question)
+		if Config.get_config("filters", category) and question_to_delete in questions_dict[category]:
+			questions_dict[category].erase(question_to_delete)
 			break
+	
 	# Write all categories back to the file, including empty ones for reusability
 	for category_key in questions_dict.keys():
 		file.store_line(category_key + ":")
 		for question in questions_dict[category_key]:
 			file.store_line("  - " + question)
 	file.close()
-	Debug.log("Deleting question: " + current_question)
+	
+	if IS_DECK_SHUFFLED:
+		QUESTIONS.remove_at(CURRENT_QUESTION_IDX)
+	else:
+		load_questions()
+	
+	Debug.log("Deleted question: " + question_to_delete)
+	SignalBus.current_question_deleted.emit()
 	return true
 
 
@@ -117,13 +123,14 @@ func delete_all_questions() -> void:
 	
 	var questions_dict: Dictionary = ALL_QUESTIONS
 	for category in questions_dict.keys():
-		questions_dict[category] = []  # Empty the list for each category
-	
+		questions_dict[category] = []
 	for category_key in questions_dict.keys():
 		file.store_line(category_key + ":")
-	
 	file.close()
-	Debug.log("All questions deleted, file reset to empty categories.")
+	
+	Debug.log("All questions deleted.")
+	load_questions()
+	SignalBus.all_questions_deleted.emit()
 
 
 func get_current_question_category() -> String:

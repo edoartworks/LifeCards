@@ -15,3 +15,11 @@ func _on_btn_reset_deck_pressed() -> void:
 
 func _on_btn_reset_deck_confirmed():
 	SignalBus.reset_deck_default.emit()
+
+
+func _on_btn_del_all_q_pressed() -> void:
+	Popups.show_confirm(self, _on_btn_del_all_q_confirmed)
+
+
+func _on_btn_del_all_q_confirmed():
+	Deck.delete_all_questions()

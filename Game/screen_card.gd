@@ -31,6 +31,7 @@ func _ready() -> void:
 	SignalBus.show_add_question_screen.connect(_hide_menu_overlay)
 	SignalBus.new_question_added.connect(_init_UI)
 	SignalBus.current_question_deleted.connect(_on_current_question_deleted)
+	SignalBus.all_questions_deleted.connect(_set_empty_card)
 	SignalBus.shuffle_deck.connect(_on_deck_shuffled)
 	SignalBus.reset_deck_default.connect(_init_UI)
 	SignalBus.filters_screen_exit_pressed.connect(_init_UI)
@@ -64,7 +65,7 @@ func _change_card_fwd() -> bool:
 		_refresh_card_text()
 		return true
 	else:
-		Debug.log("No more questions")
+		Debug.log("Last card. Can't go forward.")
 		return false
 
 
@@ -74,7 +75,7 @@ func _change_card_back() -> bool:
 		_refresh_card_text()
 		return true
 	else:
-		Debug.log("Reached first questions")
+		Debug.log("First card. Can't go backwards.")
 		return false
 
 
@@ -130,17 +131,19 @@ func _on_current_question_deleted() -> void:
 	if not _change_card_fwd():
 		Deck.CURRENT_QUESTION_IDX += 1
 		if not _change_card_back():
-			CARD.set_card_text("")
-			CATEG_ART.texture = null
+			_set_empty_card()
 			Debug.log("No more questions left in the deck!")
+
+
+func _set_empty_card() -> void:
+	CARD.set_card_text("")
+	CATEG_ART.texture = null
+	PROG_BAR.max_value = 0
+	PROG_BAR.value = 0
 
 
 func _on_new_question_added() -> void:
 	PROG_BAR.max_value += 1
-	# known bug: minor visual. ignore, probably forever.
-		# When adding a new Q when only one Q is left in the deck,
-		# the prog bar kinda bugs out, but not in a disruptive way.
-		# and should fix when user restarts the app.
 
 
 func _hide_menu_overlay() -> void:
