@@ -12,6 +12,7 @@ signal main_menu_play_pressed
 signal main_menu_settings_pressed
 signal main_menu_filter_pressed
 signal main_menu_help_pressed
+signal cardmenu_goto_first
 signal card_screen_exit_pressed
 signal help_screen_exit_pressed
 signal settings_screen_exit_pressed

@@ -23,3 +23,7 @@ func _on_btn_font_less_pressed() -> void:
 
 func _on_btn_font_more_pressed() -> void:
 	SignalBus.font_size_more.emit()
+
+
+func _on_btn_goto_first_pressed() -> void:
+	SignalBus.cardmenu_goto_first.emit()

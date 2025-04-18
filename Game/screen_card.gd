@@ -36,6 +36,7 @@ func _ready() -> void:
 	SignalBus.shuffle_deck.connect(_on_deck_shuffled)
 	SignalBus.reset_deck_default.connect(_init_UI)
 	SignalBus.filters_screen_exit_pressed.connect(_init_UI)
+	SignalBus.cardmenu_goto_first.connect(_on_menu_goto_first_pressed)
 	
 	if Main.DEBUG_MODE:
 		DEBUG_LOG = get_node(debug_log_lbl_path)
@@ -166,7 +167,7 @@ func _on_btn_exit_pressed() -> void:
 	SignalBus.card_screen_exit_pressed.emit()
 
 
-func _on_btn_back_to_first_pressed() -> void:
+func _on_menu_goto_first_pressed() -> void:
 	if Deck.CURRENT_QUESTION_IDX > 0:
 		_set_card_to_first()
 	else:

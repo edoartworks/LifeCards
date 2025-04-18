@@ -75,8 +75,16 @@ theme_type_variation = &"Button_Text"
 button_mask = 5
 text = "Shuffle deck"
 
+[node name="btn_goto_first" type="Button" parent="MarginContainer/cont_menu"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"Button_Text"
+button_mask = 5
+text = "Go to first question"
+
 [connection signal="pressed" from="MarginContainer/cont_menu/PanelContainer/HBoxContainer/btn_font_less" to="." method="_on_btn_font_less_pressed"]
 [connection signal="pressed" from="MarginContainer/cont_menu/PanelContainer/HBoxContainer/btn_font_more" to="." method="_on_btn_font_more_pressed"]
 [connection signal="pressed" from="MarginContainer/cont_menu/btn_add_q" to="." method="_on_btn_add_q_pressed"]
 [connection signal="pressed" from="MarginContainer/cont_menu/btn_delete_q" to="." method="_on_btn_delete_q_pressed"]
 [connection signal="pressed" from="MarginContainer/cont_menu/btn_shuffle deck" to="." method="_on_btn_shuffle_deck_pressed"]
+[connection signal="pressed" from="MarginContainer/cont_menu/btn_goto_first" to="." method="_on_btn_goto_first_pressed"]
