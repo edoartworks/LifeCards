@@ -15,7 +15,6 @@ func _ready():
 	_validate_toggles.call_deferred()
 
 func _on_button_toggled():
-	print("toggled")
 	_validate_toggles()
 
 func _validate_toggles():

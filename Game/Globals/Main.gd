@@ -2,8 +2,8 @@ extends Node
 
 var IS_KEYBOARD_OPEN = false # Read/write from other screens
 
-var DEBUG_MODE = false
-var DEBUG_QS_FILE_PATH = "res://Data/DEBUG_questions.yml"
+var DEBUG_MODE = true
+var DEBUG_QS_FILE_PATH = "res://Data/DEBUG_questions.txt"
 
 
 func _ready() -> void:
@@ -13,6 +13,9 @@ func _ready() -> void:
 	var QUESTIONS_USER_PATH = Deck.QUESTIONS_USER_PATH
 	var DEBUG_RESET_USR_QS = false
 	var DEBUG_RESET_CONFIG = false
+	
+	#Debug.log("Requesting permissions...")
+	#Debug.log(OS.request_permissions())
 	
 	if DEBUG_MODE:
 		Debug.log("DEBUG MODE: ON")

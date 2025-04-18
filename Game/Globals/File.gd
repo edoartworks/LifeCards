@@ -1,18 +1,25 @@
 extends Node
 
-func parse_yaml_file(file_path: String) -> Dictionary:
-	var all_questions: Dictionary = {}
+func parse_questions_file(file_path: String) -> Dictionary:
+	if not file_path.ends_with(".txt"):
+		Debug.log("File must be a text file")
+		return {}
+		
 	var file := FileAccess.open(file_path, FileAccess.READ)
 	if file == null:
 		Debug.log("Failed to open file: " + file_path)
+		Debug.log(FileAccess.get_open_error())
 		return {}
 	
 	var line: String
 	var current_key: String = ""
+	var all_questions: Dictionary = {}
 	var question_list: Array = []
 	
 	while not file.eof_reached():
 		line = file.get_line().strip_edges()
+		if line.begins_with("#") or line.is_empty():
+			continue
 		if line.ends_with(":"):
 			if current_key != "":
 				all_questions[current_key] = question_list
@@ -21,6 +28,9 @@ func parse_yaml_file(file_path: String) -> Dictionary:
 		elif line.begins_with("-"):
 			var question = line.lstrip("-").strip_edges()
 			question_list.append(question)
+		else:
+			Debug.log("Found invalid line in file: " + file_path)
+			return {}
 	
 	if current_key != "":
 		all_questions[current_key] = question_list

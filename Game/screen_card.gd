@@ -30,6 +30,7 @@ func _ready() -> void:
 	
 	SignalBus.show_add_question_screen.connect(_hide_menu_overlay)
 	SignalBus.new_question_added.connect(_init_UI)
+	SignalBus.questions_imported.connect(_init_UI)
 	SignalBus.current_question_deleted.connect(_on_current_question_deleted)
 	SignalBus.all_questions_deleted.connect(_set_empty_card)
 	SignalBus.shuffle_deck.connect(_on_deck_shuffled)

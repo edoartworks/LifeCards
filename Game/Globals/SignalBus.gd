@@ -6,6 +6,7 @@ signal hide_add_question_screen
 signal current_question_deleted
 signal all_questions_deleted
 signal new_question_added
+signal questions_imported
 signal shuffle_deck
 signal main_menu_play_pressed
 signal main_menu_settings_pressed

@@ -1,88 +1,119 @@
-What does being successful mean to you? #2
-Is there something that you really regret? What did you learn from it? #4
-What is something you are very proud of? #2
-Who do you see as a role model and why? #2
-What’s something that motivates you? #2
-What’s something you strongly believe in? #3
-What/who do you take inspiration from? #2
-What’s a memory that formed an important part of your identity? #4
-Describe a time you helped someone in some way. #3
-What are some of your core values? Explain one. #4
-What’s a quality you’d like to develop in yourself? #3
-What’s a quality you admire in someone else? #3
-What’s one of your biggest fears? #4
-What’s one of your biggest dreams? #3
-How would you describe your true self in a few words? #4
-What makes you hide your true self from others? #4
-What makes you show your true self to others? #4
-What’s something that people might not guess about you? #2
-What’s one of your favourite quotes? #1
-Describe something you love. #2
-Describe someone you love. #3
-Describe a highlight of your childhood. #2
-Describe a highlight of your adult life. #2
-In what ways do you show affection to someone? #3
-What’s a courageous thing you’ve done? #3
-Is there anything you’re searching for in life? #4
-What’s something you’re ashamed of? #4
-How did your education affect how you grew up? #2
-How did your friendships affect how you grew up? #3
-How did your family affect how you grew up? #4
-Describe a friendship that’s meaningful to you. #3
-Describe an object that’s meaningful to you. #2
-Describe a memory that’s meaningful to you. #3
-What's your favorite way to discover more about a person? #2
-Is religion important to you? How? #3
-Do you believe in something bigger than us? Explain. #3
-What do you think an important issue humanity is facing right now? #2
-What’s the nicest compliment you’ve ever received? #2
-What’s something that makes you feel alive? #3
-What’s something that makes you feel hopeful about the future? #3
-What are some ways you like to get out of your comfort zone? #3
-What do you think happens when we die? #4
-What makes a life worth living for you? #4
-Where do you think you are in the introvert/extrovert spectrum? #2
-What is a skill you would like to learn or develop? #2
-Is there an element of your life where you lack confidence? #3
-Briefly describe your relationship with your mum. #4
-Briefly describe your relationship with your dad. #4
-What’s brought you here? #3
-What does adventure look like to you? #1
-What’s your idea of a good challenge? #1
-Describe an experience you found challenging in the past. #4
-Describe one of the best days of your life so far. #2
-What's something you're looking forward to today or tomorrow? #2
-What's a place that feels like home to you? #2
-What's a hobby you've always wanted to try but never got the chance to? #2
-What's something that you're really grateful about right now? #2
-What's a goal you're working towards? #3
-What's a personal value you think is underrated? #3
-Describe a memory that makes you laugh? #2
-What's a way you like to relax? #2
-What's something that makes you feel connected to others? #3
-What's a way you like to express yourself creatively? #2
-How do you like to celebrate important people in your life? #2
-How do you like to celebrate important events in your life? #2
-What's a place that holds a special significance or meaning to you? #3
-What's a moment that made you realize you were growing up? #3
-What's something you used to believe in that you no longer do? #3
-Who's someone you've lost touch with that you wish you could reconnect with? #3
-What's a book or movie that had a big impact on you? #2
-What's something that you had initial doubts about, but then changed your mind on later? #3
-What's a place you've visited that felt like a different world? #1
-What's a tradition or ritual that's important to you? #2
-What's something you've learned from a difficult conversation? #3
-What's a memory that's tied to a specific smell or scent? #2
-What's something you're looking forward to learning or exploring in the future? #2
-What's a way you like to take care of yourself during stressful times? #3
-What's something you've learned from a cultural or societal difference? #2
-What's something that made you challenge your own assumptions or biases? #2
-What's something you've learned from a personal struggle or challenge? #4
-If you could switch lives with someone for a day, who would it be and why? #1
-What's one of the most spontaneous thing you've ever done? Would you do it again? #2
-What's one of the biggest risk you've ever taken? Was it worth it? #3
-If you could create a new holiday, what would it be and how would people celebrate it? #1
-What's an interesting thing you've learned recently? #1
-What's an interesting fact about your family history? How has it shaped who you are today? #4
-What's a big cultural or societal norm that you think needs to be challenged? Why? #2
-When you were a child or teenager, how did you see the world of adults? #2
+# Light and fun
+1:
+- What does adventure look like to you?
+- What’s your idea of a good challenge?
+- What’s a place you’ve visited that felt like a different world?
+- What’s an interesting thing you’ve learned recently?
+- What’s something you're looking forward to today or tomorrow?
+- What’s a hobby you’ve always wanted to try but never got the chance to?
+- What would you do if you had the whole day by yourself tomorrow?
+- Describe a memory that makes you laugh.
+- If you could instantly learn any skill, what would it be and why?
+- If you could time travel, where would you go and what would you do?
+- What’s a hidden talent or skill you have that most people don’t know about?
+- If you could try any job without worrying about skills or qualifications, what would it be?
+- If you could teleport to anywhere in the world right now, where would you want to go?
+- If you could invent a gadget that could do anything, what would it be?
+- If you could switch lives with someone for a day, who would it be and why?
+- Imagine and describe your dream home.
+- What’s one of your favorite mythical creatures and why?
+- Looking back to yourself as a child, what did you like about yourself in the way you used to act or speak?
+- What’s one of your favourite quotes?
+- If you could create a new holiday, what would it be and how would people celebrate it?
+- Which movie or book would you like to experience again for the first time?
+- What do you think is considered normal today, but will be seen as immoral or barbaric in 100 years?
+- What do you think is the role of luck in someone's life?
+
+# Reflective
+2:
+- What does being successful mean to you?
+- What is something you are very proud of?
+- Who do you see as a role model and why?
+- What’s something that motivates you?
+- What or who do you take inspiration from?
+- What’s something that people might not guess about you?
+- Describe something you love.
+- Describe a highlight of your childhood.
+- Describe a highlight of your adult life.
+- How did your education affect how you grew up?
+- Describe an object that’s meaningful to you.
+- What’s your favorite way to discover more about a person?
+- What do you think an important issue humanity is facing right now?
+- What’s the nicest compliment you’ve ever received?
+- Where do you place yourself in the introvert - extrovert spectrum?
+- What is a skill you would like to learn or develop?
+- Describe one of the best days of your life so far.
+- What’s a place that feels like home to you?
+- What’s something that you're grateful about right now?
+- What’s a way you like to relax?
+- How do you like to celebrate important people in your life?
+- What’s a way you like to express yourself creatively?
+- How do you like to celebrate important events in your life?
+- What’s something you’ve learned from a cultural or societal difference?
+- What’s something that made you challenge your own assumptions or biases?
+- What’s a big cultural or societal norm that you think needs to be challenged? Why?
+- What’s a tradition or ritual that’s important to you?
+- What’s a goal you're working towards?
+- What do you think is important for living a fulfilling life?
+
+# Deep
+3:
+- What’s something you strongly believe in?
+- Describe a time you helped someone in some way.
+- What’s a quality you’d like to develop in yourself?
+- What’s a quality you admire in someone else?
+- What’s one of your biggest dreams?
+- Describe someone you love.
+- In what ways do you show affection to someone?
+- What’s a courageous thing you’ve done?
+- What’s a personal value you think is underrated?
+- What’s something that makes you feel alive?
+- What’s something that makes you feel hopeful about the future?
+- What are some ways you like to get out of your comfort zone?
+- Is there an element of your life where you lack confidence?
+- What’s brought you here?
+- When you were a child or teenager, how did you see the world of adults?
+- Describe a friendship that’s meaningful to you.
+- Describe a memory that’s meaningful to you.
+- Is religion important to you? How?
+- Do you believe in something bigger than us? Explain.
+- What’s something that makes you feel connected to others?
+- What’s a way you like to take care of yourself during stressful times?
+- What’s something you used to believe in that you no longer do?
+- Who's someone you've lost touch with that you wish you could reconnect with?
+- What’s something that you had initial doubts about, but then changed your mind on later?
+- What’s a place that holds a special significance or meaning to you?
+- What’s a moment that made you realize you were growing up?
+- What’s one of the most spontaneous thing you’ve ever done?
+- What’s one of the biggest risk you’ve ever taken? What did you learn?
+- What’s something you’ve learned from a difficult conversation?
+- What emotion have you been feeling most often lately, and what's it teaching you?
+
+# Very deep
+4:
+- Is there something that you really regret? What did you learn from it?
+- What’s a memory that formed an important part of your identity?
+- What are some of your core values? Explain one.
+- What’s one of your biggest fears?
+- What’s a fear you’ve overcome, and how did you do it?
+- How do you handle forgiveness, both giving and receiving it?
+- How would you describe your true self in a few words?
+- What makes you hide your true self from others?
+- What makes you show your true self to others?
+- Is there anything you’re searching for in life?
+- What’s something you’re ashamed of?
+- How did your family affect how you grew up?
+- Describe an experience you found challenging in the past.
+- What do you think happens when we die?
+- What makes a life worth living for you?
+- What’s an interesting fact about your family history? How has it shaped who you are today?
+- Briefly describe your relationship with your mum.
+- Briefly describe your relationship with your dad.
+- What’s something you’ve learned from a personal struggle or challenge?
+- What's an experience that made you see the world differently, and how did it change you?
+- How do you cope with feelings of loneliness or isolation?
+- How do you define intimate love, and what role does it play in your life?
+- How do you think society's views on sex should change?
+- What role does sex play in your life?
+- How do you face loneliness?
+- What's a part of yourself you are learning to embrace?
