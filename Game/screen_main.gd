@@ -67,7 +67,8 @@ func show_help_screen():
 
 
 func hide_help_screen():
-	SCREEN_HELP.visible = false
+	if 	SCREEN_HELP.on_android_back_req():
+		SCREEN_HELP.visible = false
 
 
 func show_settings_screen():

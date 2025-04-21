@@ -8,6 +8,8 @@
 layer = 2
 script = ExtResource("1_fbdoe")
 screen_more_path = NodePath("screen_more")
+text_1_path = NodePath("BG/MarginContainer/cont_main/help_text1")
+text_2_path = NodePath("BG/MarginContainer/cont_main/help_text2")
 
 [node name="BG" type="Panel" parent="."]
 anchors_preset = 15
@@ -46,7 +48,23 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.02
 
-[node name="help_text" type="Label" parent="BG/MarginContainer/cont_main"]
+[node name="help_text1" type="Label" parent="BG/MarginContainer/cont_main"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"Label_Body"
+text = "presents you with a deck of questions, designed to spark meaningful conversations. 
+
+You can choose to customise your deck, by adding or removing levels of Depth. 
+You can keep the conversation light and fun, or decide to go very deep.
+
+You also have the option to add custom questions, or remove questions that you don't like."
+horizontal_alignment = 1
+autowrap_mode = 3
+clip_text = true
+
+[node name="help_text2" type="Label" parent="BG/MarginContainer/cont_main"]
+visible = false
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 3
