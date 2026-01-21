@@ -1,6 +1,7 @@
 # Godot
 .godot/
 .import/
+_Print/
 export.cfg
 export_presets.cfg
 
